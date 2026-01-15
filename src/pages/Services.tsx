@@ -1,64 +1,235 @@
-import Navigation from "@/components/Navigation";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import Navigation from '@/components/layout/Navigation';
+import Footer from '@/components/layout/Footer';
+import { useLanguage } from '@/lib/i18n';
+import { Button } from '@/components/ui/button';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import { Check, Star } from 'lucide-react';
 
 const Services = () => {
-  const services = [
-    {
-      number: "01",
-      title: "RESIDENTIAL",
-      description: "Crafting homes that reflect individual lifestyles while maintaining architectural integrity"
-    },
-    {
-      number: "02", 
-      title: "COMMERCIAL",
-      description: "Designing functional spaces that enhance business environments and user experiences"
-    },
-    {
-      number: "03",
-      title: "RENOVATION",
-      description: "Transforming existing structures with contemporary sensibilities and sustainable practices"
-    },
-    {
-      number: "04",
-      title: "CONSULTATION",
-      description: "Providing expert guidance on design direction, planning, and architectural solutions"
-    }
-  ];
+  const { t, language } = useLanguage();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navigation />
-      <section className="pt-32 pb-32 bg-background">
+      
+      {/* Hero Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="pt-32 pb-20 bg-gradient-to-b from-muted/50 to-background"
+      >
         <div className="container mx-auto px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-20">
-              <h1 className="text-minimal text-muted-foreground mb-4">SERVICES</h1>
-              <h2 className="text-4xl md:text-6xl font-light text-architectural">
-                What We Do
-              </h2>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-x-20 gap-y-16">
-              {services.map((service, index) => (
-                <div key={index} className="group">
-                  <div className="flex items-start space-x-6">
-                    <span className="text-minimal text-muted-foreground font-medium">
-                      {service.number}
-                    </span>
-                    <div>
-                      <h3 className="text-2xl font-light mb-4 text-architectural group-hover:text-muted-foreground transition-colors duration-500">
-                        {service.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.span 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-sm tracking-[0.3em] text-muted-foreground uppercase"
+            >
+              {t.services.title}
+            </motion.span>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-light mt-4 mb-6"
+            >
+              {t.services.subtitle}
+            </motion.h1>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Pricing Cards */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Turnkey Package */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="bg-background border border-border rounded-sm p-8 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="mb-6">
+                  <h3 className="text-2xl font-medium mb-2">{t.services.packages.turnkey.title}</h3>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-light">{t.services.packages.turnkey.price}</span>
+                    <span className="text-muted-foreground">{t.services.packages.turnkey.priceUnit}</span>
                   </div>
                 </div>
-              ))}
+                <ul className="space-y-4 mb-8">
+                  {t.services.packages.turnkey.includes.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button asChild className="w-full" size="lg">
+                  <Link to="/contact">{t.services.cta}</Link>
+                </Button>
+              </motion.div>
+
+              {/* Supervision Package */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="bg-primary text-primary-foreground rounded-sm p-8 shadow-lg relative overflow-hidden"
+              >
+                <div className="absolute top-4 right-4">
+                  <span className="inline-flex items-center gap-1 bg-primary-foreground/20 px-3 py-1 rounded-full text-xs">
+                    <Star className="w-3 h-3" />
+                    {language === 'ru' ? 'Популярный' : 'Popular'}
+                  </span>
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-2xl font-medium mb-2">{t.services.packages.supervision.title}</h3>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-light">{t.services.packages.supervision.price}</span>
+                    <span className="text-primary-foreground/80">{t.services.packages.supervision.priceUnit}</span>
+                  </div>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  {t.services.packages.supervision.includes.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <span className="text-primary-foreground/90">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button asChild variant="secondary" className="w-full" size="lg">
+                  <Link to="/contact">{t.services.cta}</Link>
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Technical Plans */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-light mb-4">{t.services.technicalPlans.title}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {language === 'ru' 
+                  ? 'Полный пакет технической документации для безупречной реализации вашего проекта'
+                  : 'Complete package of technical documentation for flawless implementation of your project'}
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              {t.services.technicalPlans.items.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="flex items-center gap-3 bg-background p-4 rounded-sm"
+                >
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-sm font-medium text-primary">{index + 1}</span>
+                  </div>
+                  <span className="text-sm">{item}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-light mb-4">{t.services.faq.title}</h2>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <Accordion type="single" collapsible className="space-y-4">
+                {t.services.faq.items.map((faq, index) => (
+                  <AccordionItem 
+                    key={index} 
+                    value={`item-${index}`}
+                    className="bg-muted/30 rounded-sm border-none px-6"
+                  >
+                    <AccordionTrigger className="text-left hover:no-underline py-6">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground pb-6">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="py-24 bg-primary text-primary-foreground"
+      >
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-light mb-6">
+            {language === 'ru' 
+              ? 'Готовы обсудить ваш проект?' 
+              : 'Ready to discuss your project?'}
+          </h2>
+          <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+            {language === 'ru'
+              ? 'Свяжитесь со мной для бесплатной консультации и обсуждения деталей.'
+              : 'Contact me for a free consultation and to discuss the details.'}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild variant="secondary" size="lg">
+              <Link to="/contact">{t.services.cta}</Link>
+            </Button>
+            <WhatsAppButton 
+              variant="outline" 
+              size="lg" 
+              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" 
+            />
+          </div>
+        </div>
+      </motion.section>
+
+      <Footer />
     </div>
   );
 };
