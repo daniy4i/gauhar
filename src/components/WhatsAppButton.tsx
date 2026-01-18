@@ -1,10 +1,10 @@
-import { useLanguage, contactInfo, getWhatsAppUrl } from '@/lib/i18n';
+import { useLanguage, getWhatsAppUrl } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface WhatsAppButtonProps {
-  variant?: 'default' | 'outline' | 'ghost' | 'icon';
+  variant?: 'default' | 'outline' | 'ghost' | 'icon' | 'secondary';
   size?: 'default' | 'sm' | 'lg' | 'icon';
   className?: string;
   showLabel?: boolean;
@@ -32,7 +32,7 @@ const WhatsAppButton = ({
         size="icon"
         onClick={handleClick}
         className={cn(
-          "text-[#25D366] hover:text-[#25D366] hover:bg-[#25D366]/10",
+          "text-[hsl(var(--whatsapp))] hover:text-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/10",
           className
         )}
         aria-label="WhatsApp"
@@ -42,14 +42,22 @@ const WhatsAppButton = ({
     );
   }
 
+  // Map our variants to button variants
+  const getButtonVariant = () => {
+    if (variant === 'outline') return 'outline';
+    if (variant === 'secondary') return 'secondary';
+    if (variant === 'ghost') return 'ghost';
+    return 'whatsapp';
+  };
+
   return (
     <Button
-      variant={variant === 'outline' ? 'outline' : 'default'}
+      variant={getButtonVariant()}
       size={size}
       onClick={handleClick}
       className={cn(
-        variant === 'default' && "bg-[#25D366] hover:bg-[#20BD5A] text-white",
-        variant === 'outline' && "border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10",
+        variant === 'default' && "bg-[hsl(var(--whatsapp))] hover:bg-[hsl(142,70%,40%)] text-white",
+        variant === 'outline' && "border-[hsl(var(--whatsapp))] text-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/10",
         className
       )}
     >
