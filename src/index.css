@@ -6,64 +6,63 @@
 
 @layer base {
   :root {
-    /* Pure Architecture Palette */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Warm Interior Design Palette */
+    --background: 40 20% 98%;
+    --foreground: 30 10% 15%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card: 40 25% 97%;
+    --card-foreground: 30 10% 15%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover: 40 25% 97%;
+    --popover-foreground: 30 10% 15%;
     
-    /* Primary: Pure Black */
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary: Warm Charcoal */
+    --primary: 30 8% 20%;
+    --primary-foreground: 40 20% 98%;
     
-    /* Secondary: Pure White */
-    --secondary: 0 0% 100%;
-    --secondary-foreground: 0 0% 0%;
+    /* Secondary: Warm Cream */
+    --secondary: 38 40% 92%;
+    --secondary-foreground: 30 10% 20%;
     
-    /* Muted: Subtle Gray */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 20%;
+    /* Muted: Soft Taupe */
+    --muted: 35 15% 93%;
+    --muted-foreground: 30 8% 40%;
     
-    /* Accent: Elegant Gray */
-    --accent: 0 0% 95%;
-    --accent-foreground: 0 0% 0%;
+    /* Accent: Warm Bronze/Terracotta */
+    --accent: 25 45% 88%;
+    --accent-foreground: 30 10% 15%;
     
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 90%;
-    --input: 0 0% 95%;
-    --ring: 0 0% 0%;
+    --border: 35 20% 88%;
+    --input: 38 25% 94%;
+    --ring: 30 8% 20%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 38 25% 96%;
+    --sidebar-foreground: 30 8% 30%;
+    --sidebar-primary: 30 8% 20%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 35 20% 92%;
+    --sidebar-accent-foreground: 30 8% 20%;
+    --sidebar-border: 35 15% 88%;
+    --sidebar-ring: 30 8% 20%;
     
-    /* Architecture Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 0% / 0.8), hsl(0 0% 0% / 0.4));
-    --gradient-overlay: linear-gradient(180deg, hsl(0 0% 0% / 0.9), hsl(0 0% 0% / 0.1));
+    /* Warm WhatsApp */
+    --whatsapp: 142 70% 45%;
+    --whatsapp-foreground: 0 0% 100%;
+    
+    /* Elegant Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(30 8% 20% / 0.85), hsl(30 8% 20% / 0.4));
+    --gradient-overlay: linear-gradient(180deg, hsl(30 8% 15% / 0.7), hsl(30 8% 15% / 0.1));
+    --gradient-warm: linear-gradient(135deg, hsl(38 40% 92%), hsl(35 30% 88%));
     
     /* Elegant Shadows */
-    --shadow-architectural: 0 25px 50px -12px hsl(0 0% 0% / 0.25);
-    --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.15);
+    --shadow-architectural: 0 25px 50px -12px hsl(30 10% 20% / 0.15);
+    --shadow-elegant: 0 10px 30px -10px hsl(30 10% 20% / 0.1);
+    --shadow-soft: 0 4px 20px -4px hsl(30 10% 20% / 0.08);
     
     /* Smooth Transitions */
     --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -71,41 +70,56 @@
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --background: 30 10% 8%;
+    --foreground: 38 20% 92%;
     
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
+    --card: 30 10% 10%;
+    --card-foreground: 38 20% 92%;
     
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 30 10% 10%;
+    --popover-foreground: 38 20% 92%;
     
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 38 25% 90%;
+    --primary-foreground: 30 10% 10%;
     
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 30 8% 18%;
+    --secondary-foreground: 38 20% 90%;
     
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 30 8% 15%;
+    --muted-foreground: 35 15% 55%;
     
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 25 20% 22%;
+    --accent-foreground: 38 25% 90%;
     
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 10%;
-    --ring: 0 0% 100%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 30 8% 18%;
+    --input: 30 8% 15%;
+    --ring: 38 25% 90%;
+    
+    --sidebar-background: 30 10% 10%;
+    --sidebar-foreground: 38 20% 85%;
+    --sidebar-primary: 38 25% 85%;
+    --sidebar-primary-foreground: 30 10% 10%;
+    --sidebar-accent: 30 8% 15%;
+    --sidebar-accent-foreground: 38 20% 85%;
+    --sidebar-border: 30 8% 18%;
+    --sidebar-ring: 38 25% 90%;
+    
+    /* Warm WhatsApp */
+    --whatsapp: 142 70% 45%;
+    --whatsapp-foreground: 0 0% 100%;
+    
+    /* Dark Mode Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(30 10% 5% / 0.9), hsl(30 10% 5% / 0.5));
+    --gradient-overlay: linear-gradient(180deg, hsl(30 10% 5% / 0.8), hsl(30 10% 5% / 0.2));
+    --gradient-warm: linear-gradient(135deg, hsl(30 8% 12%), hsl(30 10% 10%));
+    
+    /* Dark Mode Shadows */
+    --shadow-architectural: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
+    --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.4);
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
   }
 }
 
