@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
+import SEO from '@/components/SEO';
 import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -14,6 +15,13 @@ const Services = () => {
 
   return (
     <PageTransition>
+      <SEO 
+        title={language === 'ru' ? 'Услуги' : 'Services'}
+        description={language === 'ru' 
+          ? 'Услуги дизайна интерьера: проект под ключ от $100/м², проект с авторским надзором от $130/м². Полный комплекс услуг.'
+          : 'Interior design services: turnkey project from $100/m², project with author supervision from $130/m². Full range of services.'}
+        url="https://pure-architect-space-01.lovable.app/services"
+      />
       <div className="min-h-screen bg-background">
         <Navigation />
         

@@ -29,20 +29,47 @@ export interface PortfolioProject {
   images: string[];
 }
 
-// Placeholder images - replace with actual project images
-const placeholderImages = {
-  living1: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&h=800&fit=crop',
-  living2: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop',
-  living3: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=800&fit=crop',
-  bedroom1: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop',
-  bedroom2: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&h=800&fit=crop',
-  kitchen1: 'https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?w=1200&h=800&fit=crop',
-  kitchen2: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop',
+// Real project images - warm, elegant interior design photos
+const projectImages = {
+  // Family Living Room - warm classic-modern mix
+  familyLiving1: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=800&fit=crop',
+  familyLiving2: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=800&fit=crop',
+  familyLiving3: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=800&fit=crop',
+  
+  // Minimalism and Wood
+  minimalistWood1: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&h=800&fit=crop',
+  minimalistWood2: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=800&fit=crop',
+  minimalistWood3: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&h=800&fit=crop',
+  
+  // Restaurant Ayalla - elegant dining
+  restaurant1: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200&h=800&fit=crop',
+  restaurant2: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&h=800&fit=crop',
+  restaurant3: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=800&fit=crop',
+  
+  // Loft Country House
+  loft1: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop',
+  loft2: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1200&h=800&fit=crop',
+  loft3: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&h=800&fit=crop',
+  
+  // Luxurious Bedroom
+  bedroom1: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&h=800&fit=crop',
+  bedroom2: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&h=800&fit=crop',
+  
+  // Marble Bathroom
+  marble1: 'https://images.unsplash.com/photo-1600566752734-72834a191a3b?w=1200&h=800&fit=crop',
+  marble2: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&h=800&fit=crop',
+  
+  // Office
   office1: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop',
-  restaurant1: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=800&fit=crop',
-  loft1: 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&h=800&fit=crop',
-  house1: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=800&fit=crop',
-  marble1: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&h=800&fit=crop',
+  office2: 'https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&h=800&fit=crop',
+  
+  // Kitchen
+  kitchen1: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop',
+  kitchen2: 'https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?w=1200&h=800&fit=crop',
+  
+  // Yellow Accents
+  yellow1: 'https://images.unsplash.com/photo-1616137466211-f939a420be84?w=1200&h=800&fit=crop',
+  yellow2: 'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=1200&h=800&fit=crop',
 };
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -67,8 +94,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2023,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: true,
-    thumbnail: placeholderImages.living1,
-    images: [placeholderImages.living1, placeholderImages.living2, placeholderImages.living3],
+    thumbnail: projectImages.familyLiving1,
+    images: [projectImages.familyLiving1, projectImages.familyLiving2, projectImages.familyLiving3],
   },
   {
     id: '2',
@@ -91,8 +118,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2023,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: true,
-    thumbnail: placeholderImages.living2,
-    images: [placeholderImages.living2, placeholderImages.living1, placeholderImages.kitchen1],
+    thumbnail: projectImages.minimalistWood1,
+    images: [projectImages.minimalistWood1, projectImages.minimalistWood2, projectImages.minimalistWood3],
   },
   {
     id: '3',
@@ -115,8 +142,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2022,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: true,
-    thumbnail: placeholderImages.restaurant1,
-    images: [placeholderImages.restaurant1, placeholderImages.office1],
+    thumbnail: projectImages.restaurant1,
+    images: [projectImages.restaurant1, projectImages.restaurant2, projectImages.restaurant3],
   },
   {
     id: '4',
@@ -139,8 +166,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2023,
     location: { ru: 'Алматинская область', en: 'Almaty Region' },
     featured: true,
-    thumbnail: placeholderImages.loft1,
-    images: [placeholderImages.loft1, placeholderImages.house1, placeholderImages.living3],
+    thumbnail: projectImages.loft1,
+    images: [projectImages.loft1, projectImages.loft2, projectImages.loft3],
   },
   {
     id: '5',
@@ -163,8 +190,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2023,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: true,
-    thumbnail: placeholderImages.bedroom1,
-    images: [placeholderImages.bedroom1, placeholderImages.bedroom2],
+    thumbnail: projectImages.bedroom1,
+    images: [projectImages.bedroom1, projectImages.bedroom2],
   },
   {
     id: '6',
@@ -187,8 +214,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2022,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: true,
-    thumbnail: placeholderImages.marble1,
-    images: [placeholderImages.marble1],
+    thumbnail: projectImages.marble1,
+    images: [projectImages.marble1, projectImages.marble2],
   },
   {
     id: '7',
@@ -211,8 +238,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2023,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: false,
-    thumbnail: placeholderImages.office1,
-    images: [placeholderImages.office1],
+    thumbnail: projectImages.office1,
+    images: [projectImages.office1, projectImages.office2],
   },
   {
     id: '8',
@@ -235,8 +262,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2023,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: false,
-    thumbnail: placeholderImages.kitchen1,
-    images: [placeholderImages.kitchen1, placeholderImages.kitchen2],
+    thumbnail: projectImages.kitchen1,
+    images: [projectImages.kitchen1, projectImages.kitchen2],
   },
   {
     id: '9',
@@ -259,8 +286,8 @@ export const portfolioProjects: PortfolioProject[] = [
     year: 2022,
     location: { ru: 'Алматы', en: 'Almaty' },
     featured: false,
-    thumbnail: placeholderImages.living3,
-    images: [placeholderImages.living3, placeholderImages.living1],
+    thumbnail: projectImages.yellow1,
+    images: [projectImages.yellow1, projectImages.yellow2],
   },
 ];
 

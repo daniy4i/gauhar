@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
+import SEO from '@/components/SEO';
 import { useLanguage } from '@/lib/i18n';
 import { getWhatsAppUrl } from '@/lib/i18n/translations';
 import { Button } from '@/components/ui/button';
@@ -59,6 +60,13 @@ const Contact = () => {
 
   return (
     <PageTransition>
+      <SEO 
+        title={language === 'ru' ? 'Контакты' : 'Contact'}
+        description={language === 'ru' 
+          ? 'Свяжитесь с дизайнером интерьера Гаухар Сергазиной. WhatsApp: +7 777 211 2211. Алматы, ул. Хаджимукана 49.'
+          : 'Contact interior designer Gauhar Sergazina. WhatsApp: +7 777 211 2211. Almaty, Khadzhimukan St 49.'}
+        url="https://pure-architect-space-01.lovable.app/contact"
+      />
       <div className="min-h-screen bg-background">
         <Navigation />
         
