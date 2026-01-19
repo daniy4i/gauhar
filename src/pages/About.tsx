@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
+import SEO from '@/components/SEO';
 import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,13 @@ const About = () => {
 
   return (
     <PageTransition>
+      <SEO 
+        title={language === 'ru' ? 'О себе' : 'About Me'}
+        description={language === 'ru' 
+          ? 'Гаухар Сергазина — дипломированный дизайнер интерьеров. Образование: КазГАСА и Central Saint Martins, Лондон.'
+          : 'Gauhar Sergazina — certified interior designer. Education: KazGASA and Central Saint Martins, London.'}
+        url="https://pure-architect-space-01.lovable.app/about"
+      />
       <div className="min-h-screen bg-background">
         <Navigation />
         

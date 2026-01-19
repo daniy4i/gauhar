@@ -5,6 +5,8 @@ import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import SEO from '@/components/SEO';
+import Testimonials from '@/components/Testimonials';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check } from 'lucide-react';
 import { getFeaturedProjects } from '@/data/portfolioData';
@@ -15,6 +17,7 @@ const Index = () => {
 
   return (
     <PageTransition>
+      <SEO />
       <div className="min-h-screen bg-background">
         <Navigation />
         
@@ -198,6 +201,9 @@ const Index = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* Testimonials */}
+        <Testimonials />
 
         {/* CTA */}
         <section className="py-24 bg-primary text-primary-foreground text-center">

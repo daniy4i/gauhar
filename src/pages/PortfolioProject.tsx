@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
+import SEO from '@/components/SEO';
 import { useLanguage } from '@/lib/i18n';
 import { getProjectBySlug, portfolioProjects } from '@/data/portfolioData';
 import { Button } from '@/components/ui/button';
@@ -47,6 +48,12 @@ const PortfolioProject = () => {
 
   return (
     <PageTransition>
+      <SEO 
+        title={project.title[language]}
+        description={project.description[language]}
+        image={project.thumbnail}
+        url={`https://pure-architect-space-01.lovable.app/portfolio/${project.slug}`}
+      />
       <div className="min-h-screen bg-background">
         <Navigation />
         

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
+import SEO from '@/components/SEO';
 import { useLanguage } from '@/lib/i18n';
 import { portfolioProjects, ProjectCategory } from '@/data/portfolioData';
 import { Button } from '@/components/ui/button';
@@ -26,6 +27,13 @@ const Portfolio = () => {
 
   return (
     <PageTransition>
+      <SEO 
+        title={language === 'ru' ? 'Портфолио' : 'Portfolio'}
+        description={language === 'ru' 
+          ? 'Портфолио проектов дизайна интерьера: квартиры, дома, рестораны. Более 50 реализованных проектов в Алматы.'
+          : 'Interior design portfolio: apartments, houses, restaurants. Over 50 completed projects in Almaty.'}
+        url="https://pure-architect-space-01.lovable.app/portfolio"
+      />
       <div className="min-h-screen bg-background">
         <Navigation />
         
