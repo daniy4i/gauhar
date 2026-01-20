@@ -56,8 +56,8 @@ const WhatsAppButton = ({
       size={size}
       onClick={handleClick}
       className={cn(
-        variant === 'default' && "bg-[hsl(var(--whatsapp))] hover:bg-[hsl(142,70%,40%)] text-white",
-        variant === 'outline' && "border-[hsl(var(--whatsapp))] text-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/10",
+        variant === 'default' && "bg-[hsl(var(--whatsapp))] hover:bg-[hsl(142,70%,40%)] !text-white",
+        variant === 'outline' && "border-[hsl(var(--whatsapp))] !text-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/10",
         className
       )}
     >

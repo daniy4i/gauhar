@@ -7,6 +7,8 @@ import PageTransition from '@/components/layout/PageTransition';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import SEO from '@/components/SEO';
 import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
+import InstagramFeed from '@/components/InstagramFeed';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { getFeaturedProjects } from '@/data/portfolioData';
@@ -293,6 +295,12 @@ const Index = () => {
 
         {/* Testimonials */}
         <Testimonials />
+
+        {/* FAQ Section */}
+        <FAQ />
+
+        {/* Instagram Feed */}
+        <InstagramFeed />
 
         {/* CTA / Contact Section */}
         <section id="contact" className="py-24 bg-primary text-primary-foreground text-center">
