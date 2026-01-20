@@ -27,6 +27,8 @@ const FAQ = () => {
     <section className="py-24 bg-muted/30 relative">
       {/* Subtle top border for section distinction */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      {/* Noise Texture */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none noise-texture" />
       
       <div className="container mx-auto px-6">
         <motion.div 
