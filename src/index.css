@@ -120,6 +120,9 @@
     --shadow-architectural: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
     --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.4);
     --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    
+    /* Navigation glow */
+    --nav-glow: 0 0 10px hsl(38 20% 92% / 0.2);
   }
 }
 

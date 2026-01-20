@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Star, Quote } from 'lucide-react';
+import { useCountUp } from '@/hooks/useCountUp';
 
 interface Testimonial {
   id: number;
@@ -57,12 +58,49 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+const StatItem = ({ end, suffix, label, delay }: { end: number; suffix: string; label: string; delay: number }) => {
+  const { count, ref, displayValue } = useCountUp({ end, duration: 2000, delay, suffix });
+  
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: delay / 1000, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="text-4xl md:text-5xl font-light text-primary mb-2 tabular-nums">
+        {displayValue}
+      </div>
+      <div className="text-sm text-muted-foreground uppercase tracking-wider">
+        {label}
+      </div>
+    </motion.div>
+  );
+};
+
 const Testimonials = () => {
   const { language } = useLanguage();
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.15,
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as const,
+      },
+    }),
+  };
+
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-background relative overflow-hidden">
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-transparent to-muted/20 pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,18 +120,28 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="relative bg-card border border-border p-8 shadow-soft"
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={cardVariants}
+              whileHover={{ y: -4, transition: { duration: 0.3 } }}
+              className="relative bg-card border border-border p-8 shadow-soft hover:shadow-elegant transition-shadow duration-500 group"
             >
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-muted-foreground/20" />
+              <Quote className="absolute top-6 right-6 w-8 h-8 text-muted-foreground/20 group-hover:text-muted-foreground/30 transition-colors duration-300" />
               
-              {/* Stars */}
+              {/* Stars with stagger */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + i * 0.05, duration: 0.3 }}
+                  >
+                    <Star className="w-4 h-4 fill-accent text-accent" />
+                  </motion.div>
                 ))}
               </div>
 
@@ -116,39 +164,33 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Social Proof Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-4xl mx-auto"
-        >
-          <div>
-            <div className="text-4xl md:text-5xl font-light text-primary mb-2">50+</div>
-            <div className="text-sm text-muted-foreground uppercase tracking-wider">
-              {language === 'ru' ? 'Проектов' : 'Projects'}
-            </div>
-          </div>
-          <div>
-            <div className="text-4xl md:text-5xl font-light text-primary mb-2">8+</div>
-            <div className="text-sm text-muted-foreground uppercase tracking-wider">
-              {language === 'ru' ? 'Лет опыта' : 'Years Experience'}
-            </div>
-          </div>
-          <div>
-            <div className="text-4xl md:text-5xl font-light text-primary mb-2">100%</div>
-            <div className="text-sm text-muted-foreground uppercase tracking-wider">
-              {language === 'ru' ? 'Довольных клиентов' : 'Happy Clients'}
-            </div>
-          </div>
-          <div>
-            <div className="text-4xl md:text-5xl font-light text-primary mb-2">5★</div>
-            <div className="text-sm text-muted-foreground uppercase tracking-wider">
-              {language === 'ru' ? 'Средняя оценка' : 'Average Rating'}
-            </div>
-          </div>
-        </motion.div>
+        {/* Social Proof Stats with Count-up */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-4xl mx-auto">
+          <StatItem 
+            end={50} 
+            suffix="+" 
+            label={language === 'ru' ? 'Проектов' : 'Projects'} 
+            delay={0} 
+          />
+          <StatItem 
+            end={8} 
+            suffix="+" 
+            label={language === 'ru' ? 'Лет опыта' : 'Years Experience'} 
+            delay={100} 
+          />
+          <StatItem 
+            end={100} 
+            suffix="%" 
+            label={language === 'ru' ? 'Довольных клиентов' : 'Happy Clients'} 
+            delay={200} 
+          />
+          <StatItem 
+            end={5} 
+            suffix="★" 
+            label={language === 'ru' ? 'Средняя оценка' : 'Average Rating'} 
+            delay={300} 
+          />
+        </div>
       </div>
     </section>
   );
