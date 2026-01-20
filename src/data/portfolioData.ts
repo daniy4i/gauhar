@@ -48,10 +48,10 @@ const projectImages = {
   bedroom2: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1600&h=1000&fit=crop&q=90',
   bedroom3: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&h=1000&fit=crop&q=90',
   
-  // Marble Tale
-  marble1: 'https://images.unsplash.com/photo-1600566752734-72834a191a3b?w=1600&h=1000&fit=crop&q=90',
-  marble2: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&h=1000&fit=crop&q=90',
-  marble3: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1600&h=1000&fit=crop&q=90',
+  // Marble Tale - marble bathroom/interior
+  marble1: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1600&h=1000&fit=crop&q=90',
+  marble2: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&h=1000&fit=crop&q=90',
+  marble3: 'https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=1600&h=1000&fit=crop&q=90',
 };
 
 export const portfolioProjects: PortfolioProject[] = [
