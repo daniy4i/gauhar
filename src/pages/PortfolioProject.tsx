@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
 import SEO from '@/components/SEO';
 import ImageLightbox from '@/components/ImageLightbox';
+import BlurImage from '@/components/BlurImage';
 import { useLanguage } from '@/lib/i18n';
 import { getProjectBySlug, portfolioProjects } from '@/data/portfolioData';
 import { Button } from '@/components/ui/button';
@@ -92,11 +93,15 @@ const PortfolioProject = () => {
             className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden cursor-pointer group"
             onClick={() => openLightbox(0)}
           >
-            <img
-              src={project.images[0]}
-              alt={project.title[language]}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
+              <BlurImage
+                src={project.images[0]}
+                alt={project.title[language]}
+                className="w-full h-full portfolio-image"
+                priority={true}
+                sizes="100vw"
+              />
+            </div>
           </div>
         </motion.section>
 
@@ -181,12 +186,14 @@ const PortfolioProject = () => {
                     className="aspect-[4/3] overflow-hidden cursor-pointer group"
                     onClick={() => openLightbox(index + 1)}
                   >
-                    <img
-                      src={image}
-                      alt={`${project.title[language]} - ${index + 2}`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                    <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
+                      <BlurImage
+                        src={image}
+                        alt={`${project.title[language]} - ${index + 2}`}
+                        className="w-full h-full portfolio-image"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
                   </motion.div>
                 ))}
               </div>

@@ -176,4 +176,27 @@
       @apply opacity-100 translate-y-0;
     }
   }
+  
+  /* Shimmer animation for image loading */
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+  
+  /* High-quality image rendering for portfolio */
+  .portfolio-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
 }

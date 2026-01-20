@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/lib/i18n';
 import { portfolioProjects } from '@/data/portfolioData';
+import BlurImage from '@/components/BlurImage';
 
 const Portfolio = () => {
   const { language, t } = useLanguage();
@@ -57,21 +58,26 @@ const Portfolio = () => {
                     index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'
                   }`}
                 >
-                  <motion.img
-                    src={project.thumbnail}
-                    alt={project.title[language]}
-                    className="w-full h-full object-cover"
+                  <motion.div
+                    className="w-full h-full"
                     initial={false}
                     animate={{
                       scale: hoveredProject === project.id ? 1.05 : 1,
                     }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    loading="lazy"
-                  />
+                  >
+                    <BlurImage
+                      src={project.thumbnail}
+                      alt={project.title[language]}
+                      className="w-full h-full portfolio-image"
+                      priority={index === 0}
+                      sizes={index === 0 ? '(max-width: 768px) 100vw, 90vw' : '(max-width: 768px) 100vw, 50vw'}
+                    />
+                  </motion.div>
 
                   {/* Overlay */}
                   <motion.div
-                    className="absolute inset-0 bg-foreground/10"
+                    className="absolute inset-0 bg-foreground/10 pointer-events-none"
                     initial={false}
                     animate={{
                       opacity: hoveredProject === project.id ? 1 : 0,
