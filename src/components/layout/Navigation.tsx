@@ -4,6 +4,8 @@ import { useLanguage } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import AnimatedLogo from '@/components/AnimatedLogo';
+import MagneticButton from '@/components/MagneticButton';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
@@ -92,13 +94,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4 md:px-8">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="text-lg md:text-xl font-light tracking-wide hover:opacity-70 transition-opacity"
-          >
-            <span className="font-medium">Gauhar</span>
-            <span className="text-muted-foreground ml-1">Sergazina</span>
-          </Link>
+          <AnimatedLogo />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -136,7 +132,9 @@ const Navigation = () => {
           <div className="hidden lg:flex items-center gap-3">
             <LanguageToggle />
             <ThemeToggle />
-            <WhatsAppButton size="sm" />
+            <MagneticButton strength={0.2}>
+              <WhatsAppButton size="sm" />
+            </MagneticButton>
           </div>
 
           {/* Mobile Menu */}
