@@ -56,12 +56,13 @@ const WhatsAppButton = ({
       size={size}
       onClick={handleClick}
       className={cn(
+        "group",
         variant === 'default' && "bg-[hsl(var(--whatsapp))] hover:bg-[hsl(142,70%,40%)] !text-white",
         variant === 'outline' && "border-[hsl(var(--whatsapp))] !text-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp))]/10",
         className
       )}
     >
-      <MessageCircle className="mr-2 h-4 w-4" />
+      <MessageCircle className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
       {showLabel && t.nav.whatsapp}
     </Button>
   );

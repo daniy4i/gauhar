@@ -160,13 +160,16 @@ const Index = () => {
         </section>
 
         {/* Featured Projects */}
-        <section id="portfolio" className="py-24 bg-muted/30">
+        <section id="portfolio" className="py-24 bg-muted/30 relative">
+          {/* Section divider */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          
           <div className="container mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
               className="text-center mb-16"
             >
               <span className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-3 block">
@@ -178,54 +181,71 @@ const Index = () => {
               {featuredProjects.map((project, i) => (
                 <motion.div 
                   key={project.id} 
-                  initial={{ opacity: 0, y: 30 }} 
+                  initial={{ opacity: 0, y: 40 }} 
                   whileInView={{ opacity: 1, y: 0 }} 
-                  viewport={{ once: true }} 
-                  transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true, margin: "-50px" }} 
+                  transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
                 >
                   <Link to={`/portfolio/${project.slug}`} className="group block">
-                    <div className="aspect-[4/3] overflow-hidden bg-muted shadow-elegant">
+                    <div className="aspect-[4/3] overflow-hidden bg-muted shadow-elegant relative">
+                      {/* Image with zoom */}
                       <img 
                         src={project.thumbnail} 
                         alt={project.title[language]} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                        className="w-full h-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-105" 
                       />
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+                      {/* Depth shadow on hover */}
+                      <div className="absolute inset-0 shadow-[inset_0_-60px_40px_-40px_rgba(0,0,0,0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    <h3 className="mt-5 text-lg font-medium group-hover:text-muted-foreground transition-colors duration-300">
-                      {project.title[language]}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {project.area && `${project.area} м² · `}{project.location?.[language]}
-                    </p>
+                    {/* Info with slide-up animation */}
+                    <div className="mt-5 relative overflow-hidden">
+                      <motion.div
+                        initial={false}
+                        whileHover={{ y: -2 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <h3 className="text-lg font-medium transition-colors duration-300 group-hover:text-muted-foreground">
+                          {project.title[language]}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1 transition-all duration-300 group-hover:text-muted-foreground/70">
+                          {project.area && `${project.area} м² · `}{project.location?.[language]}
+                        </p>
+                      </motion.div>
+                    </div>
                   </Link>
                 </motion.div>
               ))}
             </div>
             <motion.div 
-              initial={{ opacity: 0 }} 
-              whileInView={{ opacity: 1 }} 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-center mt-16"
             >
               <Button asChild variant="outline" size="lg">
-                <Link to="/portfolio">
+                <Link to="/portfolio" className="group">
                   {language === 'ru' ? 'Все проекты' : 'All Projects'} 
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </Button>
             </motion.div>
           </div>
+          
+          {/* Section divider */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </section>
 
         {/* Services */}
-        <section id="services" className="py-24">
+        <section id="services" className="py-24 relative bg-background">
           <div className="container mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
               className="text-center mb-16"
             >
               <span className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-3 block">
@@ -240,8 +260,9 @@ const Index = () => {
                 initial={{ opacity: 0, x: -30 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-card border border-border p-8 shadow-soft"
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+                whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                className="bg-card border border-border p-8 shadow-soft hover:shadow-elegant transition-shadow duration-500"
               >
                 <h3 className="text-2xl font-medium mb-2">{t.services.packages.turnkey.title}</h3>
                 <div className="text-3xl font-light mb-6">
@@ -250,10 +271,17 @@ const Index = () => {
                 </div>
                 <ul className="space-y-3">
                   {t.services.packages.turnkey.includes.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-muted-foreground">
+                    <motion.li 
+                      key={i} 
+                      className="flex gap-3 text-sm text-muted-foreground"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05, duration: 0.3 }}
+                    >
                       <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                       {item}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </motion.div>
@@ -261,8 +289,9 @@ const Index = () => {
                 initial={{ opacity: 0, x: 30 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-primary text-primary-foreground p-8 shadow-architectural"
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+                whileHover={{ y: -4, transition: { duration: 0.3 } }}
+                className="bg-primary text-primary-foreground p-8 shadow-architectural hover:shadow-[0_30px_60px_-15px_hsl(var(--primary)/0.4)] transition-shadow duration-500"
               >
                 <h3 className="text-2xl font-medium mb-2">{t.services.packages.supervision.title}</h3>
                 <div className="text-3xl font-light mb-6">
@@ -271,23 +300,33 @@ const Index = () => {
                 </div>
                 <ul className="space-y-3">
                   {t.services.packages.supervision.includes.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-primary-foreground/90">
+                    <motion.li 
+                      key={i} 
+                      className="flex gap-3 text-sm text-primary-foreground/90"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05, duration: 0.3 }}
+                    >
                       <Check className="w-4 h-4 mt-0.5 flex-shrink-0" />
                       {item}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </motion.div>
             </div>
             <motion.div 
-              initial={{ opacity: 0 }} 
-              whileInView={{ opacity: 1 }} 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center mt-12"
             >
               <Button asChild size="lg">
-                <Link to="/services">{t.common.learnMore}</Link>
+                <Link to="/services" className="group">
+                  {t.common.learnMore}
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
               </Button>
             </motion.div>
           </div>
