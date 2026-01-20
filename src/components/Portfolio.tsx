@@ -1,72 +1,153 @@
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '@/lib/i18n';
+import { portfolioProjects } from '@/data/portfolioData';
 
 const Portfolio = () => {
-  const projects = [
-    {
-      image: project1,
-      title: "MINIMAL RESIDENCE",
-      location: "NEW YORK, 2024",
-      description: "A contemporary home focusing on light, space, and material honesty"
-    },
-    {
-      image: project2,
-      title: "CORPORATE HEADQUARTERS",
-      location: "LONDON, 2023",
-      description: "Modern office space emphasizing collaboration and natural elements"
-    },
-    {
-      image: project3,
-      title: "CULTURAL CENTER",
-      location: "TOKYO, 2023",
-      description: "Public architecture that bridges tradition with contemporary design"
-    }
-  ];
+  const { language, t } = useLanguage();
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+
+  // Show only first 4 projects on homepage
+  const featuredProjects = portfolioProjects.slice(0, 4);
 
   return (
-    <section id="work" className="py-32 bg-muted">
-      <div className="container mx-auto px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20">
-            <h2 className="text-minimal text-muted-foreground mb-4">SELECTED WORK</h2>
-            <h3 className="text-4xl md:text-6xl font-light text-architectural">
-              Our Projects
-            </h3>
-          </div>
-          
-          <div className="space-y-32">
-            {projects.map((project, index) => (
-              <div key={index} className="group">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-[70vh] object-cover transition-transform duration-700 group-hover:scale-105"
+    <section id="work" className="py-24 md:py-32 bg-muted/30">
+      <div className="container mx-auto px-6 lg:px-12">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl mb-16 md:mb-20"
+        >
+          <span className="text-minimal text-muted-foreground block mb-4">
+            {t.portfolio.title}
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-architectural mb-6">
+            {language === 'ru' ? 'Избранные работы' : 'Selected Works'}
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            {t.portfolio.subtitle}
+          </p>
+        </motion.div>
+
+        {/* Projects Grid - Curated Layout */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
+          {featuredProjects.map((project, index) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className={index === 0 ? 'md:col-span-2' : ''}
+              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
+            >
+              <Link to={`/portfolio/${project.slug}`} className="block group">
+                {/* Image */}
+                <div
+                  className={`relative overflow-hidden mb-6 ${
+                    index === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'
+                  }`}
+                >
+                  <motion.img
+                    src={project.thumbnail}
+                    alt={project.title[language]}
+                    className="w-full h-full object-cover"
+                    initial={false}
+                    animate={{
+                      scale: hoveredProject === project.id ? 1.05 : 1,
+                    }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Overlay */}
+                  <motion.div
+                    className="absolute inset-0 bg-foreground/10"
+                    initial={false}
+                    animate={{
+                      opacity: hoveredProject === project.id ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.5 }}
+                  />
+
+                  {/* View indicator */}
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    initial={false}
+                    animate={{
+                      opacity: hoveredProject === project.id ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <span className="text-background bg-foreground/90 backdrop-blur-sm px-6 py-3 text-sm tracking-wide">
+                      {t.portfolio.viewProject}
+                    </span>
+                  </motion.div>
                 </div>
-                
-                <div className="mt-8 grid md:grid-cols-3 gap-8">
-                  <div>
-                    <h4 className="text-2xl font-light text-architectural mb-2">
-                      {project.title}
-                    </h4>
-                    <p className="text-minimal text-muted-foreground">
-                      {project.location}
-                    </p>
+
+                {/* Info */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                    <span>{project.area} м²</span>
+                    <span className="w-px h-3 bg-border" />
+                    <span>{project.location[language]}</span>
                   </div>
-                  
-                  <div className="md:col-span-2">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {project.description}
+
+                  <h3 className="text-2xl md:text-3xl font-light text-architectural transition-colors duration-500 group-hover:text-muted-foreground">
+                    {project.title[language]}
+                  </h3>
+
+                  {index === 0 && (
+                    <p className="text-muted-foreground leading-relaxed max-w-2xl">
+                      {project.description[language]}
                     </p>
-                  </div>
+                  )}
                 </div>
-              </div>
-            ))}
-          </div>
+              </Link>
+            </motion.article>
+          ))}
         </div>
+
+        {/* View All Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <Link
+            to="/portfolio"
+            className="inline-flex items-center text-foreground hover:text-muted-foreground transition-colors group"
+          >
+            <span className="relative text-lg">
+              {language === 'ru' ? 'Смотреть все проекты' : 'View All Projects'}
+              <span className="absolute bottom-0 left-0 w-full h-px bg-current scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </span>
+            <svg
+              className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
