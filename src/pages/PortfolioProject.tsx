@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
 import SEO from '@/components/SEO';
+import ImageLightbox from '@/components/ImageLightbox';
 import { useLanguage } from '@/lib/i18n';
 import { getProjectBySlug, portfolioProjects } from '@/data/portfolioData';
 import { Button } from '@/components/ui/button';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { ArrowLeft, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const PortfolioProject = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -19,6 +20,27 @@ const PortfolioProject = () => {
 
   const project = slug ? getProjectBySlug(slug) : undefined;
 
+  const openLightbox = useCallback((index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+  }, []);
+
+  const nextImage = useCallback(() => {
+    if (project) {
+      setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+    }
+  }, [project]);
+
+  const prevImage = useCallback(() => {
+    if (project) {
+      setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    }
+  }, [project]);
+
   if (!project) {
     return <Navigate to="/portfolio" replace />;
   }
@@ -26,25 +48,6 @@ const PortfolioProject = () => {
   const currentIndex = portfolioProjects.findIndex(p => p.slug === slug);
   const prevProject = currentIndex > 0 ? portfolioProjects[currentIndex - 1] : null;
   const nextProject = currentIndex < portfolioProjects.length - 1 ? portfolioProjects[currentIndex + 1] : null;
-
-  const openLightbox = (index: number) => {
-    setCurrentImageIndex(index);
-    setLightboxOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    document.body.style.overflow = 'auto';
-  };
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
-  };
 
   return (
     <PageTransition>
@@ -254,54 +257,16 @@ const PortfolioProject = () => {
           </div>
         </section>
 
-        {/* Lightbox */}
-        <AnimatePresence>
-          {lightboxOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-foreground/95 flex items-center justify-center"
-              onClick={closeLightbox}
-            >
-              <button 
-                onClick={closeLightbox}
-                className="absolute top-6 right-6 text-background/70 hover:text-background transition-colors"
-              >
-                <X className="w-8 h-8" />
-              </button>
-              
-              <button 
-                onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                className="absolute left-6 text-background/70 hover:text-background transition-colors"
-              >
-                <ChevronLeft className="w-10 h-10" />
-              </button>
-              
-              <motion.img
-                key={currentImageIndex}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                src={project.images[currentImageIndex]}
-                alt={project.title[language]}
-                className="max-w-[90vw] max-h-[90vh] object-contain"
-                onClick={(e) => e.stopPropagation()}
-              />
-              
-              <button 
-                onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                className="absolute right-6 text-background/70 hover:text-background transition-colors"
-              >
-                <ChevronRight className="w-10 h-10" />
-              </button>
-              
-              <div className="absolute bottom-6 text-background/70 text-sm">
-                {currentImageIndex + 1} / {project.images.length}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Lightbox with keyboard navigation */}
+        <ImageLightbox
+          images={project.images}
+          currentIndex={currentImageIndex}
+          isOpen={lightboxOpen}
+          onClose={closeLightbox}
+          onNext={nextImage}
+          onPrev={prevImage}
+          altText={project.title[language]}
+        />
 
         <Footer />
       </div>
