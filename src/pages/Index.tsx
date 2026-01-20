@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button';
 import BlurImage from '@/components/BlurImage';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
-import heroImage from '@/assets/hero-interior.jpg';
+import HeroVideo from '@/components/HeroVideo';
 
 const Index = () => {
   const { language, t } = useLanguage();
@@ -51,22 +51,10 @@ const Index = () => {
         
         {/* Hero with Parallax Background */}
         <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden">
-          {/* Parallax Background Image */}
-          <motion.div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
-            style={{ 
-              backgroundImage: `url(${heroImage})`,
-              y: heroY,
-            }}
-          />
-          {/* Cinematic Vignette */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.4) 100%)'
-          }} />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
-          {/* Noise Texture */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" />
+          {/* Hero Video Background with Fallback */}
+          <HeroVideo heroY={heroY}>
+            <></>
+          </HeroVideo>
           
           <motion.div className="container mx-auto px-6 text-center relative z-10" style={{ opacity: heroOpacity }}>
             <motion.span 
