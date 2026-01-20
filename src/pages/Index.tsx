@@ -57,8 +57,14 @@ const Index = () => {
               y: heroY,
             }}
           />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-foreground/40 dark:bg-foreground/60" />
+          {/* Cinematic Vignette */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.4) 100%)'
+          }} />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
+          {/* Noise Texture */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" />
           
           <motion.div className="container mx-auto px-6 text-center relative z-10" style={{ opacity: heroOpacity }}>
             <motion.span 
@@ -93,14 +99,14 @@ const Index = () => {
               transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button asChild size="lg" className="bg-foreground/90 text-background hover:bg-foreground font-medium tracking-wide">
+              <Button asChild size="lg" className="bg-white/95 text-black hover:bg-white font-medium tracking-wide shadow-lg">
                 <Link to="/contact">{t.hero.cta.request}</Link>
               </Button>
               <Button 
                 asChild 
                 variant="outline" 
                 size="lg" 
-                className="border-foreground/30 text-foreground bg-foreground/10 backdrop-blur-sm hover:bg-foreground/20 hover:border-foreground/50 font-medium tracking-wide"
+                className="border-white/40 !text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/60 font-medium tracking-wide"
               >
                 <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
               </Button>
