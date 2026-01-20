@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
@@ -23,6 +23,46 @@ const Index = () => {
   const { language, t } = useLanguage();
   const featuredProjects = portfolioProjects.slice(0, 6);
   const [videoReady, setVideoReady] = useState(false);
+  
+  // 3D Tilt effect for hero text
+  const heroContentRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Smooth spring animation for tilt
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), { stiffness: 100, damping: 30 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), { stiffness: 100, damping: 30 });
+  const translateX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 100, damping: 30 });
+  const translateY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-10, 10]), { stiffness: 100, damping: 30 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroContentRef.current) return;
+      const rect = heroContentRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Normalize mouse position to -0.5 to 0.5
+      const x = (e.clientX - centerX) / rect.width;
+      const y = (e.clientY - centerY) / rect.height;
+      
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
+    const handleMouseLeave = () => {
+      mouseX.set(0);
+      mouseY.set(0);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [mouseX, mouseY]);
   
   // Parallax effect for hero
   const heroRef = useRef(null);
@@ -93,23 +133,35 @@ const Index = () => {
             <></>
           </HeroVideo>
           
-          <motion.div className="container mx-auto px-6 text-center relative z-10" style={{ opacity: heroOpacity }}>
+          <motion.div 
+            ref={heroContentRef}
+            className="container mx-auto px-6 text-center relative z-10" 
+            style={{ 
+              opacity: heroOpacity,
+              rotateX,
+              rotateY,
+              x: translateX,
+              y: translateY,
+              transformStyle: 'preserve-3d',
+              perspective: 1000,
+            }}
+          >
             {/* Cinematic subtitle reveal with parallax */}
             <motion.span 
               variants={cinematicReveal}
               initial="hidden"
               animate="visible"
               custom={0.3}
-              style={{ y: subtitleY }}
+              style={{ y: subtitleY, translateZ: 20 }}
               className="text-sm tracking-[0.3em] text-white/70 uppercase mb-6 block font-light"
             >
               {language === 'ru' ? 'Дизайнер интерьеров · Алматы' : 'Interior Designer · Almaty'}
             </motion.span>
             
-            {/* Letter-by-letter title reveal with parallax */}
+            {/* Letter-by-letter title reveal with parallax and 3D depth */}
             <motion.h1 
               className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-tight text-white overflow-hidden"
-              style={{ y: textY }}
+              style={{ y: textY, translateZ: 50 }}
             >
               {titleLetters.map((letter, i) => (
                 <motion.span
@@ -132,7 +184,7 @@ const Index = () => {
               initial="hidden"
               animate="visible"
               custom={1.2}
-              style={{ y: subtitleY }}
+              style={{ y: subtitleY, translateZ: 30 }}
               className="text-lg text-white/80 max-w-2xl mx-auto mb-12 font-light leading-relaxed"
             >
               {language === 'ru' 
@@ -145,7 +197,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }} 
-              style={{ y: buttonsY }}
+              style={{ y: buttonsY, translateZ: 40 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <MagneticButton strength={0.15}>
@@ -186,44 +238,64 @@ const Index = () => {
           </motion.button>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-24 bg-background">
+        {/* About Section with scroll-triggered reveal */}
+        <section id="about" className="py-24 bg-background overflow-hidden">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-3 block"
-              >
-                {language === 'ru' ? 'О себе' : 'About Me'}
-              </motion.span>
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                className="text-4xl md:text-5xl font-light tracking-tight mb-8"
-              >
-                {language === 'ru' ? 'Гаухар Сергазина' : 'Gauhar Sergazina'}
-              </motion.h2>
+              {/* Animated line decoration */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] as const }}
+                className="w-16 h-px bg-primary mx-auto mb-8 origin-left"
+              />
+              
+              {/* Label with slide-up reveal */}
+              <div className="overflow-hidden">
+                <motion.span 
+                  initial={{ y: '100%', opacity: 0 }} 
+                  whileInView={{ y: 0, opacity: 1 }} 
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
+                  className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-4 block"
+                >
+                  {language === 'ru' ? 'О себе' : 'About Me'}
+                </motion.span>
+              </div>
+              
+              {/* Name with character-by-character reveal */}
+              <div className="overflow-hidden mb-8">
+                <motion.h2 
+                  initial={{ y: '100%' }} 
+                  whileInView={{ y: 0 }} 
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
+                  className="text-4xl md:text-5xl font-light tracking-tight"
+                >
+                  {language === 'ru' ? 'Гаухар Сергазина' : 'Gauhar Sergazina'}
+                </motion.h2>
+              </div>
+              
+              {/* Description with blur-in effect */}
               <motion.p 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-lg text-muted-foreground leading-relaxed mb-8"
+                initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
+                className="text-lg text-muted-foreground leading-relaxed mb-10"
               >
                 {language === 'ru' 
                   ? 'Дипломированный дизайнер интерьеров, окончившая Казахскую архитектурно-строительную академию и прошедшая обучение в престижном Central Saint Martin в Лондоне. Моя страсть к дизайну находит отражение в каждом проекте.'
                   : 'A certified interior designer who graduated from the Kazakh Academy of Architecture and Construction and trained at the prestigious Central Saint Martin in London. My passion for design is reflected in every project.'}
               </motion.p>
+              
+              {/* CTA button with scale-in */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.6 }}
+                initial={{ opacity: 0, scale: 0.9 }} 
+                whileInView={{ opacity: 1, scale: 1 }} 
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
               >
                 <Button asChild variant="outline" size="lg">
                   <Link to="/about">
