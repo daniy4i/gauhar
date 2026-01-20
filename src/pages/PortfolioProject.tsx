@@ -51,7 +51,7 @@ const PortfolioProject = () => {
 
   return (
     <PageTransition>
-      <SEO 
+      <SEO
         title={project.title[language]}
         description={project.description[language]}
         image={project.thumbnail}
@@ -59,98 +59,100 @@ const PortfolioProject = () => {
       />
       <div className="min-h-screen bg-background">
         <Navigation />
-        
-        {/* Hero Image */}
-        <section className="pt-24">
-          <div className="container mx-auto px-6">
+
+        {/* Back Link */}
+        <section className="pt-24 md:pt-28">
+          <div className="container mx-auto px-6 lg:px-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="mb-8"
             >
-              <Link 
-                to="/portfolio" 
-                className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors group"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
                 {language === 'ru' ? 'Назад к портфолио' : 'Back to Portfolio'}
               </Link>
             </motion.div>
           </div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full aspect-[21/9] overflow-hidden cursor-pointer shadow-architectural"
-            onClick={() => openLightbox(0)}
-          >
-            <img 
-              src={project.images[0]} 
-              alt={project.title[language]}
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-            />
-          </motion.div>
         </section>
 
+        {/* Hero Image - Full Width */}
+        <motion.section
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 md:mb-24"
+        >
+          <div
+            className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden cursor-pointer group"
+            onClick={() => openLightbox(0)}
+          >
+            <img
+              src={project.images[0]}
+              alt={project.title[language]}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        </motion.section>
+
         {/* Project Info */}
-        <section className="py-16">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
+        <section className="pb-16 md:pb-24">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="max-w-5xl">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="grid md:grid-cols-3 gap-12"
+                className="grid md:grid-cols-[2fr_1fr] gap-12 md:gap-20"
               >
-                <div className="md:col-span-2">
-                  <h1 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">
+                {/* Main Content */}
+                <div>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-architectural mb-8">
                     {project.title[language]}
                   </h1>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    {project.brief[language]}
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    {project.description[language]}
                   </p>
                 </div>
 
-                <div className="space-y-6">
-                  {project.area && (
+                {/* Project Details */}
+                <div className="space-y-8 md:pt-4">
+                  <div className="space-y-6">
                     <div>
-                      <span className="text-sm text-muted-foreground block mb-1">
+                      <span className="text-minimal text-muted-foreground block mb-2">
                         {t.portfolio.area}
                       </span>
-                      <span className="text-lg">{project.area} м²</span>
+                      <span className="text-xl">{project.area} м²</span>
                     </div>
-                  )}
-                  {project.location && (
+
+                    <div className="w-full h-px bg-border" />
+
                     <div>
-                      <span className="text-sm text-muted-foreground block mb-1">
+                      <span className="text-minimal text-muted-foreground block mb-2">
                         {language === 'ru' ? 'Локация' : 'Location'}
                       </span>
-                      <span className="text-lg">{project.location[language]}</span>
+                      <span className="text-xl">{project.location[language]}</span>
                     </div>
-                  )}
-                  {project.year && (
+
+                    <div className="w-full h-px bg-border" />
+
                     <div>
-                      <span className="text-sm text-muted-foreground block mb-1">
-                        {language === 'ru' ? 'Год' : 'Year'}
+                      <span className="text-minimal text-muted-foreground block mb-2">
+                        {language === 'ru' ? 'Категория' : 'Category'}
                       </span>
-                      <span className="text-lg">{project.year}</span>
-                    </div>
-                  )}
-                  <div>
-                    <span className="text-sm text-muted-foreground block mb-2">
-                      {language === 'ru' ? 'Стиль' : 'Style'}
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {project.styles.map((style) => (
-                        <span 
-                          key={style}
-                          className="px-3 py-1 bg-muted text-sm"
-                        >
-                          {style}
-                        </span>
-                      ))}
+                      <span className="text-xl capitalize">
+                        {project.category === 'residential'
+                          ? language === 'ru'
+                            ? 'Жилой'
+                            : 'Residential'
+                          : language === 'ru'
+                          ? 'Коммерческий'
+                          : 'Commercial'}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -161,23 +163,28 @@ const PortfolioProject = () => {
 
         {/* Image Gallery */}
         {project.images.length > 1 && (
-          <section className="py-8">
-            <div className="container mx-auto px-6">
-              <div className="grid md:grid-cols-2 gap-4">
+          <section className="pb-24 md:pb-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                 {project.images.slice(1).map((image, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="aspect-[4/3] overflow-hidden cursor-pointer shadow-elegant"
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{
+                      delay: index * 0.1,
+                      duration: 0.6,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="aspect-[4/3] overflow-hidden cursor-pointer group"
                     onClick={() => openLightbox(index + 1)}
                   >
-                    <img 
-                      src={image} 
+                    <img
+                      src={image}
                       alt={`${project.title[language]} - ${index + 2}`}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
                     />
                   </motion.div>
                 ))}
@@ -187,77 +194,79 @@ const PortfolioProject = () => {
         )}
 
         {/* CTA Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-6 text-center">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
+        <section className="py-20 md:py-28 bg-muted/30">
+          <div className="container mx-auto px-6 lg:px-12 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl md:text-4xl font-light mb-6"
+              className="max-w-2xl mx-auto"
             >
-              {t.portfolio.requestSimilar}
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="text-muted-foreground mb-8 max-w-xl mx-auto"
-            >
-              {language === 'ru'
-                ? 'Хотите такой же стильный интерьер? Давайте обсудим ваш проект!'
-                : 'Want a similarly stylish interior? Let\'s discuss your project!'}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Button asChild size="lg">
-                <Link to="/contact">{t.contact.form.submit}</Link>
-              </Button>
-              <WhatsAppButton variant="outline" size="lg" />
+              <h2 className="text-3xl md:text-4xl font-light text-architectural mb-6">
+                {t.portfolio.requestSimilar}
+              </h2>
+              <p className="text-muted-foreground mb-10 text-lg">
+                {language === 'ru'
+                  ? 'Хотите такой же стильный интерьер? Давайте обсудим ваш проект!'
+                  : "Want a similarly stylish interior? Let's discuss your project!"}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="px-8">
+                  <Link to="/contact">{t.contact.form.submit}</Link>
+                </Button>
+                <WhatsAppButton variant="outline" size="lg" />
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* Project Navigation */}
-        <section className="py-12 border-t border-border/50">
-          <div className="container mx-auto px-6">
+        <section className="py-12 md:py-16 border-t border-border/50">
+          <div className="container mx-auto px-6 lg:px-12">
             <div className="flex justify-between items-center">
               {prevProject ? (
-                <Link 
+                <Link
                   to={`/portfolio/${prevProject.slug}`}
-                  className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                  className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                  <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-2" />
                   <div className="text-left">
-                    <span className="text-xs block">{language === 'ru' ? 'Предыдущий' : 'Previous'}</span>
-                    <span className="text-sm font-medium text-foreground">{prevProject.title[language]}</span>
+                    <span className="text-minimal block mb-1">
+                      {language === 'ru' ? 'Предыдущий' : 'Previous'}
+                    </span>
+                    <span className="text-lg text-foreground font-light">
+                      {prevProject.title[language]}
+                    </span>
                   </div>
                 </Link>
-              ) : <div />}
-              
+              ) : (
+                <div />
+              )}
+
               {nextProject ? (
-                <Link 
+                <Link
                   to={`/portfolio/${nextProject.slug}`}
-                  className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                  className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <div className="text-right">
-                    <span className="text-xs block">{language === 'ru' ? 'Следующий' : 'Next'}</span>
-                    <span className="text-sm font-medium text-foreground">{nextProject.title[language]}</span>
+                    <span className="text-minimal block mb-1">
+                      {language === 'ru' ? 'Следующий' : 'Next'}
+                    </span>
+                    <span className="text-lg text-foreground font-light">
+                      {nextProject.title[language]}
+                    </span>
                   </div>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                 </Link>
-              ) : <div />}
+              ) : (
+                <div />
+              )}
             </div>
           </div>
         </section>
 
-        {/* Lightbox with keyboard navigation */}
+        {/* Lightbox */}
         <ImageLightbox
           images={project.images}
           currentIndex={currentImageIndex}

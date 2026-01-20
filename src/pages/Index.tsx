@@ -11,12 +11,12 @@ import FAQ from '@/components/FAQ';
 import InstagramFeed from '@/components/InstagramFeed';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
-import { getFeaturedProjects } from '@/data/portfolioData';
+import { portfolioProjects } from '@/data/portfolioData';
 import heroImage from '@/assets/hero-interior.jpg';
 
 const Index = () => {
   const { language, t } = useLanguage();
-  const featuredProjects = getFeaturedProjects().slice(0, 6);
+  const featuredProjects = portfolioProjects.slice(0, 6);
 
   const scrollToPortfolio = () => {
     const element = document.getElementById('portfolio');

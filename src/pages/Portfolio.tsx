@@ -16,8 +16,7 @@ const Portfolio = () => {
 
   const filters: { key: 'all' | ProjectCategory; label: string }[] = [
     { key: 'all', label: t.portfolio.filters.all },
-    { key: 'apartment', label: t.portfolio.filters.apartment },
-    { key: 'house', label: t.portfolio.filters.house },
+    { key: 'residential', label: language === 'ru' ? 'Жилые' : 'Residential' },
     { key: 'commercial', label: t.portfolio.filters.commercial },
   ];
 
