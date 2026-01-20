@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import Preloader from "./components/Preloader";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import PortfolioProject from "./pages/PortfolioProject";
@@ -36,6 +37,7 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <Preloader />
       <Toaster />
       <Sonner />
       <BrowserRouter>
