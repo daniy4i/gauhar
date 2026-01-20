@@ -1,37 +1,48 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import heroImage from '@/assets/hero-interior.jpg';
 
 interface HeroVideoProps {
   children: React.ReactNode;
   heroY: any;
+  onVideoReady?: () => void;
 }
 
-const HeroVideo = ({ children, heroY }: HeroVideoProps) => {
+const HeroVideo = ({ children, heroY, onVideoReady }: HeroVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [showVideo, setShowVideo] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const kenBurnsControls = useAnimation();
+
+  // Ken Burns zoom effect - slow cinematic zoom
+  useEffect(() => {
+    if (isLoaded && isPlaying) {
+      kenBurnsControls.start({
+        scale: [1, 1.08],
+        transition: {
+          duration: 20,
+          ease: 'linear',
+          repeat: Infinity,
+          repeatType: 'reverse',
+        },
+      });
+    } else {
+      kenBurnsControls.stop();
+    }
+  }, [isLoaded, isPlaying, kenBurnsControls]);
 
   // Check for reduced motion preference and low power mode
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const isLowPower = 'connection' in navigator && 
       (navigator as any).connection?.saveData === true;
     
-    // Disable video on reduced motion, low power, or mobile with slow connection
+    // Disable video on reduced motion or low power
     if (prefersReducedMotion || isLowPower) {
       setShowVideo(false);
-    }
-    
-    // On mobile, still try to show video but handle failures gracefully
-    if (isMobile && videoRef.current) {
-      videoRef.current.play().catch(() => {
-        setShowVideo(false);
-      });
     }
   }, []);
 
@@ -55,42 +66,53 @@ const HeroVideo = ({ children, heroY }: HeroVideoProps) => {
 
   const handleVideoLoad = () => {
     setIsLoaded(true);
+    onVideoReady?.();
   };
 
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Fallback Image (always present for no layout shift) */}
       <motion.div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ 
           backgroundImage: `url(${heroImage})`,
           y: heroY,
+          scale: 1.1,
         }}
       />
       
-      {/* Video Background */}
+      {/* Video Background with Ken Burns Effect */}
       {showVideo && (
         <motion.div 
-          className="absolute inset-0 scale-110"
+          className="absolute inset-0"
           style={{ y: heroY }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
           transition={{ duration: 1.5, ease: 'easeOut' }}
         >
-          <video
-            ref={videoRef}
-            className="w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={heroImage}
-            preload="auto"
-            onLoadedData={handleVideoLoad}
-            onCanPlay={handleVideoLoad}
+          <motion.div
+            className="w-full h-full"
+            animate={kenBurnsControls}
+            initial={{ scale: 1 }}
           >
-            <source src="/videos/hero-video.mp4" type="video/mp4" />
-          </video>
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover scale-110"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster={heroImage}
+              preload="auto"
+              onLoadedData={handleVideoLoad}
+              onCanPlay={handleVideoLoad}
+            >
+              {/* WebM for better compression (provide hero-video.webm) */}
+              <source src="/videos/hero-video.webm" type="video/webm" />
+              {/* MP4 fallback */}
+              <source src="/videos/hero-video.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
         </motion.div>
       )}
       
@@ -102,8 +124,8 @@ const HeroVideo = ({ children, heroY }: HeroVideoProps) => {
         background: 'radial-gradient(ellipse at center, transparent 0%, transparent 30%, rgba(0,0,0,0.5) 100%)'
       }} />
       
-      {/* Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" />
+      {/* Film grain effect */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none noise-texture mix-blend-overlay" />
       
       {/* Content */}
       {children}
