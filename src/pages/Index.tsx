@@ -12,6 +12,7 @@ import FAQ from '@/components/FAQ';
 import InstagramFeed from '@/components/InstagramFeed';
 import ScrollProgress from '@/components/ScrollProgress';
 import BackToTop from '@/components/BackToTop';
+import MagneticButton from '@/components/MagneticButton';
 import { Button } from '@/components/ui/button';
 import BlurImage from '@/components/BlurImage';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
@@ -98,20 +99,26 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <Button asChild size="lg" className="bg-white/95 text-black hover:bg-white font-medium tracking-wide shadow-lg">
-                <Link to="/contact">{t.hero.cta.request}</Link>
-              </Button>
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
-                className="border-white/40 !text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/60 font-medium tracking-wide"
-              >
-                <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
-              </Button>
-              <WhatsAppButton size="lg" />
+              <MagneticButton strength={0.15}>
+                <Button asChild size="lg" className="bg-white/95 text-black hover:bg-white font-medium tracking-wide shadow-lg">
+                  <Link to="/contact">{t.hero.cta.request}</Link>
+                </Button>
+              </MagneticButton>
+              <MagneticButton strength={0.15}>
+                <Button 
+                  asChild 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-white/40 !text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/60 font-medium tracking-wide"
+                >
+                  <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
+                </Button>
+              </MagneticButton>
+              <MagneticButton strength={0.15}>
+                <WhatsAppButton size="lg" />
+              </MagneticButton>
             </motion.div>
           </motion.div>
 
