@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { z } from 'zod';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
@@ -12,11 +13,28 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { MessageCircle, Mail, Phone, MapPin, Instagram, Youtube, Send } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+
+// Validation schema
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
+  phone: z.string().trim().max(50, "Phone too long").optional(),
+  email: z.string().trim().email("Invalid email").max(255, "Email too long").optional().or(z.literal('')),
+  city: z.string().trim().max(100, "City too long").optional(),
+  projectType: z.string().max(100).optional(),
+  area: z.string().max(50).optional(),
+  budget: z.string().max(100).optional(),
+  message: z.string().trim().max(2000, "Message too long").optional(),
+}).refine(data => data.phone || data.email, {
+  message: "Phone or email is required",
+  path: ["phone"],
+});
 
 const Contact = () => {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({ 
     name: '', 
     phone: '', 
@@ -30,32 +48,62 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || (!formData.phone.trim() && !formData.email.trim())) {
+    setErrors({});
+    
+    // Validate form data
+    const result = contactSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach(err => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
       toast({ 
         title: language === 'ru' ? 'Ошибка' : 'Error', 
-        description: language === 'ru' ? 'Заполните имя и контакт' : 'Fill name and contact', 
+        description: language === 'ru' ? 'Проверьте правильность заполнения формы' : 'Please check the form fields', 
         variant: 'destructive' 
       });
       return;
     }
+
     setIsSubmitting(true);
-    const subject = encodeURIComponent(language === 'ru' ? `Заявка от ${formData.name}` : `Request from ${formData.name}`);
-    const body = encodeURIComponent(
-      `${language === 'ru' ? 'Имя' : 'Name'}: ${formData.name}\n` +
-      `${language === 'ru' ? 'Телефон' : 'Phone'}: ${formData.phone}\n` +
-      `Email: ${formData.email}\n` +
-      `${language === 'ru' ? 'Город' : 'City'}: ${formData.city}\n` +
-      `${language === 'ru' ? 'Тип проекта' : 'Project type'}: ${formData.projectType}\n` +
-      `${language === 'ru' ? 'Площадь' : 'Area'}: ${formData.area} м²\n` +
-      `${language === 'ru' ? 'Бюджет' : 'Budget'}: ${formData.budget}\n\n` +
-      `${language === 'ru' ? 'Сообщение' : 'Message'}:\n${formData.message}`
-    );
-    window.location.href = `mailto:gauhars@mail.ru?subject=${subject}&body=${body}`;
-    setIsSubmitting(false);
-    toast({ 
-      title: language === 'ru' ? 'Успешно!' : 'Success!', 
-      description: t.contact.form.success 
-    });
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          phone: formData.phone || undefined,
+          email: formData.email || undefined,
+          city: formData.city || undefined,
+          projectType: formData.projectType || undefined,
+          area: formData.area || undefined,
+          budget: formData.budget || undefined,
+          message: formData.message || undefined,
+          language,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({ 
+        title: language === 'ru' ? 'Успешно!' : 'Success!', 
+        description: t.contact.form.success 
+      });
+      
+      // Reset form
+      setFormData({ name: '', phone: '', email: '', city: '', projectType: '', area: '', budget: '', message: '' });
+    } catch (error: any) {
+      console.error('Form submission error:', error);
+      toast({ 
+        title: language === 'ru' ? 'Ошибка' : 'Error', 
+        description: language === 'ru' ? 'Не удалось отправить заявку. Попробуйте позже.' : 'Failed to submit. Please try again.', 
+        variant: 'destructive' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -111,28 +159,37 @@ const Contact = () => {
                 className="lg:col-span-3 space-y-6"
               >
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Input 
-                    placeholder={t.contact.form.namePlaceholder} 
-                    value={formData.name} 
-                    onChange={e => setFormData(p => ({...p, name: e.target.value}))} 
-                    required 
-                    className="bg-card border-border"
-                  />
-                  <Input 
-                    placeholder={t.contact.form.phonePlaceholder} 
-                    value={formData.phone} 
-                    onChange={e => setFormData(p => ({...p, phone: e.target.value}))}
-                    className="bg-card border-border"
-                  />
+                  <div>
+                    <Input 
+                      placeholder={t.contact.form.namePlaceholder} 
+                      value={formData.name} 
+                      onChange={e => setFormData(p => ({...p, name: e.target.value}))} 
+                      required 
+                      className={`bg-card border-border ${errors.name ? 'border-destructive' : ''}`}
+                    />
+                    {errors.name && <span className="text-destructive text-xs mt-1">{errors.name}</span>}
+                  </div>
+                  <div>
+                    <Input 
+                      placeholder={t.contact.form.phonePlaceholder} 
+                      value={formData.phone} 
+                      onChange={e => setFormData(p => ({...p, phone: e.target.value}))}
+                      className={`bg-card border-border ${errors.phone ? 'border-destructive' : ''}`}
+                    />
+                    {errors.phone && <span className="text-destructive text-xs mt-1">{errors.phone}</span>}
+                  </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Input 
-                    type="email" 
-                    placeholder={t.contact.form.emailPlaceholder} 
-                    value={formData.email} 
-                    onChange={e => setFormData(p => ({...p, email: e.target.value}))}
-                    className="bg-card border-border"
-                  />
+                  <div>
+                    <Input 
+                      type="email" 
+                      placeholder={t.contact.form.emailPlaceholder} 
+                      value={formData.email} 
+                      onChange={e => setFormData(p => ({...p, email: e.target.value}))}
+                      className={`bg-card border-border ${errors.email ? 'border-destructive' : ''}`}
+                    />
+                    {errors.email && <span className="text-destructive text-xs mt-1">{errors.email}</span>}
+                  </div>
                   <Input 
                     placeholder={t.contact.form.cityPlaceholder} 
                     value={formData.city} 
