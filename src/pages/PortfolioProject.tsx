@@ -10,6 +10,7 @@ import { useLanguage } from '@/lib/i18n';
 import { getProjectBySlug, portfolioProjects } from '@/data/portfolioData';
 import { Button } from '@/components/ui/button';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import BackToTop from '@/components/BackToTop';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const PortfolioProject = () => {
@@ -278,6 +279,7 @@ const PortfolioProject = () => {
         />
 
         <Footer />
+        <BackToTop />
       </div>
     </PageTransition>
   );

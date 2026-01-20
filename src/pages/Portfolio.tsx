@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
+import BackToTop from '@/components/BackToTop';
+import BlurImage from '@/components/BlurImage';
 import SEO from '@/components/SEO';
 import { useLanguage } from '@/lib/i18n';
 import { portfolioProjects, ProjectCategory } from '@/data/portfolioData';
@@ -108,12 +110,12 @@ const Portfolio = () => {
                       className="group block"
                     >
                       <div className="relative overflow-hidden bg-muted aspect-[4/3] shadow-elegant">
-                        <img 
+                        <BlurImage 
                           src={project.thumbnail} 
                           alt={project.title[language]}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                           <span className="inline-flex items-center text-white text-sm font-medium">
                             {t.portfolio.viewProject}
@@ -178,6 +180,7 @@ const Portfolio = () => {
         </section>
 
         <Footer />
+        <BackToTop />
       </div>
     </PageTransition>
   );
