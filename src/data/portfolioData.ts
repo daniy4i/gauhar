@@ -21,59 +21,31 @@ export interface PortfolioProject {
   images: string[];
 }
 
-// Original images from gauharsergazina.kz
-const originalImages = {
-  // Family Living Room
-  familyLiving1: 'https://gauharsergazina.kz/images/1.jpg',
-  familyLiving2: 'https://gauharsergazina.kz/images/2.jpg',
-  familyLiving3: 'https://gauharsergazina.kz/images/3.jpg',
-  
-  // Restaurant Ayalla
-  restaurant1: 'https://gauharsergazina.kz/images/4.jpg',
-  restaurant2: 'https://gauharsergazina.kz/images/5.jpg',
-  restaurant3: 'https://gauharsergazina.kz/images/6.jpg',
-  
-  // Loft Country House
-  loft1: 'https://gauharsergazina.kz/images/7.jpg',
-  loft2: 'https://gauharsergazina.kz/images/8.jpg',
-  loft3: 'https://gauharsergazina.kz/images/122.jpg',
-  
-  // Minimalism and Wood
-  minimalistWood1: 'https://gauharsergazina.kz/images/9.jpg',
-  minimalistWood2: 'https://gauharsergazina.kz/images/10.jpg',
-  minimalistWood3: 'https://gauharsergazina.kz/images/11.jpg',
-  
-  // Luxurious Bedroom
-  bedroom1: 'https://gauharsergazina.kz/images/83.jpg',
-  bedroom2: 'https://gauharsergazina.kz/images/104.jpg',
-  
-  // Marble Tale
-  marble1: 'https://gauharsergazina.kz/images/123.jpg',
-  marble2: 'https://gauharsergazina.kz/images/132.jpg',
-  marble3: 'https://gauharsergazina.kz/images/14.jpg',
-  
-  // Additional projects from original site
-  laconicLiving1: 'https://gauharsergazina.kz/images/15.jpg',
-  laconicLiving2: 'https://gauharsergazina.kz/images/16.jpg',
-  
-  tastefulLiving1: 'https://gauharsergazina.kz/images/17.jpg',
-  tastefulLiving2: 'https://gauharsergazina.kz/images/18.jpg',
-  
-  leatherLiving1: 'https://gauharsergazina.kz/images/19.jpg',
-  leatherLiving2: 'https://gauharsergazina.kz/images/20.jpg',
-  
-  classicHint1: 'https://gauharsergazina.kz/images/21.jpg',
-  classicHint2: 'https://gauharsergazina.kz/images/22.jpg',
-  
-  fireplaceLiving1: 'https://gauharsergazina.kz/images/23.jpg',
-  fireplaceLiving2: 'https://gauharsergazina.kz/images/24.jpg',
-  
-  contrastLiving1: 'https://gauharsergazina.kz/images/25.jpg',
-  contrastLiving2: 'https://gauharsergazina.kz/images/26.jpg',
-  
-  natureLiving1: 'https://gauharsergazina.kz/images/27.jpg',
-  natureLiving2: 'https://gauharsergazina.kz/images/28.jpg',
-};
+// Local high-resolution images - imported for Vite optimization
+import familyLiving1 from '@/assets/portfolio/family-living-1.jpg';
+import familyLiving2 from '@/assets/portfolio/family-living-2.jpg';
+import familyLiving3 from '@/assets/portfolio/family-living-3.jpg';
+import restaurant1 from '@/assets/portfolio/restaurant-1.jpg';
+import restaurant2 from '@/assets/portfolio/restaurant-2.jpg';
+import restaurant3 from '@/assets/portfolio/restaurant-3.jpg';
+import loft1 from '@/assets/portfolio/loft-1.jpg';
+import loft2 from '@/assets/portfolio/loft-2.jpg';
+import loft3 from '@/assets/portfolio/loft-3.jpg';
+import minimalistWood1 from '@/assets/portfolio/minimalist-wood-1.jpg';
+import minimalistWood2 from '@/assets/portfolio/minimalist-wood-2.jpg';
+import minimalistWood3 from '@/assets/portfolio/minimalist-wood-3.jpg';
+import bedroom1 from '@/assets/portfolio/bedroom-1.jpg';
+import bedroom2 from '@/assets/portfolio/bedroom-2.jpg';
+import marble1 from '@/assets/portfolio/marble-1.jpg';
+import marble2 from '@/assets/portfolio/marble-2.jpg';
+import marble3 from '@/assets/portfolio/marble-3.jpg';
+import laconicLiving1 from '@/assets/portfolio/laconic-living-1.jpg';
+import laconicLiving2 from '@/assets/portfolio/laconic-living-2.jpg';
+import classicHint2 from '@/assets/portfolio/classic-hint-2.jpg';
+import fireplaceLiving1 from '@/assets/portfolio/fireplace-living-1.jpg';
+import fireplaceLiving2 from '@/assets/portfolio/fireplace-living-2.jpg';
+import contrastLiving1 from '@/assets/portfolio/contrast-living-1.jpg';
+import contrastLiving2 from '@/assets/portfolio/contrast-living-2.jpg';
 
 export const portfolioProjects: PortfolioProject[] = [
   {
@@ -90,8 +62,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 40,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.familyLiving1,
-    images: [originalImages.familyLiving1, originalImages.familyLiving2, originalImages.familyLiving3],
+    thumbnail: familyLiving1,
+    images: [familyLiving1, familyLiving2, familyLiving3],
   },
   {
     id: '2',
@@ -107,8 +79,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'commercial',
     area: 350,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.restaurant1,
-    images: [originalImages.restaurant1, originalImages.restaurant2, originalImages.restaurant3],
+    thumbnail: restaurant1,
+    images: [restaurant1, restaurant2, restaurant3],
   },
   {
     id: '3',
@@ -124,8 +96,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 280,
     location: { ru: 'Алматинская область', en: 'Almaty Region' },
-    thumbnail: originalImages.loft1,
-    images: [originalImages.loft1, originalImages.loft2, originalImages.loft3],
+    thumbnail: loft1,
+    images: [loft1, loft2, loft3],
   },
   {
     id: '4',
@@ -141,8 +113,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 85,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.minimalistWood1,
-    images: [originalImages.minimalistWood1, originalImages.minimalistWood2, originalImages.minimalistWood3],
+    thumbnail: minimalistWood1,
+    images: [minimalistWood1, minimalistWood2, minimalistWood3],
   },
   {
     id: '5',
@@ -158,8 +130,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 35,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.bedroom1,
-    images: [originalImages.bedroom1, originalImages.bedroom2],
+    thumbnail: bedroom1,
+    images: [bedroom1, bedroom2],
   },
   {
     id: '6',
@@ -175,8 +147,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 18,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.marble1,
-    images: [originalImages.marble1, originalImages.marble2, originalImages.marble3],
+    thumbnail: marble1,
+    images: [marble1, marble2, marble3],
   },
   {
     id: '7',
@@ -192,45 +164,11 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 45,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.laconicLiving1,
-    images: [originalImages.laconicLiving1, originalImages.laconicLiving2],
+    thumbnail: laconicLiving1,
+    images: [laconicLiving1, laconicLiving2],
   },
   {
     id: '8',
-    slug: 'tasteful-living-room',
-    title: {
-      ru: 'Гостиная со вкусом',
-      en: 'Tasteful Living Room',
-    },
-    description: {
-      ru: 'Стильный дизайн интерьера загородного дома в пригороде Алматы. Минималистичный дизайн, мягкое цветовое решение интерьера, дополняют сдержанные оттенки мебели.',
-      en: 'Stylish interior design of a country house in Almaty suburbs. Minimalist design with soft color palette complemented by restrained furniture tones.',
-    },
-    category: 'residential',
-    area: 120,
-    location: { ru: 'Алматинская область', en: 'Almaty Region' },
-    thumbnail: originalImages.tastefulLiving1,
-    images: [originalImages.tastefulLiving1, originalImages.tastefulLiving2],
-  },
-  {
-    id: '9',
-    slug: 'leather-living-room',
-    title: {
-      ru: 'Кожаная гостиная',
-      en: 'Leather Living Room',
-    },
-    description: {
-      ru: 'В проекте используется множество эксклюзивных покрытий, например авторские стеновые панели обтянутые кожей с белой прострочкой и металлическими вставками.',
-      en: 'The project uses many exclusive finishes, including custom wall panels covered in leather with white stitching and metal inserts.',
-    },
-    category: 'residential',
-    area: 55,
-    location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.leatherLiving1,
-    images: [originalImages.leatherLiving1, originalImages.leatherLiving2],
-  },
-  {
-    id: '10',
     slug: 'hint-of-classic',
     title: {
       ru: 'Намек на классику',
@@ -243,11 +181,11 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 65,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.classicHint1,
-    images: [originalImages.classicHint1, originalImages.classicHint2],
+    thumbnail: classicHint2,
+    images: [classicHint2],
   },
   {
-    id: '11',
+    id: '9',
     slug: 'fireplace-living-room',
     title: {
       ru: 'Гостиная с камином',
@@ -260,11 +198,11 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 50,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.fireplaceLiving1,
-    images: [originalImages.fireplaceLiving1, originalImages.fireplaceLiving2],
+    thumbnail: fireplaceLiving1,
+    images: [fireplaceLiving1, fireplaceLiving2],
   },
   {
-    id: '12',
+    id: '10',
     slug: 'contrast-living-room',
     title: {
       ru: 'Гостиная контраст',
@@ -277,25 +215,8 @@ export const portfolioProjects: PortfolioProject[] = [
     category: 'residential',
     area: 48,
     location: { ru: 'Алматы', en: 'Almaty' },
-    thumbnail: originalImages.contrastLiving1,
-    images: [originalImages.contrastLiving1, originalImages.contrastLiving2],
-  },
-  {
-    id: '13',
-    slug: 'nature-in-living-room',
-    title: {
-      ru: 'Природа в гостиной',
-      en: 'Nature in Living Room',
-    },
-    description: {
-      ru: 'Лаконичный сдержанный стиль, подчеркивающий настроение и выдержанность хозяев. Кабинет в загородном доме с видом на задний двор.',
-      en: 'Laconic restrained style emphasizing the mood and composure of the owners. Home office in a country house with a view of the backyard.',
-    },
-    category: 'residential',
-    area: 35,
-    location: { ru: 'Алматинская область', en: 'Almaty Region' },
-    thumbnail: originalImages.natureLiving1,
-    images: [originalImages.natureLiving1, originalImages.natureLiving2],
+    thumbnail: contrastLiving1,
+    images: [contrastLiving1, contrastLiving2],
   },
 ];
 
