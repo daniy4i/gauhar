@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+interface NavLink {
+  href: string;
+  label: string;
+  sectionId?: string;
+}
 
 const Navigation = () => {
   const { t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,17 +30,54 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  // Handle scroll after navigation from another page
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+      // Clear the state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
+  const navLinks: NavLink[] = [
     { href: '/', label: t.nav.home },
-    { href: '/about', label: t.nav.about },
-    { href: '/portfolio', label: t.nav.portfolio },
-    { href: '/services', label: t.nav.services },
-    { href: '/contact', label: t.nav.contact },
+    { href: '/about', label: t.nav.about, sectionId: 'about' },
+    { href: '/portfolio', label: t.nav.portfolio, sectionId: 'portfolio' },
+    { href: '/services', label: t.nav.services, sectionId: 'services' },
+    { href: '/contact', label: t.nav.contact, sectionId: 'contact' },
   ];
 
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/';
     return location.pathname.startsWith(href);
+  };
+
+  const handleNavClick = (e: React.MouseEvent, link: NavLink) => {
+    if (location.pathname === '/' && link.sectionId) {
+      e.preventDefault();
+      const element = document.getElementById(link.sectionId);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+      setIsOpen(false);
+    } else if (link.sectionId && location.pathname !== '/') {
+      // Navigate to home page then scroll
+      e.preventDefault();
+      navigate('/', { state: { scrollTo: link.sectionId } });
+      setIsOpen(false);
+    }
   };
 
   return (
@@ -62,6 +106,7 @@ const Navigation = () => {
               <Link
                 key={link.href}
                 to={link.href}
+                onClick={(e) => handleNavClick(e, link)}
                 className={cn(
                   "text-sm tracking-wide transition-colors relative group",
                   isActive(link.href)
@@ -109,7 +154,7 @@ const Navigation = () => {
                       <Link
                         key={link.href}
                         to={link.href}
-                        onClick={() => setIsOpen(false)}
+                        onClick={(e) => handleNavClick(e, link)}
                         className={cn(
                           "text-lg py-2 border-b border-border transition-colors",
                           isActive(link.href)
