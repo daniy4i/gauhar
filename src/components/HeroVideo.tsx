@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import heroImage from '@/assets/hero-interior.jpg';
 
@@ -15,6 +15,7 @@ const HeroVideo = ({ children, heroY, onVideoReady }: HeroVideoProps) => {
   const [isMuted, setIsMuted] = useState(true);
   const [showVideo, setShowVideo] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const kenBurnsControls = useAnimation();
 
   // Ken Burns zoom effect - slow cinematic zoom
@@ -43,8 +44,19 @@ const HeroVideo = ({ children, heroY, onVideoReady }: HeroVideoProps) => {
     // Disable video on reduced motion or low power
     if (prefersReducedMotion || isLowPower) {
       setShowVideo(false);
+      setShowLoader(false);
     }
   }, []);
+
+  // Hide loader after video loads with cinematic delay
+  useEffect(() => {
+    if (isLoaded) {
+      const timer = setTimeout(() => {
+        setShowLoader(false);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoaded]);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -71,6 +83,70 @@ const HeroVideo = ({ children, heroY, onVideoReady }: HeroVideoProps) => {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
+      {/* Cinematic Loading State */}
+      <AnimatePresence>
+        {showLoader && showVideo && (
+          <motion.div
+            className="absolute inset-0 z-30 bg-black flex items-center justify-center"
+            initial={{ opacity: 1 }}
+            exit={{ 
+              opacity: 0,
+              transition: { 
+                duration: 1.5, 
+                ease: [0.22, 1, 0.36, 1] 
+              }
+            }}
+          >
+            {/* Cinematic loader content */}
+            <div className="relative flex flex-col items-center">
+              {/* Elegant loading ring */}
+              <motion.div
+                className="w-16 h-16 border border-white/20 rounded-full"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <motion.div
+                  className="absolute inset-0 border-t border-white/60 rounded-full"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1.5, ease: 'linear', repeat: Infinity }}
+                />
+              </motion.div>
+              
+              {/* Loading text */}
+              <motion.span
+                className="mt-6 text-xs tracking-[0.3em] text-white/50 uppercase"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                Loading
+              </motion.span>
+            </div>
+
+            {/* Cinematic reveal bars */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isLoaded ? 1 : 0 }}
+            >
+              <motion.div
+                className="absolute top-0 left-0 right-0 h-1/2 bg-black origin-top"
+                initial={{ scaleY: 1 }}
+                animate={{ scaleY: isLoaded ? 0 : 1 }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              />
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-1/2 bg-black origin-bottom"
+                initial={{ scaleY: 1 }}
+                animate={{ scaleY: isLoaded ? 0 : 1 }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Fallback Image (always present for no layout shift) */}
       <motion.div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -131,11 +207,11 @@ const HeroVideo = ({ children, heroY, onVideoReady }: HeroVideoProps) => {
       {children}
       
       {/* Video Controls - Unobtrusive */}
-      {showVideo && isLoaded && (
+      {showVideo && isLoaded && !showLoader && (
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
           className="absolute bottom-8 right-8 z-20 flex gap-2"
         >
           <button
