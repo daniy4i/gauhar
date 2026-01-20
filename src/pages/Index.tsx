@@ -13,6 +13,7 @@ import InstagramFeed from '@/components/InstagramFeed';
 import ScrollProgress from '@/components/ScrollProgress';
 import BackToTop from '@/components/BackToTop';
 import { Button } from '@/components/ui/button';
+import BlurImage from '@/components/BlurImage';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
 import heroImage from '@/assets/hero-interior.jpg';
@@ -71,7 +72,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
-              className="text-sm tracking-[0.3em] text-background/80 uppercase mb-4 block font-light"
+              className="text-sm tracking-[0.3em] text-white/70 uppercase mb-4 block font-light"
             >
               {language === 'ru' ? 'Дизайнер интерьеров · Алматы' : 'Interior Designer · Almaty'}
             </motion.span>
@@ -79,7 +80,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
-              className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight text-background"
+              className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight text-white"
             >
               {t.hero.title}
             </motion.h1>
@@ -87,7 +88,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
-              className="text-lg text-background/80 max-w-2xl mx-auto mb-10 font-light"
+              className="text-lg text-white/80 max-w-2xl mx-auto mb-10 font-light"
             >
               {language === 'ru' 
                 ? 'Создаю уникальные интерьеры, которые отражают вашу индивидуальность' 
@@ -120,7 +121,7 @@ const Index = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.6 }}
             onClick={scrollToPortfolio}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-background/60 hover:text-background transition-colors cursor-pointer group"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-colors cursor-pointer group"
           >
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs tracking-[0.2em] uppercase">
@@ -185,6 +186,8 @@ const Index = () => {
         <section id="portfolio" className="py-24 bg-muted/30 relative">
           {/* Section divider */}
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          {/* Noise Texture */}
+          <div className="absolute inset-0 opacity-[0.015] pointer-events-none noise-texture" />
           
           <div className="container mx-auto px-6">
             <motion.div 
@@ -210,14 +213,14 @@ const Index = () => {
                 >
                   <Link to={`/portfolio/${project.slug}`} className="group block">
                     <div className="aspect-[4/3] overflow-hidden bg-muted shadow-elegant relative">
-                      {/* Image with zoom */}
-                      <img 
+                      {/* BlurImage with loading effect */}
+                      <BlurImage 
                         src={project.thumbnail} 
                         alt={project.title[language]} 
-                        className="w-full h-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-105" 
+                        className="w-full h-full transition-transform duration-700 ease-smooth group-hover:scale-105" 
                       />
                       {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                       {/* Depth shadow on hover */}
                       <div className="absolute inset-0 shadow-[inset_0_-60px_40px_-40px_rgba(0,0,0,0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
@@ -364,8 +367,10 @@ const Index = () => {
         <InstagramFeed />
 
         {/* CTA / Contact Section */}
-        <section id="contact" className="py-24 bg-primary text-primary-foreground text-center">
-          <div className="container mx-auto px-6">
+        <section id="contact" className="py-24 bg-primary text-primary-foreground text-center relative overflow-hidden">
+          {/* Noise Texture */}
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none noise-texture" />
+          <div className="container mx-auto px-6 relative z-10">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 

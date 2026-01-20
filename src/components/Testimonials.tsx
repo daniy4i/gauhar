@@ -99,6 +99,8 @@ const Testimonials = () => {
     <section className="py-24 bg-background relative overflow-hidden">
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-transparent to-muted/20 pointer-events-none" />
+      {/* Noise Texture */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none noise-texture" />
       
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
