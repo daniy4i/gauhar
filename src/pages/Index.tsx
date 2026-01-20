@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
@@ -9,6 +10,7 @@ import SEO from '@/components/SEO';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import InstagramFeed from '@/components/InstagramFeed';
+import ScrollProgress from '@/components/ScrollProgress';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
@@ -17,6 +19,15 @@ import heroImage from '@/assets/hero-interior.jpg';
 const Index = () => {
   const { language, t } = useLanguage();
   const featuredProjects = portfolioProjects.slice(0, 6);
+  
+  // Parallax effect for hero
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const scrollToPortfolio = () => {
     const element = document.getElementById('portfolio');
@@ -31,20 +42,24 @@ const Index = () => {
   return (
     <PageTransition>
       <SEO />
+      <ScrollProgress />
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Hero with Background Image */}
-        <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${heroImage})` }}
+        {/* Hero with Parallax Background */}
+        <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden">
+          {/* Parallax Background Image */}
+          <motion.div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+            style={{ 
+              backgroundImage: `url(${heroImage})`,
+              y: heroY,
+            }}
           />
           {/* Overlay */}
           <div className="absolute inset-0 bg-foreground/40 dark:bg-foreground/60" />
           
-          <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.div className="container mx-auto px-6 text-center relative z-10" style={{ opacity: heroOpacity }}>
             <motion.span 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
@@ -90,7 +105,7 @@ const Index = () => {
               </Button>
               <WhatsAppButton size="lg" />
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Scroll Indicator */}
           <motion.button
