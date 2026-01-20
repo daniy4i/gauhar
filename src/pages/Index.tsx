@@ -11,6 +11,7 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import InstagramFeed from '@/components/InstagramFeed';
 import ScrollProgress from '@/components/ScrollProgress';
+import BackToTop from '@/components/BackToTop';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
@@ -92,14 +93,14 @@ const Index = () => {
               transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button asChild size="lg" className="bg-background text-foreground hover:bg-background/90">
+              <Button asChild size="lg" className="bg-foreground/90 text-background hover:bg-foreground font-medium tracking-wide">
                 <Link to="/contact">{t.hero.cta.request}</Link>
               </Button>
               <Button 
                 asChild 
                 variant="outline" 
                 size="lg" 
-                className="border-background/50 text-background hover:bg-background/10"
+                className="border-foreground/30 text-foreground bg-foreground/10 backdrop-blur-sm hover:bg-foreground/20 hover:border-foreground/50 font-medium tracking-wide"
               >
                 <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
               </Button>
@@ -388,6 +389,7 @@ const Index = () => {
         </section>
 
         <Footer />
+        <BackToTop />
       </div>
     </PageTransition>
   );

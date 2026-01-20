@@ -118,26 +118,16 @@ const Navigation = () => {
               >
                 <span className="relative">
                   {link.label}
-                  {/* Animated underline */}
+                  {/* Animated underline with accent color */}
                   <span
                     className={cn(
-                      "absolute -bottom-0.5 left-0 h-[2px] bg-foreground transition-all duration-500 ease-smooth",
+                      "absolute -bottom-0.5 left-0 h-[2px] transition-all duration-500 ease-smooth",
                       isActive(link.href) 
-                        ? "w-full" 
-                        : "w-0 group-hover:w-full",
-                      // Premium glow effect on Portfolio
-                      link.sectionId === 'portfolio' && "group-hover:shadow-[0_0_8px_hsl(var(--foreground)/0.3)]"
+                        ? "w-full bg-accent" 
+                        : "w-0 group-hover:w-full bg-accent",
                     )}
                   />
                 </span>
-                {/* Subtle opacity shift on hover */}
-                <span 
-                  className={cn(
-                    "absolute inset-0 bg-foreground/5 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -mx-2 -my-1",
-                    isActive(link.href) && "opacity-50"
-                  )}
-                  style={{ padding: '0.25rem 0.5rem', margin: '-0.25rem -0.5rem' }}
-                />
               </Link>
             ))}
           </div>
