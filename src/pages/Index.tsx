@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
@@ -22,6 +22,7 @@ import HeroVideo from '@/components/HeroVideo';
 const Index = () => {
   const { language, t } = useLanguage();
   const featuredProjects = portfolioProjects.slice(0, 6);
+  const [videoReady, setVideoReady] = useState(false);
   
   // Parallax effect for hero
   const heroRef = useRef(null);
@@ -31,6 +32,37 @@ const Index = () => {
   });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Cinematic text animation variants
+  const cinematicReveal = {
+    hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        delay: delay,
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    }),
+  };
+
+  const letterReveal = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.5 + i * 0.03,
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    }),
+  };
+
+  const titleText = t.hero.title;
+  const titleLetters = titleText.split('');
 
   const scrollToPortfolio = () => {
     const element = document.getElementById('portfolio');
@@ -52,32 +84,46 @@ const Index = () => {
         {/* Hero with Parallax Background */}
         <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden">
           {/* Hero Video Background with Fallback */}
-          <HeroVideo heroY={heroY}>
+          <HeroVideo heroY={heroY} onVideoReady={() => setVideoReady(true)}>
             <></>
           </HeroVideo>
           
           <motion.div className="container mx-auto px-6 text-center relative z-10" style={{ opacity: heroOpacity }}>
+            {/* Cinematic subtitle reveal */}
             <motion.span 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
-              className="text-sm tracking-[0.3em] text-white/70 uppercase mb-4 block font-light"
+              variants={cinematicReveal}
+              initial="hidden"
+              animate="visible"
+              custom={0.3}
+              className="text-sm tracking-[0.3em] text-white/70 uppercase mb-6 block font-light"
             >
               {language === 'ru' ? 'Дизайнер интерьеров · Алматы' : 'Interior Designer · Almaty'}
             </motion.span>
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
-              className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight text-white"
-            >
-              {t.hero.title}
-            </motion.h1>
+            
+            {/* Letter-by-letter title reveal */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-tight text-white overflow-hidden">
+              {titleLetters.map((letter, i) => (
+                <motion.span
+                  key={i}
+                  variants={letterReveal}
+                  initial="hidden"
+                  animate="visible"
+                  custom={i}
+                  className="inline-block"
+                  style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </motion.span>
+              ))}
+            </h1>
+            
+            {/* Cinematic description reveal with blur */}
             <motion.p 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
-              className="text-lg text-white/80 max-w-2xl mx-auto mb-10 font-light"
+              variants={cinematicReveal}
+              initial="hidden"
+              animate="visible"
+              custom={1.2}
+              className="text-lg text-white/80 max-w-2xl mx-auto mb-12 font-light leading-relaxed"
             >
               {language === 'ru' 
                 ? 'Создаю уникальные интерьеры, которые отражают вашу индивидуальность' 
