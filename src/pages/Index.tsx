@@ -32,6 +32,11 @@ const Index = () => {
   });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  
+  // Parallax text effect - title moves slower than background
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const subtitleY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const buttonsY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   // Cinematic text animation variants
   const cinematicReveal = {
@@ -89,19 +94,23 @@ const Index = () => {
           </HeroVideo>
           
           <motion.div className="container mx-auto px-6 text-center relative z-10" style={{ opacity: heroOpacity }}>
-            {/* Cinematic subtitle reveal */}
+            {/* Cinematic subtitle reveal with parallax */}
             <motion.span 
               variants={cinematicReveal}
               initial="hidden"
               animate="visible"
               custom={0.3}
+              style={{ y: subtitleY }}
               className="text-sm tracking-[0.3em] text-white/70 uppercase mb-6 block font-light"
             >
               {language === 'ru' ? 'Дизайнер интерьеров · Алматы' : 'Interior Designer · Almaty'}
             </motion.span>
             
-            {/* Letter-by-letter title reveal */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-tight text-white overflow-hidden">
+            {/* Letter-by-letter title reveal with parallax */}
+            <motion.h1 
+              className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-tight text-white overflow-hidden"
+              style={{ y: textY }}
+            >
               {titleLetters.map((letter, i) => (
                 <motion.span
                   key={i}
@@ -115,24 +124,28 @@ const Index = () => {
                   {letter === ' ' ? '\u00A0' : letter}
                 </motion.span>
               ))}
-            </h1>
+            </motion.h1>
             
-            {/* Cinematic description reveal with blur */}
+            {/* Cinematic description reveal with blur and parallax */}
             <motion.p 
               variants={cinematicReveal}
               initial="hidden"
               animate="visible"
               custom={1.2}
+              style={{ y: subtitleY }}
               className="text-lg text-white/80 max-w-2xl mx-auto mb-12 font-light leading-relaxed"
             >
               {language === 'ru' 
                 ? 'Создаю уникальные интерьеры, которые отражают вашу индивидуальность' 
                 : 'Creating unique interiors that reflect your individuality'}
             </motion.p>
+            
+            {/* CTA buttons with parallax - move faster than text */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
+              transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }} 
+              style={{ y: buttonsY }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <MagneticButton strength={0.15}>
