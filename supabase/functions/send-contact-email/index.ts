@@ -3,6 +3,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
+// Rate limiting configuration
+const RATE_LIMIT = 5; // Max submissions per IP per hour
+const RATE_WINDOW_MS = 3600000; // 1 hour in milliseconds
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -21,6 +25,52 @@ interface ContactFormData {
   language?: string;
 }
 
+// Check rate limit based on IP address
+async function checkRateLimit(ip: string, supabase: any): Promise<{ allowed: boolean; remaining: number }> {
+  const oneHourAgo = new Date(Date.now() - RATE_WINDOW_MS).toISOString();
+  
+  const { count, error } = await supabase
+    .from('inquiries')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', oneHourAgo)
+    .eq('ip_address', ip);
+  
+  if (error) {
+    console.error("Rate limit check error:", error);
+    // Allow the request if we can't check (fail open for UX)
+    return { allowed: true, remaining: RATE_LIMIT };
+  }
+  
+  const currentCount = count || 0;
+  const remaining = Math.max(0, RATE_LIMIT - currentCount);
+  
+  return { 
+    allowed: currentCount < RATE_LIMIT, 
+    remaining 
+  };
+}
+
+// Get client IP from request headers
+function getClientIP(req: Request): string {
+  // Check various headers for the real IP (common proxy headers)
+  const forwardedFor = req.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim();
+  }
+  
+  const realIP = req.headers.get('x-real-ip');
+  if (realIP) {
+    return realIP.trim();
+  }
+  
+  const cfConnectingIP = req.headers.get('cf-connecting-ip');
+  if (cfConnectingIP) {
+    return cfConnectingIP.trim();
+  }
+  
+  return 'unknown';
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -28,6 +78,38 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Get client IP for rate limiting
+    const clientIP = getClientIP(req);
+    console.log("Request from IP:", clientIP);
+
+    // Create Supabase client
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Check rate limit
+    const { allowed, remaining } = await checkRateLimit(clientIP, supabase);
+    
+    if (!allowed) {
+      console.log("Rate limit exceeded for IP:", clientIP);
+      return new Response(
+        JSON.stringify({ 
+          error: "Too many requests. Please try again later.",
+          retryAfter: 3600 // seconds until rate limit resets
+        }),
+        { 
+          status: 429, 
+          headers: { 
+            "Content-Type": "application/json",
+            "Retry-After": "3600",
+            "X-RateLimit-Limit": String(RATE_LIMIT),
+            "X-RateLimit-Remaining": "0",
+            ...corsHeaders 
+          } 
+        }
+      );
+    }
+
     const formData: ContactFormData = await req.json();
     
     console.log("Received contact form submission:", formData.name);
@@ -36,6 +118,14 @@ const handler = async (req: Request): Promise<Response> => {
     if (!formData.name || formData.name.trim().length === 0) {
       return new Response(
         JSON.stringify({ error: "Name is required" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Validate name length
+    if (formData.name.trim().length > 100) {
+      return new Response(
+        JSON.stringify({ error: "Name must be less than 100 characters" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
@@ -57,14 +147,35 @@ const handler = async (req: Request): Promise<Response> => {
           { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
         );
       }
+      if (formData.email.length > 255) {
+        return new Response(
+          JSON.stringify({ error: "Email must be less than 255 characters" }),
+          { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
     }
 
-    // Create Supabase client
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    // Validate phone format if provided (basic check)
+    if (formData.phone && formData.phone.trim().length > 0) {
+      // Remove common phone formatting characters for validation
+      const cleanPhone = formData.phone.replace(/[\s\-\(\)\+]/g, '');
+      if (!/^\d{7,15}$/.test(cleanPhone)) {
+        return new Response(
+          JSON.stringify({ error: "Invalid phone number format" }),
+          { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+    }
 
-    // Save to database
+    // Validate message length if provided
+    if (formData.message && formData.message.trim().length > 2000) {
+      return new Response(
+        JSON.stringify({ error: "Message must be less than 2000 characters" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Save to database with IP address for rate limiting
     const { error: dbError } = await supabase.from("inquiries").insert({
       name: formData.name.trim().substring(0, 100),
       phone: formData.phone?.trim().substring(0, 50) || null,
@@ -75,6 +186,7 @@ const handler = async (req: Request): Promise<Response> => {
       budget: formData.budget?.trim().substring(0, 100) || null,
       message: formData.message?.trim().substring(0, 2000) || null,
       language: formData.language || 'ru',
+      ip_address: clientIP, // Store IP for rate limiting
     });
 
     if (dbError) {
@@ -208,7 +320,15 @@ const handler = async (req: Request): Promise<Response> => {
       // Still return success since the inquiry was saved
       return new Response(
         JSON.stringify({ success: true, emailSent: false }),
-        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        { 
+          status: 200, 
+          headers: { 
+            "Content-Type": "application/json",
+            "X-RateLimit-Limit": String(RATE_LIMIT),
+            "X-RateLimit-Remaining": String(remaining - 1),
+            ...corsHeaders 
+          } 
+        }
       );
     }
 
@@ -216,12 +336,20 @@ const handler = async (req: Request): Promise<Response> => {
 
     return new Response(
       JSON.stringify({ success: true, emailSent: true }),
-      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      { 
+        status: 200, 
+        headers: { 
+          "Content-Type": "application/json",
+          "X-RateLimit-Limit": String(RATE_LIMIT),
+          "X-RateLimit-Remaining": String(remaining - 1),
+          ...corsHeaders 
+        } 
+      }
     );
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An unexpected error occurred" }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
