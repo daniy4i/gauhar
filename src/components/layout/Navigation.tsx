@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, contactInfo, getWhatsAppUrl } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
-import WhatsAppButton from '@/components/WhatsAppButton';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import AnimatedLogo from '@/components/AnimatedLogo';
-import MagneticButton from '@/components/MagneticButton';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import { Menu, MessageCircle, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavLink {
@@ -18,7 +16,7 @@ interface NavLink {
 }
 
 const Navigation = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -82,6 +80,26 @@ const Navigation = () => {
     }
   };
 
+  const handleWhatsAppClick = () => {
+    const url = getWhatsAppUrl(language);
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleEmailClick = () => {
+    window.location.href = `mailto:${contactInfo.email}`;
+  };
+
+  const ctaLabels = {
+    ru: {
+      whatsapp: 'Написать в WhatsApp',
+      email: 'Email',
+    },
+    en: {
+      whatsapp: 'Write to WhatsApp',
+      email: 'Email',
+    },
+  };
+
   return (
     <header
       className={cn(
@@ -104,7 +122,7 @@ const Navigation = () => {
                 to={link.href}
                 onClick={(e) => handleNavClick(e, link)}
                 className={cn(
-                  "text-sm tracking-wide transition-all duration-300 relative group py-1",
+                  "text-sm tracking-wide transition-all duration-200 relative group py-1",
                   isActive(link.href)
                     ? "text-foreground font-medium"
                     : "text-muted-foreground hover:text-foreground",
@@ -117,10 +135,10 @@ const Navigation = () => {
                   {/* Animated underline with accent color */}
                   <span
                     className={cn(
-                      "absolute -bottom-0.5 left-0 h-[2px] transition-all duration-500 ease-smooth",
+                      "absolute -bottom-0.5 left-0 h-[2px] transition-all duration-300 ease-out",
                       isActive(link.href) 
-                        ? "w-full bg-accent" 
-                        : "w-0 group-hover:w-full bg-accent",
+                        ? "w-full bg-primary" 
+                        : "w-0 group-hover:w-full bg-primary",
                     )}
                   />
                 </span>
@@ -132,9 +150,22 @@ const Navigation = () => {
           <div className="hidden lg:flex items-center gap-3">
             <LanguageToggle />
             <ThemeToggle />
-            <MagneticButton strength={0.2}>
-              <WhatsAppButton size="sm" />
-            </MagneticButton>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleEmailClick}
+              className="border-primary text-primary hover:bg-primary/10"
+            >
+              <Mail className="h-4 w-4 mr-2" />
+              {ctaLabels[language].email}
+            </Button>
+            <Button
+              size="sm"
+              onClick={handleWhatsAppClick}
+            >
+              <MessageCircle className="h-4 w-4 mr-2" />
+              {ctaLabels[language].whatsapp}
+            </Button>
           </div>
 
           {/* Mobile Menu */}
@@ -172,8 +203,22 @@ const Navigation = () => {
                     ))}
                   </nav>
 
-                  <div className="pt-6 border-t border-border">
-                    <WhatsAppButton className="w-full" />
+                  <div className="pt-6 border-t border-border space-y-3">
+                    <Button
+                      variant="outline"
+                      onClick={handleEmailClick}
+                      className="w-full"
+                    >
+                      <Mail className="h-4 w-4 mr-2" />
+                      {ctaLabels[language].email}
+                    </Button>
+                    <Button
+                      onClick={handleWhatsAppClick}
+                      className="w-full"
+                    >
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      {ctaLabels[language].whatsapp}
+                    </Button>
                   </div>
                 </div>
               </SheetContent>
