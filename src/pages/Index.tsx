@@ -177,50 +177,54 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Featured Projects - Grid-based, large images, edge-to-edge feel */}
-        <section id="portfolio" className="py-32 bg-[hsl(240,6%,6%)]">
-          <div className="container mx-auto px-6">
+        {/* Featured Projects - 2-column layout like hot-walls.ru */}
+        <section id="portfolio" className="py-24 bg-[hsl(240,6%,6%)]">
+          <div className="container mx-auto px-0">
+            {/* Section header */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-center mb-16"
+              className="text-center mb-16 px-6"
             >
-              <span className="text-sm tracking-[0.2em] text-white/50 uppercase mb-4 block">
+              <span className="text-[11px] tracking-[0.2em] text-white/40 uppercase mb-4 block">
                 {language === 'ru' ? 'Избранное' : 'Featured'}
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-white">
+              <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-white">
                 {t.portfolio.subtitle}
               </h2>
             </motion.div>
             
-            {/* Projects Grid - Large cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Projects Grid - 2 columns, edge-to-edge */}
+            <div className="grid md:grid-cols-2">
               {featuredProjects.map((project, i) => (
                 <motion.div 
                   key={project.id} 
-                  initial={{ opacity: 0, y: 30 }} 
-                  whileInView={{ opacity: 1, y: 0 }} 
-                  viewport={{ once: true, margin: "-50px" }} 
-                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0 }} 
+                  whileInView={{ opacity: 1 }} 
+                  viewport={{ once: true, margin: "-100px" }} 
+                  transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <Link to={`/portfolio/${project.slug}`} className="group block">
-                    <div className="aspect-[4/3] overflow-hidden bg-[hsl(240,5%,12%)] relative">
+                  <Link to={`/portfolio/${project.slug}`} className="group block relative">
+                    {/* Image - Full width, tall aspect ratio */}
+                    <div className="aspect-[4/3] overflow-hidden bg-[hsl(240,5%,8%)] relative">
                       <BlurImage 
                         src={project.thumbnail} 
                         alt={project.title[language]} 
-                        className="w-full h-full transition-transform duration-500 ease-out group-hover:scale-105" 
+                        className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105" 
                       />
                       {/* Subtle hover overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                     </div>
-                    <div className="mt-5">
-                      <h3 className="text-lg font-medium text-white transition-colors duration-200 group-hover:text-white/70">
+                    
+                    {/* Project Info - Below image, minimal */}
+                    <div className="px-6 py-8 bg-[hsl(240,6%,6%)]">
+                      <h3 className="text-xl md:text-2xl font-normal tracking-tight text-white uppercase mb-3 transition-colors duration-200 group-hover:text-white/70">
                         {project.title[language]}
                       </h3>
-                      <p className="text-sm text-white/50 mt-1">
-                        {project.area && `${project.area} м² · `}{project.location?.[language]}
+                      <p className="text-sm text-white/40">
+                        {project.location?.[language]}, {project.area} m²
                       </p>
                     </div>
                   </Link>
@@ -228,14 +232,28 @@ const Index = () => {
               ))}
             </div>
             
+            {/* Pagination dots */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-center mt-16"
+              className="flex items-center justify-center gap-4 mt-12"
             >
-              <Button asChild variant="outline" size="lg" className="border-white/30 !text-white hover:bg-white/10 hover:border-white/50">
+              <span className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-sm text-white">1</span>
+              <span className="text-sm text-white/40">2</span>
+              <span className="text-sm text-white/40">3</span>
+              <ArrowRight className="w-4 h-4 text-white/40 ml-2" />
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-center mt-12 px-6"
+            >
+              <Button asChild variant="outline" size="lg" className="border-white/20 !text-white hover:bg-white/5 hover:border-white/40 rounded-full px-8">
                 <Link to="/portfolio" className="group">
                   {language === 'ru' ? 'Все проекты' : 'All Projects'} 
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
