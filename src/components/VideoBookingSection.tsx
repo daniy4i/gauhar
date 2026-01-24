@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,30 @@ const VideoBookingSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [countryCode, setCountryCode] = useState('+7');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [scale, setScale] = useState(1);
+
+  // Ken Burns zoom effect
+  useEffect(() => {
+    const duration = 20000; // 20 seconds for full cycle
+    const startScale = 1;
+    const endScale = 1.15;
+    let startTime = Date.now();
+    let animationFrame: number;
+
+    const animate = () => {
+      const elapsed = (Date.now() - startTime) % (duration * 2);
+      const progress = elapsed < duration 
+        ? elapsed / duration 
+        : 2 - elapsed / duration;
+      
+      const currentScale = startScale + (endScale - startScale) * progress;
+      setScale(currentScale);
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
 
   const countryCodes = [
     { code: '+7', flag: '🇰🇿', label: 'KZ' },
@@ -74,19 +98,20 @@ const VideoBookingSection = () => {
 
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0">
+      {/* Video Background with Ken Burns */}
+      <div className="absolute inset-0 overflow-hidden">
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-100 ease-linear"
+          style={{ transform: `scale(${scale})` }}
         >
           <source src="/videos/room-cinematic.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* Content */}

@@ -141,10 +141,12 @@ const Navigation = () => {
             
             <Button
               size="sm"
-              onClick={handleWhatsAppClick}
+              asChild
               className="rounded-full px-5 h-8 text-[11px] tracking-wide"
             >
-              {language === 'ru' ? 'Написать нам' : 'Contact us'}
+              <Link to="/contact">
+                {language === 'ru' ? 'Написать нам' : 'Contact us'}
+              </Link>
             </Button>
 
             {/* Hamburger Menu */}
