@@ -151,7 +151,7 @@ const SoftModernApartment = () => {
       </section>
 
       {/* Description Section */}
-      <section className="py-20 md:py-32 px-6 md:px-12 lg:px-20 border-muted-foreground" style={{
+      <section className="py-20 md:py-32 px-6 md:px-12 lg:px-20 border-muted-foreground bg-popover text-primary-foreground" style={{
       backgroundColor: '#F5F3F0'
     }}>
         <motion.div initial={{
@@ -165,14 +165,14 @@ const SoftModernApartment = () => {
       }} transition={{
         duration: 0.8
       }} className="max-w-3xl">
-          <p className="text-lg md:text-xl leading-relaxed text-secondary">
+          <p className="text-lg md:text-xl leading-relaxed text-primary-foreground">
             {projectInfo.description[language]}
           </p>
         </motion.div>
       </section>
 
       {/* Gallery Grid */}
-      <section className="px-4 md:px-8 lg:px-12 pb-20 md:pb-32 border-muted-foreground" style={{
+      <section className="px-4 md:px-8 lg:px-12 pb-20 md:pb-32 border-muted-foreground bg-popover" style={{
       backgroundColor: '#F5F3F0'
     }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
