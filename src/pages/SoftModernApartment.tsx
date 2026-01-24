@@ -156,7 +156,7 @@ const SoftModernApartment = () => {
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         onNext={() => setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length)}
-        onPrevious={() => setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
+        onPrev={() => setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
       />
 
       <Footer />
