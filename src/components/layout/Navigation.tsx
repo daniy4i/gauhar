@@ -138,16 +138,6 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
-            
-            <Button
-              size="sm"
-              asChild
-              className="rounded-full px-5 h-8 text-[11px] tracking-wide"
-            >
-              <Link to="/contact">
-                {language === 'ru' ? 'Написать нам' : 'Contact us'}
-              </Link>
-            </Button>
 
             {/* Hamburger Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
