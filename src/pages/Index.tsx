@@ -1,18 +1,13 @@
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import SEO from '@/components/SEO';
-import Testimonials from '@/components/Testimonials';
-import FAQ from '@/components/FAQ';
-import InstagramFeed from '@/components/InstagramFeed';
-import ScrollProgress from '@/components/ScrollProgress';
 import BackToTop from '@/components/BackToTop';
-import MagneticButton from '@/components/MagneticButton';
 import { Button } from '@/components/ui/button';
 import BlurImage from '@/components/BlurImage';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
@@ -24,90 +19,13 @@ const Index = () => {
   const featuredProjects = portfolioProjects.slice(0, 6);
   const [videoReady, setVideoReady] = useState(false);
   
-  // 3D Tilt effect for hero text
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  // Smooth spring animation for tilt
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), { stiffness: 100, damping: 30 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), { stiffness: 100, damping: 30 });
-  const translateX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 100, damping: 30 });
-  const translateY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-10, 10]), { stiffness: 100, damping: 30 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!heroContentRef.current) return;
-      const rect = heroContentRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      // Normalize mouse position to -0.5 to 0.5
-      const x = (e.clientX - centerX) / rect.width;
-      const y = (e.clientY - centerY) / rect.height;
-      
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-
-    const handleMouseLeave = () => {
-      mouseX.set(0);
-      mouseY.set(0);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [mouseX, mouseY]);
-  
   // Parallax effect for hero
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  
-  // Parallax text effect - title moves slower than background
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const subtitleY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const buttonsY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-  // Cinematic text animation variants
-  const cinematicReveal = {
-    hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
-    visible: (delay: number) => ({
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        delay: delay,
-        duration: 1.2,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    }),
-  };
-
-  const letterReveal = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.5 + i * 0.03,
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    }),
-  };
-
-  const titleText = t.hero.title;
-  const titleLetters = titleText.split('');
 
   const scrollToPortfolio = () => {
     const element = document.getElementById('portfolio');
@@ -122,102 +40,69 @@ const Index = () => {
   return (
     <PageTransition>
       <SEO />
-      <ScrollProgress />
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Hero with Parallax Background */}
+        {/* Hero - Full-width, edge-to-edge */}
         <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden">
-          {/* Hero Video Background with Fallback */}
-          <HeroVideo heroY={heroY} onVideoReady={() => setVideoReady(true)}>
+          <HeroVideo heroY={useTransform(scrollYProgress, [0, 1], ["0%", "30%"])} onVideoReady={() => setVideoReady(true)}>
             <></>
           </HeroVideo>
           
           <motion.div 
-            ref={heroContentRef}
             className="container mx-auto px-6 text-center relative z-10" 
-            style={{ 
-              opacity: heroOpacity,
-              rotateX,
-              rotateY,
-              x: translateX,
-              y: translateY,
-              transformStyle: 'preserve-3d',
-              perspective: 1000,
-            }}
+            style={{ opacity: heroOpacity }}
           >
-            {/* Cinematic subtitle reveal with parallax */}
+            {/* Subtitle - muted, tracking wide */}
             <motion.span 
-              variants={cinematicReveal}
-              initial="hidden"
-              animate="visible"
-              custom={0.3}
-              style={{ y: subtitleY, translateZ: 20 }}
-              className="text-sm tracking-[0.3em] text-white/70 uppercase mb-6 block font-light"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm tracking-[0.3em] text-white/60 uppercase mb-6 block font-normal"
             >
               {language === 'ru' ? 'Дизайнер интерьеров · Алматы' : 'Interior Designer · Almaty'}
             </motion.span>
             
-            {/* Letter-by-letter title reveal with parallax and 3D depth */}
+            {/* Title - Large, confident, clean */}
             <motion.h1 
-              className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-tight text-white overflow-hidden"
-              style={{ y: textY, translateZ: 50 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-5xl md:text-7xl lg:text-8xl font-normal mb-8 tracking-tight text-white"
             >
-              {titleLetters.map((letter, i) => (
-                <motion.span
-                  key={i}
-                  variants={letterReveal}
-                  initial="hidden"
-                  animate="visible"
-                  custom={i}
-                  className="inline-block"
-                  style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
-                >
-                  {letter === ' ' ? '\u00A0' : letter}
-                </motion.span>
-              ))}
+              {t.hero.title}
             </motion.h1>
             
-            {/* Cinematic description reveal with blur and parallax */}
+            {/* Description - muted gray */}
             <motion.p 
-              variants={cinematicReveal}
-              initial="hidden"
-              animate="visible"
-              custom={1.2}
-              style={{ y: subtitleY, translateZ: 30 }}
-              className="text-lg text-white/80 max-w-2xl mx-auto mb-12 font-light leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg text-white/70 max-w-2xl mx-auto mb-12 font-normal leading-relaxed"
             >
               {language === 'ru' 
                 ? 'Создаю уникальные интерьеры, которые отражают вашу индивидуальность' 
                 : 'Creating unique interiors that reflect your individuality'}
             </motion.p>
             
-            {/* CTA buttons with parallax - move faster than text */}
+            {/* CTA buttons - Pill-shaped, electric blue primary */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }} 
-              style={{ y: buttonsY, translateZ: 40 }}
+              transition={{ delay: 0.9, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <MagneticButton strength={0.15}>
-                <Button asChild size="lg" className="bg-white/95 text-black hover:bg-white font-medium tracking-wide shadow-lg">
-                  <Link to="/contact">{t.hero.cta.request}</Link>
-                </Button>
-              </MagneticButton>
-              <MagneticButton strength={0.15}>
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  size="lg" 
-                  className="border-white/40 !text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/60 font-medium tracking-wide"
-                >
-                  <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
-                </Button>
-              </MagneticButton>
-              <MagneticButton strength={0.15}>
-                <WhatsAppButton size="lg" />
-              </MagneticButton>
+              <Button asChild size="lg">
+                <Link to="/contact">{t.hero.cta.request}</Link>
+              </Button>
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg" 
+                className="border-white/30 !text-white bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/50"
+              >
+                <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
+              </Button>
             </motion.div>
           </motion.div>
 
@@ -225,12 +110,12 @@ const Index = () => {
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
             onClick={scrollToPortfolio}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-colors cursor-pointer group"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors duration-200 cursor-pointer"
           >
             <div className="flex flex-col items-center gap-2">
-              <span className="text-xs tracking-[0.2em] uppercase">
+              <span className="text-xs tracking-[0.2em] uppercase font-normal">
                 {language === 'ru' ? 'Листать' : 'Scroll'}
               </span>
               <ChevronDown className="w-5 h-5 animate-bounce" />
@@ -238,64 +123,47 @@ const Index = () => {
           </motion.button>
         </section>
 
-        {/* About Section with scroll-triggered reveal */}
-        <section id="about" className="py-24 bg-background overflow-hidden">
+        {/* About Section - Clean, spacious */}
+        <section id="about" className="py-32 bg-background">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              {/* Animated line decoration */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] as const }}
-                className="w-16 h-px bg-primary mx-auto mb-8 origin-left"
-              />
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-6 block"
+              >
+                {language === 'ru' ? 'О себе' : 'About Me'}
+              </motion.span>
               
-              {/* Label with slide-up reveal */}
-              <div className="overflow-hidden">
-                <motion.span 
-                  initial={{ y: '100%', opacity: 0 }} 
-                  whileInView={{ y: 0, opacity: 1 }} 
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
-                  className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-4 block"
-                >
-                  {language === 'ru' ? 'О себе' : 'About Me'}
-                </motion.span>
-              </div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }}
+                transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 tracking-tight"
+              >
+                {language === 'ru' ? 'Гаухар Сергазина' : 'Gauhar Sergazina'}
+              </motion.h2>
               
-              {/* Name with character-by-character reveal */}
-              <div className="overflow-hidden mb-8">
-                <motion.h2 
-                  initial={{ y: '100%' }} 
-                  whileInView={{ y: 0 }} 
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
-                  className="text-4xl md:text-5xl font-light tracking-tight"
-                >
-                  {language === 'ru' ? 'Гаухар Сергазина' : 'Gauhar Sergazina'}
-                </motion.h2>
-              </div>
-              
-              {/* Description with blur-in effect */}
               <motion.p 
-                initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }} 
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
-                className="text-lg text-muted-foreground leading-relaxed mb-10"
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
               >
                 {language === 'ru' 
                   ? 'Дипломированный дизайнер интерьеров, окончившая Казахскую архитектурно-строительную академию и прошедшая обучение в престижном Central Saint Martin в Лондоне. Моя страсть к дизайну находит отражение в каждом проекте.'
                   : 'A certified interior designer who graduated from the Kazakh Academy of Architecture and Construction and trained at the prestigious Central Saint Martin in London. My passion for design is reflected in every project.'}
               </motion.p>
               
-              {/* CTA button with scale-in */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }} 
-                whileInView={{ opacity: 1, scale: 1 }} 
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <Button asChild variant="outline" size="lg">
                   <Link to="/about">
@@ -308,67 +176,57 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Featured Projects */}
-        <section id="portfolio" className="py-24 bg-muted/30 relative">
-          {/* Section divider */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-          {/* Noise Texture */}
-          <div className="absolute inset-0 opacity-[0.015] pointer-events-none noise-texture" />
-          
+        {/* Featured Projects - Grid-based, large images, edge-to-edge feel */}
+        <section id="portfolio" className="py-32 bg-[hsl(240,6%,6%)]">
           <div className="container mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="text-center mb-16"
             >
-              <span className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-3 block">
+              <span className="text-sm tracking-[0.2em] text-white/50 uppercase mb-4 block">
                 {language === 'ru' ? 'Избранное' : 'Featured'}
               </span>
-              <h2 className="text-4xl md:text-5xl font-light tracking-tight">{t.portfolio.subtitle}</h2>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-white">
+                {t.portfolio.subtitle}
+              </h2>
             </motion.div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Projects Grid - Large cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredProjects.map((project, i) => (
                 <motion.div 
                   key={project.id} 
-                  initial={{ opacity: 0, y: 40 }} 
+                  initial={{ opacity: 0, y: 30 }} 
                   whileInView={{ opacity: 1, y: 0 }} 
                   viewport={{ once: true, margin: "-50px" }} 
-                  transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link to={`/portfolio/${project.slug}`} className="group block">
-                    <div className="aspect-[4/3] overflow-hidden bg-muted shadow-elegant relative">
-                      {/* BlurImage with loading effect */}
+                    <div className="aspect-[4/3] overflow-hidden bg-[hsl(240,5%,12%)] relative">
                       <BlurImage 
                         src={project.thumbnail} 
                         alt={project.title[language]} 
-                        className="w-full h-full transition-transform duration-700 ease-smooth group-hover:scale-105" 
+                        className="w-full h-full transition-transform duration-500 ease-out group-hover:scale-105" 
                       />
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                      {/* Depth shadow on hover */}
-                      <div className="absolute inset-0 shadow-[inset_0_-60px_40px_-40px_rgba(0,0,0,0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      {/* Subtle hover overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                     </div>
-                    {/* Info with slide-up animation */}
-                    <div className="mt-5 relative overflow-hidden">
-                      <motion.div
-                        initial={false}
-                        whileHover={{ y: -2 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <h3 className="text-lg font-medium transition-colors duration-300 group-hover:text-muted-foreground">
-                          {project.title[language]}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1 transition-all duration-300 group-hover:text-muted-foreground/70">
-                          {project.area && `${project.area} м² · `}{project.location?.[language]}
-                        </p>
-                      </motion.div>
+                    <div className="mt-5">
+                      <h3 className="text-lg font-medium text-white transition-colors duration-200 group-hover:text-white/70">
+                        {project.title[language]}
+                      </h3>
+                      <p className="text-sm text-white/50 mt-1">
+                        {project.area && `${project.area} м² · `}{project.location?.[language]}
+                      </p>
                     </div>
                   </Link>
                 </motion.div>
               ))}
             </div>
+            
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
@@ -376,96 +234,87 @@ const Index = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-center mt-16"
             >
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="lg" className="border-white/30 !text-white hover:bg-white/10 hover:border-white/50">
                 <Link to="/portfolio" className="group">
                   {language === 'ru' ? 'Все проекты' : 'All Projects'} 
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </Button>
             </motion.div>
           </div>
-          
-          {/* Section divider */}
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </section>
 
-        {/* Services */}
-        <section id="services" className="py-24 relative bg-background">
+        {/* Services - Clean cards, spacious */}
+        <section id="services" className="py-32 bg-background">
           <div className="container mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="text-center mb-16"
             >
-              <span className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-3 block">
+              <span className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-4 block">
                 {language === 'ru' ? 'Услуги' : 'Services'}
               </span>
-              <h2 className="text-4xl md:text-5xl font-light tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight">
                 {language === 'ru' ? 'Что мы предлагаем' : 'What We Offer'}
               </h2>
             </motion.div>
-            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            
+            <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+              {/* Turnkey Package */}
               <motion.div 
-                initial={{ opacity: 0, x: -30 }} 
-                whileInView={{ opacity: 1, x: 0 }} 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-                whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                className="bg-card border border-border p-8 shadow-soft hover:shadow-elegant transition-shadow duration-500"
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-colors duration-200"
               >
-                <h3 className="text-2xl font-medium mb-2">{t.services.packages.turnkey.title}</h3>
-                <div className="text-3xl font-light mb-6">
+                <h3 className="text-2xl font-medium mb-3">{t.services.packages.turnkey.title}</h3>
+                <div className="text-4xl font-normal mb-8">
                   {t.services.packages.turnkey.price} 
-                  <span className="text-base text-muted-foreground ml-1">{t.services.packages.turnkey.priceUnit}</span>
+                  <span className="text-lg text-muted-foreground ml-2">{t.services.packages.turnkey.priceUnit}</span>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   {t.services.packages.turnkey.includes.map((item, i) => (
-                    <motion.li 
-                      key={i} 
-                      className="flex gap-3 text-sm text-muted-foreground"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05, duration: 0.3 }}
-                    >
-                      <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <li key={i} className="flex gap-3 text-muted-foreground">
+                      <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                       {item}
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </motion.div>
+              
+              {/* Supervision Package - Featured */}
               <motion.div 
-                initial={{ opacity: 0, x: 30 }} 
-                whileInView={{ opacity: 1, x: 0 }} 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-                whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                className="bg-primary text-primary-foreground p-8 shadow-architectural hover:shadow-[0_30px_60px_-15px_hsl(var(--primary)/0.4)] transition-shadow duration-500"
+                transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-primary text-primary-foreground p-10 rounded-2xl relative"
               >
-                <h3 className="text-2xl font-medium mb-2">{t.services.packages.supervision.title}</h3>
-                <div className="text-3xl font-light mb-6">
-                  {t.services.packages.supervision.price} 
-                  <span className="text-base text-primary-foreground/70 ml-1">{t.services.packages.supervision.priceUnit}</span>
+                <div className="absolute top-6 right-6">
+                  <span className="inline-flex items-center bg-white/20 px-3 py-1 rounded-full text-xs font-medium">
+                    {language === 'ru' ? 'Популярный' : 'Popular'}
+                  </span>
                 </div>
-                <ul className="space-y-3">
+                <h3 className="text-2xl font-medium mb-3">{t.services.packages.supervision.title}</h3>
+                <div className="text-4xl font-normal mb-8">
+                  {t.services.packages.supervision.price} 
+                  <span className="text-lg text-primary-foreground/70 ml-2">{t.services.packages.supervision.priceUnit}</span>
+                </div>
+                <ul className="space-y-4">
                   {t.services.packages.supervision.includes.map((item, i) => (
-                    <motion.li 
-                      key={i} 
-                      className="flex gap-3 text-sm text-primary-foreground/90"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05, duration: 0.3 }}
-                    >
-                      <Check className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <li key={i} className="flex gap-3 text-primary-foreground/90">
+                      <Check className="w-5 h-5 mt-0.5 flex-shrink-0" />
                       {item}
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </motion.div>
             </div>
+            
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
@@ -476,36 +325,36 @@ const Index = () => {
               <Button asChild size="lg">
                 <Link to="/services" className="group">
                   {t.common.learnMore}
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </Button>
             </motion.div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <Testimonials />
-
-        {/* FAQ Section */}
-        <FAQ />
-
-        {/* Instagram Feed */}
-        <InstagramFeed />
-
-        {/* CTA / Contact Section */}
-        <section id="contact" className="py-24 bg-primary text-primary-foreground text-center relative overflow-hidden">
-          {/* Noise Texture */}
-          <div className="absolute inset-0 opacity-[0.02] pointer-events-none noise-texture" />
-          <div className="container mx-auto px-6 relative z-10">
+        {/* CTA Section - Full-width, dark, spacious */}
+        <section id="contact" className="py-32 bg-[hsl(240,6%,6%)] text-white text-center">
+          <div className="container mx-auto px-6">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl md:text-4xl font-light mb-8"
+              className="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 tracking-tight"
             >
               {language === 'ru' ? 'Готовы создать интерьер мечты?' : 'Ready to create your dream interior?'}
             </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.6 }}
+              className="text-lg text-white/60 mb-10 max-w-2xl mx-auto"
+            >
+              {language === 'ru'
+                ? 'Свяжитесь со мной для бесплатной консультации и обсуждения деталей.'
+                : 'Contact me for a free consultation and to discuss the details.'}
+            </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
@@ -513,14 +362,10 @@ const Index = () => {
               transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button asChild variant="secondary" size="lg">
+              <Button asChild size="lg">
                 <Link to="/contact">{t.hero.cta.request}</Link>
               </Button>
-              <WhatsAppButton 
-                variant="outline" 
-                size="lg" 
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" 
-              />
+              <WhatsAppButton size="lg" />
             </motion.div>
           </div>
         </section>

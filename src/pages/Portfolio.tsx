@@ -33,28 +33,28 @@ const Portfolio = () => {
         description={language === 'ru' 
           ? 'Портфолио проектов дизайна интерьера: квартиры, дома, рестораны. Более 50 реализованных проектов в Алматы.'
           : 'Interior design portfolio: apartments, houses, restaurants. Over 50 completed projects in Almaty.'}
-        url="https://pure-architect-space-01.lovable.app/portfolio"
+        url="https://gauhar.lovable.app/portfolio"
       />
       <div className="min-h-screen bg-background">
         <Navigation />
         
-        {/* Hero Section */}
-        <section className="pt-32 pb-16">
+        {/* Hero Section - Clean, minimal */}
+        <section className="pt-32 pb-20">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <motion.span 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-3 block"
+                transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-4 block"
               >
                 {t.portfolio.title}
               </motion.span>
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="text-4xl md:text-6xl lg:text-7xl font-light mt-4 mb-6 tracking-tight"
+                transition={{ delay: 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight"
               >
                 {t.portfolio.subtitle}
               </motion.h1>
@@ -62,23 +62,23 @@ const Portfolio = () => {
           </div>
         </section>
 
-        {/* Filters */}
-        <section className="py-8 border-b border-border/50">
+        {/* Filters - Pill-shaped buttons */}
+        <section className="py-8 border-b border-border">
           <div className="container mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap justify-center gap-3"
             >
               {filters.map((filter) => (
                 <button
                   key={filter.key}
                   onClick={() => setActiveFilter(filter.key)}
-                  className={`px-6 py-2.5 text-sm tracking-wide transition-all duration-300 ${
+                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     activeFilter === filter.key
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground hover:bg-accent hover:text-foreground'
                   }`}
                 >
                   {filter.label}
@@ -88,8 +88,8 @@ const Portfolio = () => {
           </div>
         </section>
 
-        {/* Projects Grid */}
-        <section className="py-16">
+        {/* Projects Grid - Large images, calm hover */}
+        <section className="py-20">
           <div className="container mx-auto px-6">
             <motion.div 
               layout
@@ -100,17 +100,17 @@ const Portfolio = () => {
                   <motion.div
                     key={project.id}
                     layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <Link 
                       to={`/portfolio/${project.slug}`}
                       className="group block"
                     >
-                      <div className="relative overflow-hidden bg-muted aspect-[4/3] shadow-elegant">
-                        <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
+                      <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-lg">
+                        <div className="w-full h-full transition-transform duration-500 ease-out group-hover:scale-105">
                           <BlurImage 
                             src={project.thumbnail} 
                             alt={project.title[language]}
@@ -118,22 +118,20 @@ const Portfolio = () => {
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                        <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                        {/* Calm hover overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+                        <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                           <span className="inline-flex items-center text-white text-sm font-medium">
                             {t.portfolio.viewProject}
                             <ArrowRight className="ml-2 w-4 h-4" />
                           </span>
                         </div>
                       </div>
-                      <div className="mt-5 space-y-2">
-                        <h3 className="text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">
+                      <div className="mt-6">
+                        <h3 className="text-xl font-medium transition-colors duration-200 group-hover:text-muted-foreground">
                           {project.title[language]}
                         </h3>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {project.description[language]}
-                        </p>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
                           {project.area && <span>{project.area} м²</span>}
                           {project.location && <span>{project.location[language]}</span>}
                         </div>
@@ -146,15 +144,15 @@ const Portfolio = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-24 bg-muted/30">
+        {/* CTA Section - Dark, spacious */}
+        <section className="py-32 bg-[hsl(240,6%,6%)]">
           <div className="container mx-auto px-6 text-center">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl md:text-4xl font-light mb-6"
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 text-white tracking-tight"
             >
               {language === 'ru' ? 'Понравился проект?' : 'Like what you see?'}
             </motion.h2>
@@ -162,8 +160,8 @@ const Portfolio = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="text-muted-foreground mb-8 max-w-xl mx-auto"
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="text-white/60 mb-10 max-w-xl mx-auto text-lg"
             >
               {language === 'ru'
                 ? 'Давайте обсудим, как я могу помочь создать интерьер вашей мечты.'
@@ -173,7 +171,7 @@ const Portfolio = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
             >
               <Button asChild size="lg">
                 <Link to="/contact">{t.portfolio.projectCta}</Link>

@@ -103,13 +103,13 @@ const Navigation = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm py-3"
+          ? "bg-background/95 backdrop-blur-md py-4"
           : "bg-transparent py-5"
       )}
     >
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container mx-auto px-6">
         <nav className="flex items-center justify-between">
           {/* Logo */}
           <AnimatedLogo />
@@ -122,26 +122,13 @@ const Navigation = () => {
                 to={link.href}
                 onClick={(e) => handleNavClick(e, link)}
                 className={cn(
-                  "text-sm tracking-wide transition-all duration-200 relative group py-1",
+                  "text-sm transition-colors duration-200 relative",
                   isActive(link.href)
                     ? "text-foreground font-medium"
-                    : "text-muted-foreground hover:text-foreground",
-                  // Special styling for Portfolio
-                  link.sectionId === 'portfolio' && "font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <span className="relative">
-                  {link.label}
-                  {/* Animated underline with accent color */}
-                  <span
-                    className={cn(
-                      "absolute -bottom-0.5 left-0 h-[2px] transition-all duration-300 ease-out",
-                      isActive(link.href) 
-                        ? "w-full bg-primary" 
-                        : "w-0 group-hover:w-full bg-primary",
-                    )}
-                  />
-                </span>
+                {link.label}
               </Link>
             ))}
           </div>
@@ -154,7 +141,6 @@ const Navigation = () => {
               variant="outline"
               size="sm"
               onClick={handleEmailClick}
-              className="border-primary text-primary hover:bg-primary/10"
             >
               <Mail className="h-4 w-4 mr-2" />
               {ctaLabels[language].email}
@@ -182,7 +168,7 @@ const Navigation = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[350px]">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between mb-8">
-                    <span className="text-lg font-medium">Gauhar Sergazina</span>
+                    <span className="text-xs tracking-[0.3em] font-medium">GAUHAR</span>
                   </div>
                   
                   <nav className="flex flex-col gap-4 flex-1">
