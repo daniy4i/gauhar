@@ -19,6 +19,7 @@ export interface PortfolioProject {
   };
   thumbnail: string;
   images: string[];
+  externalLink?: string; // Optional external link for special project pages
 }
 
 // Local high-resolution images - imported for Vite optimization
@@ -47,7 +48,28 @@ import fireplaceLiving2 from '@/assets/portfolio/fireplace-living-2.jpg';
 import contrastLiving1 from '@/assets/portfolio/contrast-living-1.jpg';
 import contrastLiving2 from '@/assets/portfolio/contrast-living-2.jpg';
 
+// Commercial project images
+import cafeBar from '@/assets/commercial/cafe-bar.jpg';
+
 export const portfolioProjects: PortfolioProject[] = [
+  {
+    id: '0',
+    slug: 'entertainment-center',
+    title: {
+      ru: 'Семейный развлекательный и велнес-центр',
+      en: 'Family Entertainment & Wellness Center',
+    },
+    description: {
+      ru: 'Многофункциональный интерьер, объединяющий гостеприимство, велнес и детские пространства в единую среду. Проект балансирует игровые элементы с архитектурной структурой.',
+      en: 'A multifunctional interior combining hospitality, wellness, and children\'s spaces into a cohesive environment. The project balances playful elements with architectural structure.',
+    },
+    category: 'commercial',
+    area: 1200,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: cafeBar,
+    images: [cafeBar],
+    externalLink: '/commercial/entertainment-center',
+  },
   {
     id: '1',
     slug: 'family-living-room',

@@ -106,7 +106,7 @@ const Portfolio = () => {
                     transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <Link 
-                      to={`/portfolio/${project.slug}`}
+                      to={project.externalLink || `/portfolio/${project.slug}`}
                       className="group block"
                     >
                       <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-lg">
@@ -126,6 +126,14 @@ const Portfolio = () => {
                             <ArrowRight className="ml-2 w-4 h-4" />
                           </span>
                         </div>
+                        {/* Featured badge for special projects */}
+                        {project.externalLink && (
+                          <div className="absolute top-4 left-4">
+                            <span className="px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                              {language === 'ru' ? 'Подробнее' : 'Featured'}
+                            </span>
+                          </div>
+                        )}
                       </div>
                       <div className="mt-6">
                         <h3 className="text-xl font-medium transition-colors duration-200 group-hover:text-muted-foreground">
