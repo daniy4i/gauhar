@@ -108,13 +108,14 @@ const Navigation = () => {
                 to={link.href}
                 onClick={(e) => handleNavClick(e, link)}
                 className={cn(
-                  "text-[11px] tracking-[0.15em] uppercase transition-colors duration-200",
+                  "text-[11px] tracking-[0.15em] uppercase transition-all duration-300 relative group",
                   isActive(link.href)
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </div>
@@ -135,13 +136,14 @@ const Navigation = () => {
                 to={link.href}
                 onClick={(e) => handleNavClick(e, link)}
                 className={cn(
-                  "text-[11px] tracking-[0.15em] uppercase transition-colors duration-200",
+                  "text-[11px] tracking-[0.15em] uppercase transition-all duration-300 relative group",
                   isActive(link.href)
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
 
