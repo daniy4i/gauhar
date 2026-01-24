@@ -4,9 +4,10 @@ import { useLanguage, contactInfo, getWhatsAppUrl } from '@/lib/i18n';
 import LanguageToggle from '@/components/LanguageToggle';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, MessageCircle, Send } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import { MessageCircle, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface NavLink {
   href: string;
@@ -50,7 +51,7 @@ const Navigation = () => {
     { href: '/portfolio', label: language === 'ru' ? 'Интерьеры' : 'Interiors', sectionId: 'portfolio' },
     { href: '/services', label: language === 'ru' ? 'Услуги' : 'Services', sectionId: 'services' },
     { href: '/about', label: language === 'ru' ? 'О нас' : 'About', sectionId: 'about' },
-    { href: '/contact', label: language === 'ru' ? 'Контакты' : 'Contact', sectionId: 'contact' },
+    { href: '/contact', label: language === 'ru' ? 'Контакты' : 'Contact' }, // No sectionId - always navigate to page
   ];
 
   const isActive = (href: string) => {
@@ -60,17 +61,22 @@ const Navigation = () => {
 
   const handleNavClick = (e: React.MouseEvent, link: NavLink) => {
     setIsOpen(false);
+    
+    // If link has no sectionId, let it navigate normally to the page
+    if (!link.sectionId) {
+      return; // Let the Link component handle navigation
+    }
+    
+    // Only scroll to section if on homepage and section exists
     if (location.pathname === '/' && link.sectionId) {
-      e.preventDefault();
       const element = document.getElementById(link.sectionId);
       if (element) {
+        e.preventDefault();
         const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
         window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }
-    } else if (link.sectionId && location.pathname !== '/' && link.href.startsWith('/')) {
-      // Navigate to specific page
     }
   };
 
@@ -148,7 +154,10 @@ const Navigation = () => {
                   <span className="w-4 h-[1.5px] bg-foreground transition-all group-hover:w-6" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[380px] bg-card border-l border-border p-0">
+              <SheetContent side="right" className="w-[380px] bg-card border-l border-border p-0" aria-describedby={undefined}>
+                <VisuallyHidden>
+                  <SheetTitle>{language === 'ru' ? 'Меню навигации' : 'Navigation Menu'}</SheetTitle>
+                </VisuallyHidden>
                 <div className="flex flex-col h-full p-8">
                   {/* Menu Links */}
                   <nav className="flex flex-col gap-1 mt-8">
@@ -243,7 +252,10 @@ const Navigation = () => {
                   <span className="w-4 h-[1.5px] bg-foreground transition-all group-hover:w-6" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[380px] bg-card border-l border-border p-0">
+              <SheetContent side="right" className="w-full sm:w-[380px] bg-card border-l border-border p-0" aria-describedby={undefined}>
+                <VisuallyHidden>
+                  <SheetTitle>{language === 'ru' ? 'Меню навигации' : 'Navigation Menu'}</SheetTitle>
+                </VisuallyHidden>
                 <div className="flex flex-col h-full p-8">
                   {/* Menu Links */}
                   <nav className="flex flex-col gap-1 mt-8">
