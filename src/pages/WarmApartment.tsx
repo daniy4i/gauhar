@@ -20,17 +20,38 @@ import ceramics from '@/assets/warm-apartment/ceramics.jpg';
 import readingNook from '@/assets/warm-apartment/reading-nook.jpg';
 import bedroom from '@/assets/warm-apartment/bedroom.jpg';
 import bathroom from '@/assets/warm-apartment/bathroom.jpg';
+// New images
+import workspace from '@/assets/warm-apartment/workspace.jpg';
+import bathroomVanity from '@/assets/warm-apartment/bathroom-vanity.jpg';
+import kidsBedroom from '@/assets/warm-apartment/kids-bedroom.jpg';
+import diningArea from '@/assets/warm-apartment/dining-area.jpg';
+import guestWc from '@/assets/warm-apartment/guest-wc.jpg';
+import kitchenCloseup from '@/assets/warm-apartment/kitchen-closeup.jpg';
+import livingStaircase from '@/assets/warm-apartment/living-staircase.jpg';
+import entryway from '@/assets/warm-apartment/entryway.jpg';
+import livingRoom from '@/assets/warm-apartment/living-room.jpg';
+import twinBedroom from '@/assets/warm-apartment/twin-bedroom.jpg';
 
 // All gallery images in curated order
 const galleryImages = [
   hero,
+  livingStaircase,
+  livingRoom,
+  entryway,
+  diningArea,
+  kitchenCloseup,
   readingNook,
+  workspace,
   kitchenDetail,
   staircase,
   bedroomDetail,
   bedroom,
+  twinBedroom,
+  kidsBedroom,
+  bathroomVanity,
   bathroom,
   powderRoom,
+  guestWc,
   ceramics,
 ];
 
