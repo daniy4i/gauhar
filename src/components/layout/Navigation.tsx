@@ -91,11 +91,11 @@ const Navigation = () => {
 
   const ctaLabels = {
     ru: {
-      whatsapp: 'Написать в WhatsApp',
+      whatsapp: 'WhatsApp',
       email: 'Email',
     },
     en: {
-      whatsapp: 'Write to WhatsApp',
+      whatsapp: 'WhatsApp',
       email: 'Email',
     },
   };

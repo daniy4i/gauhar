@@ -246,28 +246,30 @@ const Contact = () => {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="lg:col-span-2 space-y-6"
               >
+                {/* WhatsApp Card - Electric Blue Style */}
                 <a 
                   href={getWhatsAppUrl(language)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="block bg-[hsl(var(--whatsapp))] text-white p-6 shadow-elegant hover:shadow-architectural transition-shadow duration-300"
+                  className="block bg-primary text-white p-6 rounded-2xl hover:bg-[hsl(211,100%,55%)] hover:shadow-[0_0_30px_hsl(211,100%,50%/0.4)] transition-all duration-200"
                 >
                   <MessageCircle className="w-8 h-8 mb-3" />
-                  <h3 className="font-medium mb-1">{t.contact.whatsappCard.title}</h3>
+                  <h3 className="font-semibold mb-1">{t.contact.whatsappCard.title}</h3>
                   <p className="text-white/80 text-sm mb-3">{t.contact.whatsappCard.subtitle}</p>
-                  <span className="text-lg font-medium">+7 777 211 2211</span>
+                  <span className="text-lg font-semibold">+7 777 211 2211</span>
                 </a>
                 
-                <div className="bg-card border border-border p-6 space-y-4">
+                {/* Contact Info Card */}
+                <div className="bg-card border border-border p-6 rounded-2xl space-y-4">
                   <div className="flex gap-3 items-start">
                     <Mail className="w-5 h-5 text-muted-foreground mt-0.5" />
-                    <a href="mailto:gauhars@mail.ru" className="hover:text-primary transition-colors">
+                    <a href="mailto:gauhars@mail.ru" className="hover:text-primary transition-colors duration-200">
                       gauhars@mail.ru
                     </a>
                   </div>
                   <div className="flex gap-3 items-start">
                     <Phone className="w-5 h-5 text-muted-foreground mt-0.5" />
-                    <a href="tel:+77772112211" className="hover:text-primary transition-colors">
+                    <a href="tel:+77772112211" className="hover:text-primary transition-colors duration-200">
                       +7 777 211 2211
                     </a>
                   </div>
@@ -279,12 +281,13 @@ const Contact = () => {
                   </div>
                 </div>
                 
+                {/* Social Icons - Circular Style */}
                 <div className="flex gap-3">
                   <a 
                     href="https://instagram.com/gauhar_sergazina" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="w-12 h-12 bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                    className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200"
                   >
                     <Instagram className="w-5 h-5" />
                   </a>
@@ -292,7 +295,7 @@ const Contact = () => {
                     href="https://youtube.com/@sergazina_gauhar" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="w-12 h-12 bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                    className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200"
                   >
                     <Youtube className="w-5 h-5" />
                   </a>

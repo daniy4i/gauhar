@@ -14,8 +14,7 @@ const Footer = () => {
   };
 
   const handleTelegramClick = () => {
-    // Placeholder - will be enabled when Telegram username is provided
-    // window.open(`https://t.me/${TELEGRAM_USERNAME}`, '_blank', 'noopener,noreferrer');
+    window.open(contactInfo.telegramUrl, '_blank', 'noopener,noreferrer');
   };
 
   const footerContent = {
@@ -91,8 +90,7 @@ const Footer = () => {
             <div className="flex flex-wrap gap-3">
               <Button
                 onClick={handleTelegramClick}
-                disabled
-                className="bg-primary text-white hover:bg-[hsl(211,100%,55%)] hover:shadow-[0_0_20px_hsl(211,100%,50%/0.4)] disabled:opacity-40 disabled:cursor-not-allowed"
+                className="bg-primary text-white hover:bg-[hsl(211,100%,55%)] hover:shadow-[0_0_20px_hsl(211,100%,50%/0.4)]"
               >
                 <Send className="h-4 w-4 mr-2" />
                 {content.telegram}
