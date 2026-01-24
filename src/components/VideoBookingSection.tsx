@@ -4,7 +4,7 @@ import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Check, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
@@ -66,17 +66,46 @@ const VideoBookingSection = () => {
     e.preventDefault();
     if (!agreed || !phone) return;
 
+    // Client-side phone validation
+    const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+    if (!/^\d{7,15}$/.test(cleanPhone)) {
+      toast.error(
+        language === 'ru' 
+          ? 'Пожалуйста, введите корректный номер телефона' 
+          : 'Please enter a valid phone number'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const fullPhone = `${countryCode} ${phone}`;
-      const { error } = await supabase.from('inquiries').insert({
-        name: language === 'ru' ? 'Заявка на экскурсию' : 'Tour booking request',
-        phone: fullPhone,
-        language,
-        project_type: language === 'ru' ? 'Экскурсия по готовому объекту' : 'Completed project tour',
+      
+      // Route through edge function for server-side validation and rate limiting
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: language === 'ru' ? 'Заявка на экскурсию' : 'Tour booking request',
+          phone: fullPhone,
+          language,
+          projectType: language === 'ru' ? 'Экскурсия по готовому объекту' : 'Completed project tour',
+        },
       });
 
       if (error) throw error;
+      
+      // Check for rate limit response
+      if (data?.error) {
+        if (data.retryAfter) {
+          toast.error(
+            language === 'ru' 
+              ? 'Слишком много запросов. Попробуйте позже.' 
+              : 'Too many requests. Please try again later.'
+          );
+        } else {
+          throw new Error(data.error);
+        }
+        return;
+      }
 
       toast.success(
         language === 'ru' 
