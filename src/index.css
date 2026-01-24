@@ -2,132 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Luxury Design System — Black Cat Energy */
+/* Hot Walls Style System — Tech-Clean Modern */
 
 @layer base {
   :root {
-    /* Dark Luxury Palette - Light Mode (still elegant) */
-    --background: 36 27% 88%;
-    --foreground: 0 4% 6%;
+    /* Light Mode — Clean Modern */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 7%;
     
-    --card: 40 24% 93%;
-    --card-foreground: 0 4% 6%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
     
-    --popover: 40 24% 93%;
-    --popover-foreground: 0 4% 6%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
     
-    /* Primary: Deep Wine */
-    --primary: 356 60% 30%;
-    --primary-foreground: 40 24% 93%;
+    /* Primary: Electric Blue */
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
     
-    /* Secondary: Warm Bone */
-    --secondary: 36 27% 88%;
-    --secondary-foreground: 0 4% 6%;
+    /* Secondary: Light Gray */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 7%;
     
-    /* Muted: Stone */
-    --muted: 37 15% 82%;
-    --muted-foreground: 37 8% 40%;
+    /* Muted: Soft Gray */
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 45%;
     
-    /* Accent: Wine Red */
-    --accent: 356 60% 30%;
-    --accent-foreground: 40 24% 93%;
+    /* Accent: Electric Blue */
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 37 15% 80%;
-    --input: 36 20% 90%;
-    --ring: 356 60% 30%;
+    --border: 0 0% 88%;
+    --input: 0 0% 92%;
+    --ring: 211 100% 50%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    --sidebar-background: 36 27% 88%;
-    --sidebar-foreground: 0 4% 6%;
-    --sidebar-primary: 356 60% 30%;
-    --sidebar-primary-foreground: 40 24% 93%;
-    --sidebar-accent: 37 15% 82%;
-    --sidebar-accent-foreground: 0 4% 6%;
-    --sidebar-border: 37 15% 80%;
-    --sidebar-ring: 356 60% 30%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 211 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 92%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 211 100% 50%;
     
     /* WhatsApp */
     --whatsapp: 142 70% 45%;
     --whatsapp-foreground: 0 0% 100%;
     
     /* Elegant Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 4% 6% / 0.85), hsl(0 4% 6% / 0.4));
-    --gradient-overlay: linear-gradient(180deg, hsl(0 4% 6% / 0.7), hsl(0 4% 6% / 0.1));
-    --gradient-warm: linear-gradient(135deg, hsl(36 27% 88%), hsl(37 15% 82%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 7% / 0.85), hsl(0 0% 7% / 0.4));
+    --gradient-overlay: linear-gradient(180deg, hsl(0 0% 7% / 0.7), hsl(0 0% 7% / 0.1));
     
     /* Elegant Shadows */
-    --shadow-architectural: 0 25px 50px -12px hsl(0 4% 6% / 0.15);
-    --shadow-elegant: 0 10px 30px -10px hsl(0 4% 6% / 0.1);
-    --shadow-soft: 0 4px 20px -4px hsl(0 4% 6% / 0.08);
+    --shadow-architectural: 0 25px 50px -12px hsl(0 0% 0% / 0.15);
+    --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.1);
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.08);
+    --shadow-glow: 0 0 20px hsl(211 100% 50% / 0.4);
     
     /* Smooth Transitions */
     --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.2s ease-out;
   }
 
   .dark {
-    /* Dark Luxury Palette - Obsidian Black */
-    --background: 0 4% 6%;
-    --foreground: 40 24% 93%;
+    /* Dark Mode — Deep Black Tech */
+    --background: 240 6% 6%;
+    --foreground: 0 0% 98%;
     
-    --card: 0 0% 9%;
-    --card-foreground: 40 24% 93%;
+    --card: 240 5% 9%;
+    --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 9%;
-    --popover-foreground: 40 24% 93%;
+    --popover: 240 5% 9%;
+    --popover-foreground: 0 0% 98%;
     
-    /* Primary: Wine Red accent */
-    --primary: 356 60% 35%;
-    --primary-foreground: 40 24% 93%;
+    /* Primary: Electric Blue */
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
     
-    /* Secondary: Charcoal */
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 40 24% 93%;
+    /* Secondary: Dark Gray */
+    --secondary: 240 4% 14%;
+    --secondary-foreground: 0 0% 98%;
     
-    /* Muted: Stone */
-    --muted: 0 0% 15%;
-    --muted-foreground: 37 8% 69%;
+    /* Muted: Dark Gray */
+    --muted: 240 4% 16%;
+    --muted-foreground: 0 0% 55%;
     
-    /* Accent: Wine Red */
-    --accent: 356 60% 30%;
-    --accent-foreground: 40 24% 93%;
+    /* Accent: Electric Blue */
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 12%;
-    --ring: 356 60% 35%;
+    --border: 240 4% 18%;
+    --input: 240 4% 14%;
+    --ring: 211 100% 50%;
     
-    --sidebar-background: 0 0% 9%;
-    --sidebar-foreground: 40 24% 90%;
-    --sidebar-primary: 356 60% 35%;
-    --sidebar-primary-foreground: 40 24% 93%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 40 24% 90%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 356 60% 35%;
+    --sidebar-background: 240 5% 9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 211 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 4% 18%;
+    --sidebar-ring: 211 100% 50%;
     
     /* WhatsApp */
     --whatsapp: 142 70% 45%;
     --whatsapp-foreground: 0 0% 100%;
     
     /* Dark Mode Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 4% 3% / 0.9), hsl(0 4% 3% / 0.5));
-    --gradient-overlay: linear-gradient(180deg, hsl(0 4% 3% / 0.8), hsl(0 4% 3% / 0.2));
-    --gradient-warm: linear-gradient(135deg, hsl(0 0% 9%), hsl(0 0% 6%));
+    --gradient-hero: linear-gradient(135deg, hsl(240 6% 4% / 0.9), hsl(240 6% 4% / 0.5));
+    --gradient-overlay: linear-gradient(180deg, hsl(240 6% 4% / 0.8), hsl(240 6% 4% / 0.2));
     
     /* Dark Mode Shadows */
     --shadow-architectural: 0 25px 50px -12px hsl(0 0% 0% / 0.6);
     --shadow-elegant: 0 10px 30px -10px hsl(0 0% 0% / 0.5);
     --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 25px hsl(211 100% 50% / 0.5);
     
     /* Navigation glow */
-    --nav-glow: 0 0 10px hsl(356 60% 30% / 0.3);
+    --nav-glow: 0 0 10px hsl(211 100% 50% / 0.3);
   }
 }
 

@@ -122,6 +122,7 @@ export interface TranslationStrings {
     rights: string;
     designer: string;
     privacy: string;
+    offer: string;
   };
   // Common
   common: {
@@ -301,6 +302,7 @@ export const translations: Record<Language, TranslationStrings> = {
       rights: '© 2024 Гаухар Сергазина. Все права защищены.',
       designer: 'Дизайнер интерьеров · Алматы',
       privacy: 'Политика конфиденциальности',
+      offer: 'Публичная оферта',
     },
     common: {
       learnMore: 'Узнать больше',
@@ -476,6 +478,7 @@ export const translations: Record<Language, TranslationStrings> = {
       rights: '© 2024 Gauhar Sergazina. All rights reserved.',
       designer: 'Interior Designer · Almaty',
       privacy: 'Privacy Policy',
+      offer: 'Public Offer',
     },
     common: {
       learnMore: 'Learn More',

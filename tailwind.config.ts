@@ -138,6 +138,7 @@ export default {
       boxShadow: {
         'architectural': 'var(--shadow-architectural)',
         'elegant': 'var(--shadow-elegant)',
+        'glow': 'var(--shadow-glow)',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.16, 1, 0.3, 1)',
