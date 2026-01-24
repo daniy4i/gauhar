@@ -263,9 +263,23 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Services - Clean cards, spacious */}
-        <section id="services" className="py-32 bg-background">
-          <div className="container mx-auto px-6">
+        {/* Services - With video background */}
+        <section id="services" className="py-32 relative overflow-hidden">
+          {/* Video Background */}
+          <div className="absolute inset-0">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/videos/blender-modeling.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black/70" />
+          </div>
+          
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
@@ -273,10 +287,10 @@ const Index = () => {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="text-center mb-16"
             >
-              <span className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-4 block">
+              <span className="text-sm tracking-[0.2em] text-white/60 uppercase mb-4 block">
                 {language === 'ru' ? 'Услуги' : 'Services'}
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-white">
                 {language === 'ru' ? 'Что мы предлагаем' : 'What We Offer'}
               </h2>
             </motion.div>
@@ -341,7 +355,7 @@ const Index = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center mt-12"
             >
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="bg-white text-background hover:bg-white/90">
                 <Link to="/services" className="group">
                   {t.common.learnMore}
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
