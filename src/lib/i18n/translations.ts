@@ -505,6 +505,8 @@ export const contactInfo = {
   instagramUrl: 'https://www.instagram.com/gauhar_sergazina/',
   youtube: '@sergazina_gauhar',
   youtubeUrl: 'https://www.youtube.com/@sergazina_gauhar',
+  telegram: 'gauharsergazina',
+  telegramUrl: 'https://t.me/gauharsergazina',
 };
 
 export const getWhatsAppUrl = (lang: Language, customMessage?: string) => {
