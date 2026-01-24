@@ -7,6 +7,12 @@ import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { GraduationCap, Heart, Award } from 'lucide-react';
+import BlurImage from '@/components/BlurImage';
+
+// Portrait images
+import portrait1 from '@/assets/about/gauhar-portrait-1.jpg';
+import portrait2 from '@/assets/about/gauhar-portrait-2.jpg';
+import portrait3 from '@/assets/about/gauhar-portrait-3.jpg';
 
 const About = () => {
   const { t, language } = useLanguage();
@@ -51,6 +57,55 @@ const About = () => {
               >
                 {t.about.subtitle}
               </motion.p>
+            </div>
+          </div>
+        </section>
+
+        {/* Portrait Gallery Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="aspect-[3/4] overflow-hidden rounded-xl"
+                >
+                  <BlurImage
+                    src={portrait1}
+                    alt="Gauhar Sergazina - Interior Designer"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="aspect-[3/4] overflow-hidden rounded-xl"
+                >
+                  <BlurImage
+                    src={portrait2}
+                    alt="Gauhar Sergazina Portrait"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="aspect-[3/4] overflow-hidden rounded-xl"
+                >
+                  <BlurImage
+                    src={portrait3}
+                    alt="Gauhar Sergazina Professional"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
