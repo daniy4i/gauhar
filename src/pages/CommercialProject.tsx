@@ -12,11 +12,17 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 // Import images
 import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 import cafeSeating from '@/assets/commercial/cafe-seating.jpg';
+import cafeSeating2 from '@/assets/commercial/cafe-seating-2.jpg';
 import playArea from '@/assets/commercial/play-area.jpg';
+import playArea2 from '@/assets/commercial/play-area-2.jpg';
 import activityRoom from '@/assets/commercial/activity-room.jpg';
+import activityRoom2 from '@/assets/commercial/activity-room-2.jpg';
 import fitnessCycling from '@/assets/commercial/fitness-cycling.jpg';
+import fitnessCycling2 from '@/assets/commercial/fitness-cycling-2.jpg';
 import fitnessWeights from '@/assets/commercial/fitness-weights.jpg';
+import fitnessWeights2 from '@/assets/commercial/fitness-weights-2.jpg';
 import wellnessPool from '@/assets/commercial/wellness-pool.jpg';
+import wellnessPool2 from '@/assets/commercial/wellness-pool-2.jpg';
 
 interface Section {
   id: string;
@@ -35,7 +41,7 @@ const sections: Section[] = [
       en: 'The café space is designed as a warm social hub, combining natural wood textures, soft pastel tones, and curated lighting to create an inviting atmosphere for both adults and children.',
       ru: 'Кафе спроектировано как тёплое социальное пространство, сочетающее натуральные деревянные текстуры, мягкие пастельные тона и продуманное освещение, создавая приветливую атмосферу для взрослых и детей.'
     },
-    images: [cafeBar, cafeSeating]
+    images: [cafeBar, cafeSeating, cafeSeating2]
   },
   {
     id: 'play-area',
@@ -45,7 +51,7 @@ const sections: Section[] = [
       en: 'The play area is conceived as an immersive environment where scale, color, and natural motifs encourage imagination, movement, and interaction.',
       ru: 'Игровая зона задумана как иммерсивная среда, где масштаб, цвет и природные мотивы стимулируют воображение, движение и взаимодействие.'
     },
-    images: [playArea]
+    images: [playArea, playArea2]
   },
   {
     id: 'activity-room',
@@ -55,7 +61,7 @@ const sections: Section[] = [
       en: 'A dedicated activity room designed for learning and creativity, featuring tactile materials, playful geometry, and flexible zones for group and individual play.',
       ru: 'Специальная комната для занятий, разработанная для обучения и творчества, с тактильными материалами, игривой геометрией и гибкими зонами для групповых и индивидуальных игр.'
     },
-    images: [activityRoom]
+    images: [activityRoom, activityRoom2]
   },
   {
     id: 'fitness',
@@ -65,7 +71,7 @@ const sections: Section[] = [
       en: 'The fitness studio emphasizes focus and energy through strong graphic elements, controlled lighting, and a disciplined spatial layout.',
       ru: 'Фитнес-студия делает акцент на сосредоточенности и энергии через выразительные графические элементы, контролируемое освещение и дисциплинированную пространственную планировку.'
     },
-    images: [fitnessCycling, fitnessWeights]
+    images: [fitnessCycling, fitnessCycling2, fitnessWeights, fitnessWeights2]
   },
   {
     id: 'pool',
@@ -75,7 +81,7 @@ const sections: Section[] = [
       en: 'The wellness area is designed as a calm architectural retreat, where light, water, and material symmetry create a serene and immersive experience.',
       ru: 'Велнес-зона спроектирована как спокойное архитектурное убежище, где свет, вода и симметрия материалов создают безмятежный и погружающий опыт.'
     },
-    images: [wellnessPool]
+    images: [wellnessPool, wellnessPool2]
   }
 ];
 
