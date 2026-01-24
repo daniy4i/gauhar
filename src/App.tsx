@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import CommercialProject from "./pages/CommercialProject";
 import WarmApartment from "./pages/WarmApartment";
+import SoftModernApartment from "./pages/SoftModernApartment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const AnimatedRoutes = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/commercial/entertainment-center" element={<CommercialProject />} />
         <Route path="/residential/warm-apartment" element={<WarmApartment />} />
+        <Route path="/residential/soft-modern-apartment" element={<SoftModernApartment />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

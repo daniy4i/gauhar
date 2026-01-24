@@ -54,7 +54,28 @@ import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
 
+// Soft modern apartment images
+import softModernBedroom from '@/assets/soft-modern/bedroom-1.jpg';
+
 export const portfolioProjects: PortfolioProject[] = [
+  {
+    id: 'soft-modern',
+    slug: 'soft-modern-apartment',
+    title: {
+      ru: 'Мягкая современная квартира',
+      en: 'Soft Modern Apartment',
+    },
+    description: {
+      ru: 'Жилой интерьер, исследующий спокойную современную эстетику, построенную вокруг света, баланса и повседневного комфорта.',
+      en: 'A residential interior exploring a calm, modern aesthetic built around light, balance, and everyday comfort.',
+    },
+    category: 'residential',
+    area: 95,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: softModernBedroom,
+    images: [softModernBedroom],
+    externalLink: '/residential/soft-modern-apartment',
+  },
   {
     id: 'warm-apt',
     slug: 'warm-apartment',
