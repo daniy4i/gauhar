@@ -13,6 +13,7 @@ import BlurImage from '@/components/BlurImage';
 import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
 import HeroVideo from '@/components/HeroVideo';
+import VideoBookingSection from '@/components/VideoBookingSection';
 
 const Index = () => {
   const { language, t } = useLanguage();
@@ -332,43 +333,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* CTA Section - Full-width, dark, spacious */}
-        <section id="contact" className="py-32 bg-[hsl(240,6%,6%)] text-white text-center">
-          <div className="container mx-auto px-6">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 tracking-tight"
-            >
-              {language === 'ru' ? 'Готовы создать интерьер мечты?' : 'Ready to create your dream interior?'}
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-              className="text-lg text-white/60 mb-10 max-w-2xl mx-auto"
-            >
-              {language === 'ru'
-                ? 'Свяжитесь со мной для бесплатной консультации и обсуждения деталей.'
-                : 'Contact me for a free consultation and to discuss the details.'}
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Button asChild size="lg">
-                <Link to="/contact">{t.hero.cta.request}</Link>
-              </Button>
-              <WhatsAppButton size="lg" />
-            </motion.div>
-          </div>
-        </section>
+        {/* Video Booking Section */}
+        <VideoBookingSection />
 
         <Footer />
         <BackToTop />
