@@ -51,7 +51,28 @@ import contrastLiving2 from '@/assets/portfolio/contrast-living-2.jpg';
 // Commercial project images
 import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 
+// Warm apartment images
+import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
+
 export const portfolioProjects: PortfolioProject[] = [
+  {
+    id: 'warm-apt',
+    slug: 'warm-apartment',
+    title: {
+      ru: 'Тёплый минималистичный интерьер',
+      en: 'Minimal Warm Apartment',
+    },
+    description: {
+      ru: 'Жилой интерьер в стиле тёплого минимализма с натуральным деревом, мягкими нейтральными тонами и скульптурными деталями. Пространство сочетает функциональность с архитектурным ритмом.',
+      en: 'This residential interior explores warm minimalism through natural wood, soft neutral tones, and sculptural details. The space balances functionality with calm architectural rhythm.',
+    },
+    category: 'residential',
+    area: 185,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: warmApartmentHero,
+    images: [warmApartmentHero],
+    externalLink: '/residential/warm-apartment',
+  },
   {
     id: '0',
     slug: 'entertainment-center',
