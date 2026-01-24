@@ -108,13 +108,13 @@ const VideoBookingSection = () => {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Phone Input with Country Selector */}
-            <div className="flex items-center bg-white/10 backdrop-blur-md rounded-full overflow-hidden border border-white/20">
+            <div className="flex items-center bg-white/10 backdrop-blur-md rounded-full border border-white/20 p-1.5">
               {/* Country Code Selector */}
-              <div className="relative">
+              <div className="relative flex-shrink-0">
                 <button
                   type="button"
                   onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                  className="flex items-center gap-2 px-4 py-4 text-white hover:bg-white/10 transition-colors"
+                  className="flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10 transition-colors rounded-full"
                 >
                   <span className="text-xl">
                     {countryCodes.find(c => c.code === countryCode)?.flag || '🇰🇿'}
@@ -143,14 +143,14 @@ const VideoBookingSection = () => {
               </div>
 
               {/* Phone Number */}
-              <div className="flex-1 flex items-center">
-                <span className="text-white/80 font-medium">{countryCode}</span>
+              <div className="flex-1 flex items-center min-w-0">
+                <span className="text-white/80 font-medium flex-shrink-0">{countryCode}</span>
                 <Input
                   type="tel"
                   value={phone}
                   onChange={handlePhoneChange}
                   placeholder="(000) 000-00-00"
-                  className="flex-1 bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
+                  className="flex-1 bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 text-base min-w-0"
                 />
               </div>
 
@@ -158,7 +158,7 @@ const VideoBookingSection = () => {
               <Button 
                 type="submit" 
                 disabled={!agreed || !phone || isSubmitting}
-                className="rounded-full px-8 py-6 text-base font-medium"
+                className="rounded-full px-6 py-5 text-base font-medium flex-shrink-0"
               >
                 {isSubmitting 
                   ? (language === 'ru' ? 'Отправка...' : 'Sending...') 
