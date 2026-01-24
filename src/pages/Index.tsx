@@ -14,6 +14,7 @@ import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
 import HeroVideo from '@/components/HeroVideo';
 import VideoBookingSection from '@/components/VideoBookingSection';
+import aboutBgImage from '@/assets/about/gauhar-bg.jpg';
 
 const Index = () => {
   const { language, t } = useLanguage();
@@ -124,9 +125,19 @@ const Index = () => {
           </motion.button>
         </section>
 
-        {/* About Section - Clean, spacious */}
-        <section id="about" className="py-32 bg-background">
-          <div className="container mx-auto px-6">
+        {/* About Section - With dimmed background portrait */}
+        <section id="about" className="py-32 relative overflow-hidden">
+          {/* Background Image with dimmed overlay */}
+          <div className="absolute inset-0">
+            <img 
+              src={aboutBgImage} 
+              alt="" 
+              className="w-full h-full object-cover object-top opacity-15"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
+          </div>
+          
+          <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <motion.span 
                 initial={{ opacity: 0, y: 20 }} 
