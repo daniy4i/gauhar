@@ -171,32 +171,51 @@ const SoftModernApartment = () => {
         </motion.div>
       </section>
 
-      {/* Gallery Grid */}
-      <section className="px-4 md:px-8 lg:px-12 pb-20 md:pb-32 border-muted-foreground bg-popover" style={{
-      backgroundColor: '#F5F3F0'
-    }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
-          {galleryImages.map((image, index) => <motion.div key={index} initial={{
-          opacity: 0,
-          y: 40
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true,
-          margin: '-50px'
-        }} transition={{
-          duration: 0.7,
-          delay: index * 0.1
-        }} className="group cursor-pointer" onClick={() => openLightbox(index)}>
-              <div className="relative overflow-hidden bg-muted/10">
-                <BlurImage src={image.src} alt={image.caption[language]} className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-              </div>
-              <p className="mt-4 text-sm text-foreground/60 tracking-wide">
-                {image.caption[language]}
-              </p>
-            </motion.div>)}
+      {/* Masonry Gallery */}
+      <section className="px-4 md:px-8 lg:px-12 pb-20 md:pb-32" style={{
+        backgroundColor: '#F5F3F0'
+      }}>
+        <div className="columns-1 md:columns-2 gap-6 md:gap-8 lg:gap-10 space-y-6 md:space-y-8 lg:space-y-10">
+          {galleryImages.map((image, index) => {
+            // Create visual variety with different aspect ratios
+            const aspectRatios = [
+              'aspect-[4/5]',    // Portrait tall
+              'aspect-[3/2]',    // Landscape wide
+              'aspect-[4/3]',    // Standard
+              'aspect-[1/1]',    // Square
+              'aspect-[3/4]',    // Portrait
+              'aspect-[16/10]',  // Cinematic
+              'aspect-[4/5]',    // Portrait tall
+              'aspect-[3/2]',    // Landscape wide
+              'aspect-[5/4]',    // Slightly portrait
+              'aspect-[3/2]',    // Landscape wide
+            ];
+            const aspectClass = aspectRatios[index % aspectRatios.length];
+            
+            return (
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.7, delay: (index % 4) * 0.1 }}
+                className="group cursor-pointer break-inside-avoid mb-6 md:mb-8 lg:mb-10"
+                onClick={() => openLightbox(index)}
+              >
+                <div className="relative overflow-hidden bg-muted/10">
+                  <BlurImage 
+                    src={image.src} 
+                    alt={image.caption[language]} 
+                    className={`w-full ${aspectClass} object-cover transition-transform duration-700 group-hover:scale-105`} 
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                </div>
+                <p className="mt-4 text-sm text-foreground/60 tracking-wide">
+                  {image.caption[language]}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
