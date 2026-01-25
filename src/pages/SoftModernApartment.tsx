@@ -199,16 +199,16 @@ const SoftModernApartment = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.7, delay: (index % 4) * 0.1 }}
-                className="group cursor-pointer break-inside-avoid mb-6 md:mb-8 lg:mb-10"
+                className="group cursor-zoom-in break-inside-avoid mb-6 md:mb-8 lg:mb-10"
                 onClick={() => openLightbox(index)}
               >
                 <div className="relative overflow-hidden bg-muted/10">
                   <BlurImage 
                     src={image.src} 
                     alt={image.caption[language]} 
-                    className={`w-full ${aspectClass} object-cover transition-transform duration-700 group-hover:scale-105`} 
+                    className={`w-full ${aspectClass} object-cover transition-all duration-500 ease-out group-hover:scale-110`} 
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
                 </div>
                 <p className="mt-4 text-sm text-foreground/60 tracking-wide">
                   {image.caption[language]}
