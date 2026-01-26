@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import Navigation from '@/components/layout/Navigation';
@@ -10,7 +10,7 @@ import SEO from '@/components/SEO';
 import BackToTop from '@/components/BackToTop';
 import { Button } from '@/components/ui/button';
 import BlurImage from '@/components/BlurImage';
-import { ArrowRight, Check, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
 import HeroVideo from '@/components/HeroVideo';
 import VideoBookingSection from '@/components/VideoBookingSection';
@@ -227,41 +227,49 @@ const Index = () => {
               </h2>
             </motion.div>
             
-            {/* Projects Grid - 2 columns, edge-to-edge */}
-            <div className="grid md:grid-cols-2">
-              {featuredProjects.map((project, i) => (
-                <motion.div 
-                  key={project.id} 
-                  initial={{ opacity: 0 }} 
-                  whileInView={{ opacity: 1 }} 
-                  viewport={{ once: true, margin: "-100px" }} 
-                  transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link to={`/portfolio/${project.slug}`} className="group block relative">
-                    {/* Image - Full width, tall aspect ratio */}
-                    <div className="aspect-[4/3] overflow-hidden bg-[hsl(240,5%,8%)] relative">
-                      <BlurImage 
-                        src={project.thumbnail} 
-                        alt={project.title[language]} 
-                        className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105" 
-                      />
-                      {/* Subtle hover overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                    </div>
-                    
-                    {/* Project Info - Below image, minimal */}
-                    <div className="px-6 py-8 bg-[hsl(240,6%,6%)]">
-                      <h3 className="text-xl md:text-2xl font-normal tracking-tight text-white uppercase mb-3 transition-colors duration-200 group-hover:text-white/70">
-                        {project.title[language]}
-                      </h3>
-                      <p className="text-sm text-white/40">
-                        {project.location?.[language]}, {project.area} m²
-                      </p>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+            {/* Projects Grid - 2 columns, edge-to-edge with fade animation */}
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={currentPage}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="grid md:grid-cols-2"
+              >
+                {featuredProjects.map((project, i) => (
+                  <motion.div 
+                    key={project.id} 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Link to={`/portfolio/${project.slug}`} className="group block relative">
+                      {/* Image - Full width, tall aspect ratio */}
+                      <div className="aspect-[4/3] overflow-hidden bg-[hsl(240,5%,8%)] relative">
+                        <BlurImage 
+                          src={project.thumbnail} 
+                          alt={project.title[language]} 
+                          className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105" 
+                        />
+                        {/* Subtle hover overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                      </div>
+                      
+                      {/* Project Info - Below image, minimal */}
+                      <div className="px-6 py-8 bg-[hsl(240,6%,6%)]">
+                        <h3 className="text-xl md:text-2xl font-normal tracking-tight text-white uppercase mb-3 transition-colors duration-200 group-hover:text-white/70">
+                          {project.title[language]}
+                        </h3>
+                        <p className="text-sm text-white/40">
+                          {project.location?.[language]}, {project.area} m²
+                        </p>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
             
             {/* Pagination */}
             <motion.div 
@@ -271,6 +279,13 @@ const Index = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="flex items-center justify-center gap-4 mt-12"
             >
+              <button
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="mr-2 text-white/40 hover:text-white/70 transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}
