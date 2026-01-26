@@ -202,7 +202,7 @@ const SoftModernApartment = () => {
                 className="group cursor-zoom-in break-inside-avoid mb-6 md:mb-8 lg:mb-10"
                 onClick={() => openLightbox(index)}
               >
-                <div className="relative overflow-hidden bg-muted/10">
+              <div className="relative overflow-hidden bg-muted/10 shadow-md transition-shadow duration-500 ease-out group-hover:shadow-2xl">
                   <BlurImage 
                     src={image.src} 
                     alt={image.caption[language]} 
