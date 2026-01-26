@@ -18,8 +18,28 @@ import aboutBgImage from '@/assets/about/gauhar-bg.jpg';
 
 const Index = () => {
   const { language, t } = useLanguage();
-  const featuredProjects = portfolioProjects.slice(0, 6);
+  const [currentPage, setCurrentPage] = useState(1);
   const [videoReady, setVideoReady] = useState(false);
+  
+  // Pagination settings
+  const projectsPerPage = 4;
+  const totalPages = Math.ceil(portfolioProjects.length / projectsPerPage);
+  const startIndex = (currentPage - 1) * projectsPerPage;
+  const featuredProjects = portfolioProjects.slice(startIndex, startIndex + projectsPerPage);
+  
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      // Scroll to portfolio section
+      const element = document.getElementById('portfolio');
+      if (element) {
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    }
+  };
   
   // Parallax effect for hero
   const heroRef = useRef(null);
@@ -243,7 +263,7 @@ const Index = () => {
               ))}
             </div>
             
-            {/* Pagination dots */}
+            {/* Pagination */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
@@ -251,10 +271,26 @@ const Index = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="flex items-center justify-center gap-4 mt-12"
             >
-              <span className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-sm text-white">1</span>
-              <span className="text-sm text-white/40">2</span>
-              <span className="text-sm text-white/40">3</span>
-              <ArrowRight className="w-4 h-4 text-white/40 ml-2" />
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => goToPage(page)}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm transition-all duration-200 ${
+                    currentPage === page
+                      ? 'border border-white/30 text-white'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="ml-2 text-white/40 hover:text-white/70 transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </motion.div>
             
             <motion.div 
