@@ -199,7 +199,7 @@ const SoftModernApartment = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.7, delay: (index % 4) * 0.1 }}
-                className="group cursor-zoom-in break-inside-avoid mb-6 md:mb-8 lg:mb-10"
+                className="group cursor-zoom-in break-inside-avoid mb-6 md:mb-8 lg:mb-10 transition-transform duration-500 ease-out hover:-translate-y-2"
                 onClick={() => openLightbox(index)}
               >
               <div className="relative overflow-hidden bg-muted/10 shadow-md transition-shadow duration-500 ease-out group-hover:shadow-2xl">
