@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language, translations, TranslationStrings } from './translations';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface LanguageContextType {
   language: Language;
@@ -23,6 +24,7 @@ function getInitialLanguage(): Language {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('ru');
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const initialLang = getInitialLanguage();
@@ -31,9 +33,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem(STORAGE_KEY, lang);
-    document.documentElement.lang = lang;
+    if (lang === language) return;
+    
+    setIsTransitioning(true);
+    
+    // Start fade out, then change language
+    setTimeout(() => {
+      setLanguageState(lang);
+      localStorage.setItem(STORAGE_KEY, lang);
+      document.documentElement.lang = lang;
+      
+      // End transition after language change
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
+    }, 150);
   };
 
   const toggleLanguage = () => {
@@ -60,7 +74,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider value={value}>
-      {children}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={language}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
     </LanguageContext.Provider>
   );
 }
