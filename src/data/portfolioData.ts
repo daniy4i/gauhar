@@ -57,13 +57,34 @@ import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
 // Soft modern apartment images
 import softModernBedroom from '@/assets/soft-modern/bedroom-1.jpg';
 
+// Soft modern v2 apartment images
+import softModernV2Living from '@/assets/soft-modern-v2/living-kitchen-2.jpg';
+
 export const portfolioProjects: PortfolioProject[] = [
+  {
+    id: 'soft-modern-v2',
+    slug: 'soft-modern-apartment-v2',
+    title: {
+      ru: 'Мягкая современная квартира',
+      en: 'Soft Modern Apartment',
+    },
+    description: {
+      ru: 'Современное жилое пространство, спроектированное с акцентом на мягкость, баланс и повседневную функциональность.',
+      en: 'A contemporary residential space designed with a focus on softness, balance, and everyday functionality.',
+    },
+    category: 'residential',
+    area: 72,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: softModernV2Living,
+    images: [softModernV2Living],
+    externalLink: '/residential/soft-modern-apartment-v2',
+  },
   {
     id: 'soft-modern',
     slug: 'soft-modern-apartment',
     title: {
-      ru: 'Мягкая современная квартира',
-      en: 'Soft Modern Apartment',
+      ru: 'Светлая современная квартира',
+      en: 'Light Modern Apartment',
     },
     description: {
       ru: 'Жилой интерьер, исследующий спокойную современную эстетику, построенную вокруг света, баланса и повседневного комфорта.',
