@@ -139,7 +139,7 @@ const PortfolioGallery = () => {
                       
                       {/* Elegant Overlay */}
                       <motion.div
-                        className="absolute inset-0 bg-foreground/10 pointer-events-none"
+                        className="absolute inset-0 bg-black/20 pointer-events-none"
                         initial={false}
                         animate={{
                           opacity: hoveredProject === project.id ? 1 : 0,
@@ -147,17 +147,31 @@ const PortfolioGallery = () => {
                         transition={{ duration: 0.5 }}
                       />
 
-                      {/* View Project Indicator */}
+                      {/* View Project Button - Bottom Left */}
                       <motion.div
-                        className="absolute inset-0 flex items-center justify-center"
+                        className="absolute bottom-6 left-6"
                         initial={false}
                         animate={{
                           opacity: hoveredProject === project.id ? 1 : 0,
+                          y: hoveredProject === project.id ? 0 : 10,
                         }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <span className="text-background bg-foreground/90 backdrop-blur-sm px-6 py-3 text-sm tracking-wide">
+                        <span className="inline-flex items-center gap-2 text-white bg-white/20 backdrop-blur-md px-5 py-3 text-sm tracking-wide rounded-full border border-white/20">
                           {t.portfolio.viewProject}
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
                         </span>
                       </motion.div>
                     </div>
