@@ -12,22 +12,14 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const STORAGE_KEY = 'gauhar-portfolio-lang';
 
-function getBrowserLanguage(): Language {
-  const browserLang = navigator.language.toLowerCase();
-  if (browserLang.startsWith('en')) {
-    return 'en';
-  }
-  return 'ru'; // Default to Russian
-}
-
 function getInitialLanguage(): Language {
   // Check localStorage first
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'ru' || stored === 'en') {
     return stored;
   }
-  // Fall back to browser language detection
-  return getBrowserLanguage();
+  // Default to Russian (no browser detection)
+  return 'ru';
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
