@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language, translations, TranslationStrings } from './translations';
 
 interface LanguageContextType {
@@ -10,16 +10,53 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const STORAGE_KEY = 'gauhar-portfolio-lang';
+
+function getInitialLanguage(): Language {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored === 'ru' || stored === 'en') {
+    return stored;
+  }
+  return 'ru'; // Default to Russian
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Fixed to Russian only - no language switching
-  const language: Language = 'ru';
+  const [language, setLanguageState] = useState<Language>('ru');
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    const initialLang = getInitialLanguage();
+    setLanguageState(initialLang);
+    setIsInitialized(true);
+  }, []);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+  };
+
+  const toggleLanguage = () => {
+    const newLang = language === 'ru' ? 'en' : 'ru';
+    setLanguage(newLang);
+  };
+
+  useEffect(() => {
+    if (isInitialized) {
+      document.documentElement.lang = language;
+    }
+  }, [language, isInitialized]);
 
   const value: LanguageContextType = {
     language,
-    setLanguage: () => {}, // No-op since we're Russian only
+    setLanguage,
     t: translations[language],
-    toggleLanguage: () => {}, // No-op since we're Russian only
+    toggleLanguage,
   };
+
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <LanguageContext.Provider value={value}>
