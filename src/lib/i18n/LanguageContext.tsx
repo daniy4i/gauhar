@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { Language, translations, TranslationStrings } from './translations';
 
 interface LanguageContextType {
@@ -10,58 +10,16 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'gauhar-portfolio-lang';
-
-function getInitialLanguage(): Language {
-  // Check localStorage first
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'ru' || stored === 'en') {
-    return stored;
-  }
-  // Default to Russian (no browser detection)
-  return 'ru';
-}
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('ru');
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  useEffect(() => {
-    const initialLang = getInitialLanguage();
-    setLanguageState(initialLang);
-    setIsInitialized(true);
-  }, []);
-
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem(STORAGE_KEY, lang);
-    // Update document lang attribute
-    document.documentElement.lang = lang;
-  };
-
-  const toggleLanguage = () => {
-    const newLang = language === 'ru' ? 'en' : 'ru';
-    setLanguage(newLang);
-  };
-
-  // Update document lang on mount and language change
-  useEffect(() => {
-    if (isInitialized) {
-      document.documentElement.lang = language;
-    }
-  }, [language, isInitialized]);
+  // Fixed to Russian only - no language switching
+  const language: Language = 'ru';
 
   const value: LanguageContextType = {
     language,
-    setLanguage,
+    setLanguage: () => {}, // No-op since we're Russian only
     t: translations[language],
-    toggleLanguage,
+    toggleLanguage: () => {}, // No-op since we're Russian only
   };
-
-  // Prevent flash of wrong language
-  if (!isInitialized) {
-    return null;
-  }
 
   return (
     <LanguageContext.Provider value={value}>
