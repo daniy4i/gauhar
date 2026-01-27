@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage, contactInfo, getWhatsAppUrl } from '@/lib/i18n';
-import LanguageToggle from '@/components/LanguageToggle';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
@@ -48,10 +47,10 @@ const Navigation = () => {
   }, [location.state]);
 
   const navLinks: NavLink[] = [
-    { href: '/portfolio', label: language === 'ru' ? 'Интерьеры' : 'Interiors', sectionId: 'portfolio' },
-    { href: '/services', label: language === 'ru' ? 'Услуги' : 'Services', sectionId: 'services' },
-    { href: '/about', label: language === 'ru' ? 'О нас' : 'About', sectionId: 'about' },
-    { href: '/contact', label: language === 'ru' ? 'Контакты' : 'Contact' }, // No sectionId - always navigate to page
+    { href: '/portfolio', label: 'Интерьеры', sectionId: 'portfolio' },
+    { href: '/services', label: 'Услуги', sectionId: 'services' },
+    { href: '/about', label: 'О нас', sectionId: 'about' },
+    { href: '/contact', label: 'Контакты' },
   ];
 
   const isActive = (href: string) => {
@@ -158,7 +157,7 @@ const Navigation = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-[380px] bg-card border-l border-border p-0" aria-describedby={undefined}>
                 <VisuallyHidden>
-                  <SheetTitle>{language === 'ru' ? 'Меню навигации' : 'Navigation Menu'}</SheetTitle>
+                  <SheetTitle>Меню навигации</SheetTitle>
                 </VisuallyHidden>
                 <div className="flex flex-col h-full p-8">
                   {/* Menu Links */}
@@ -168,7 +167,7 @@ const Navigation = () => {
                       onClick={() => setIsOpen(false)}
                       className="text-base py-3 text-foreground hover:text-muted-foreground transition-colors"
                     >
-                      {language === 'ru' ? 'На главную' : 'Home'}
+                      На главную
                     </Link>
                     {navLinks.map((link) => (
                       <Link
@@ -191,7 +190,7 @@ const Navigation = () => {
                   <div className="mt-auto space-y-6">
                     <div>
                       <h4 className="text-[11px] tracking-[0.15em] uppercase text-muted-foreground mb-2">
-                        {language === 'ru' ? 'АЛМАТЫ' : 'ALMATY'}
+                        АЛМАТЫ
                       </h4>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {contactInfo.address.ru}
@@ -233,9 +232,8 @@ const Navigation = () => {
                       </Button>
                     </div>
 
-                    {/* Language & Theme */}
+                    {/* Theme */}
                     <div className="flex items-center gap-3 pt-2">
-                      <LanguageToggle />
                       <ThemeToggle />
                     </div>
                   </div>
@@ -256,7 +254,7 @@ const Navigation = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-[380px] bg-card border-l border-border p-0" aria-describedby={undefined}>
                 <VisuallyHidden>
-                  <SheetTitle>{language === 'ru' ? 'Меню навигации' : 'Navigation Menu'}</SheetTitle>
+                  <SheetTitle>Меню навигации</SheetTitle>
                 </VisuallyHidden>
                 <div className="flex flex-col h-full p-8">
                   {/* Menu Links */}
@@ -266,7 +264,7 @@ const Navigation = () => {
                       onClick={() => setIsOpen(false)}
                       className="text-base py-3 text-foreground hover:text-muted-foreground transition-colors"
                     >
-                      {language === 'ru' ? 'На главную' : 'Home'}
+                      На главную
                     </Link>
                     {navLinks.map((link) => (
                       <Link
@@ -289,7 +287,7 @@ const Navigation = () => {
                   <div className="mt-auto space-y-6">
                     <div>
                       <h4 className="text-[11px] tracking-[0.15em] uppercase text-muted-foreground mb-2">
-                        {language === 'ru' ? 'АЛМАТЫ' : 'ALMATY'}
+                        АЛМАТЫ
                       </h4>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {contactInfo.address.ru}
@@ -331,9 +329,8 @@ const Navigation = () => {
                       </Button>
                     </div>
 
-                    {/* Language & Theme */}
+                    {/* Theme */}
                     <div className="flex items-center gap-3 pt-2">
-                      <LanguageToggle />
                       <ThemeToggle />
                     </div>
                   </div>
