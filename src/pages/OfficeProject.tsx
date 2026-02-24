@@ -20,6 +20,12 @@ import workspaceArt from '@/assets/office/workspace-art.jpg';
 import designDesk from '@/assets/office/design-desk.jpg';
 import kitchenette from '@/assets/office/kitchenette.jpg';
 import openWorkspace from '@/assets/office/open-workspace.jpg';
+import executiveDetail from '@/assets/office/executive-detail.jpg';
+import executiveCredenza from '@/assets/office/executive-credenza.jpg';
+import glassHall from '@/assets/office/glass-hall.jpg';
+import loungeSconce from '@/assets/office/lounge-sconce.jpg';
+import artDetail from '@/assets/office/art-detail.jpg';
+import breakArea from '@/assets/office/break-area.jpg';
 
 interface Section {
   id: string;
@@ -38,7 +44,7 @@ const sections: Section[] = [
       en: 'The entry point is framed by walnut slatted panels, crystal accent lighting, and curated decorative objects — establishing brand presence with warmth rather than formality.',
       ru: 'Входная зона обрамлена реечными панелями из ореха, хрустальными светильниками и декоративными объектами — формируя присутствие бренда через теплоту, а не формальность.'
     },
-    images: [reception, loungeArt, greenWall]
+    images: [reception, loungeArt, greenWall, loungeSconce]
   },
   {
     id: 'executive',
@@ -48,7 +54,7 @@ const sections: Section[] = [
       en: 'The private office is anchored by a solid walnut desk and textured plaster walls. Brass geometric sculptures and a marble table lamp introduce depth without competing with the architecture.',
       ru: 'Приватный кабинет построен вокруг массивного орехового стола и стен с фактурной штукатуркой. Латунные геометрические скульптуры и мраморная лампа добавляют глубину, не конкурируя с архитектурой.'
     },
-    images: [executiveWide, executiveDesk]
+    images: [executiveWide, executiveDesk, executiveDetail, executiveCredenza]
   },
   {
     id: 'workspaces',
@@ -58,7 +64,7 @@ const sections: Section[] = [
       en: 'Glass-partitioned offices preserve natural light while maintaining acoustic privacy. Each station is composed with curated art, emerald-toned lamps, and warm wood floors that soften the corporate tone.',
       ru: 'Стеклянные перегородки сохраняют естественный свет, обеспечивая акустическую приватность. Каждое рабочее место дополнено подобранным искусством, лампами изумрудных тонов и тёплым деревянным полом.'
     },
-    images: [glassCorridor, openWorkspace, workspaceArt, designDesk]
+    images: [glassCorridor, glassHall, openWorkspace, workspaceArt, artDetail, designDesk]
   },
   {
     id: 'amenities',
@@ -68,7 +74,7 @@ const sections: Section[] = [
       en: 'The kitchenette area pairs dark marble countertops with light ash cabinetry and Roman shades — practical utility elevated through considered material selection.',
       ru: 'Зона кухни сочетает тёмные мраморные столешницы со светлыми шкафами из ясеня и римскими шторами — утилитарность, возвышенная через продуманный выбор материалов.'
     },
-    images: [kitchenette]
+    images: [kitchenette, breakArea]
   }
 ];
 
