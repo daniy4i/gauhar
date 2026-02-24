@@ -20,6 +20,14 @@ import girlDaybed from '@/assets/portfolio/contrast-living-1.jpg';
 import pianoNook from '@/assets/portfolio/contrast-living-2.jpg';
 import boyLibrary from '@/assets/portfolio/fireplace-living-1.jpg';
 import boyStudy from '@/assets/portfolio/fireplace-living-2.jpg';
+import bathTub from '@/assets/portfolio/laconic-living-1.jpg';
+import bathVanity from '@/assets/portfolio/laconic-living-2.jpg';
+import tvCorner from '@/assets/portfolio/minimalist-wood-1.jpg';
+import livingTv from '@/assets/portfolio/minimalist-wood-2.jpg';
+import seatingNook from '@/assets/portfolio/minimalist-wood-3.jpg';
+import marbleShower from '@/assets/portfolio/marble-1.jpg';
+import boyBedroom from '@/assets/portfolio/marble-2.jpg';
+import masterBath from '@/assets/portfolio/marble-3.jpg';
 
 interface Section {
   id: string;
@@ -38,7 +46,7 @@ const sections: Section[] = [
       en: 'The living area is anchored by a sculpted cream sofa set against oak wall paneling and brass chandeliers. The formal dining room continues the golden thread — a statement chandelier crowns a table set for eight, bathed in light through sheer floor-to-ceiling curtains.',
       ru: 'Гостиная зона построена вокруг скульптурного кремового дивана на фоне дубовых стеновых панелей и латунных люстр. Парадная столовая продолжает золотую нить — акцентная люстра венчает стол на восемь персон, залитый светом сквозь лёгкие шторы от пола до потолка.'
     },
-    images: [livingRoom, diningRoom, hallway]
+    images: [livingRoom, livingTv, diningRoom, seatingNook, hallway]
   },
   {
     id: 'master',
@@ -48,7 +56,7 @@ const sections: Section[] = [
       en: 'The master bedroom radiates understated luxury — a patterned gold headboard wall, capiz shell ceiling light, and tonal cream bedding create a serene retreat. The en-suite vanity features an arched mosaic mirror flanked by crystal lanterns above backlit marble.',
       ru: 'Главная спальня излучает сдержанную роскошь — стена с золотым узором за изголовьем, потолочный светильник из перламутровых ракушек и тональное кремовое бельё создают умиротворённое пространство. Ванная украшена арочным мозаичным зеркалом в обрамлении хрустальных фонарей над подсвеченным мрамором.'
     },
-    images: [masterBedroom, bathroom]
+    images: [masterBedroom, bathroom, masterBath, bathTub, bathVanity, marbleShower]
   },
   {
     id: 'girl',
@@ -68,7 +76,7 @@ const sections: Section[] = [
       en: 'Deep navy walls with geometric wood trim and backlit bookshelves frame a reading lounge anchored by an aquarium. The adjacent study features a wraparound oak desk with mustard curtains, blending focus with warmth.',
       ru: 'Глубокие тёмно-синие стены с геометрическим деревянным молдингом и подсвеченные книжные полки обрамляют зону чтения с аквариумом. Смежный кабинет оснащён угловым дубовым столом с горчичными шторами, соединяя сосредоточенность с уютом.'
     },
-    images: [boyLibrary, boyStudy]
+    images: [boyLibrary, boyStudy, boyBedroom, tvCorner]
   }
 ];
 
