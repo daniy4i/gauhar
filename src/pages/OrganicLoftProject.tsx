@@ -48,7 +48,7 @@ const sections: Section[] = [
       en: 'A double-height living room unfolds beneath a floating steel-and-oak staircase. A hammered black coffee table, linen sofas, and hand-sculpted bas-relief panels ground the space in tactile craft. The entry bench and plaster art set the tone from the first step.',
       ru: 'Двусветная гостиная разворачивается под парящей лестницей из стали и дуба. Кованый чёрный кофейный стол, льняные диваны и рукотворные барельефные панно наполняют пространство тактильным мастерством. Скамья в прихожей и гипсовый арт задают тон с первого шага.'
     },
-    images: [livingStairs, entryBench, livingOpen]
+    images: [livingStairs, entryBench, livingOpen, staircaseTv, readingNook]
   },
   {
     id: 'kitchen',
