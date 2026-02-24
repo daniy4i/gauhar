@@ -13,13 +13,23 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import livingStairs from '@/assets/portfolio/loft-1.jpg';
 import entryBench from '@/assets/portfolio/loft-2.jpg';
 import livingOpen from '@/assets/portfolio/loft-3.jpg';
+import staircaseTv from '@/assets/portfolio/loft-staircase-tv.jpg';
+import readingNook from '@/assets/portfolio/loft-reading-nook.jpg';
 import kitchenWide from '@/assets/portfolio/restaurant-1.jpg';
 import kitchenDetail from '@/assets/portfolio/restaurant-2.jpg';
+import kitchenShelves from '@/assets/portfolio/loft-kitchen-shelves.jpg';
+import glassPartition from '@/assets/portfolio/loft-glass-partition.jpg';
+import ceramics from '@/assets/portfolio/loft-ceramics.jpg';
 import bathroomVanity from '@/assets/portfolio/restaurant-3.jpg';
 import guestWc from '@/assets/portfolio/laconic-living-1.jpg';
+import pinkBath from '@/assets/portfolio/loft-pink-bath.jpg';
+import guestWcPlaster from '@/assets/portfolio/loft-guest-wc.jpg';
 import girlBedroom from '@/assets/portfolio/laconic-living-2.jpg';
+import girlBedDetail from '@/assets/portfolio/loft-girl-bed.jpg';
 import boyBedroom from '@/assets/portfolio/minimalist-wood-1.jpg';
+import boysRoom from '@/assets/portfolio/loft-boys-room.jpg';
 import studyDesk from '@/assets/portfolio/minimalist-wood-2.jpg';
+import designer from '@/assets/portfolio/loft-designer.jpg';
 
 interface Section {
   id: string;
