@@ -25,63 +25,63 @@ import bedroom2 from '@/assets/soft-modern-v2/bedroom-2.jpg';
 
 // Section data structure
 const sections = [
-  {
-    id: 'living',
-    label: { ru: 'Гостиная', en: 'Living' },
-    images: [
-      { src: livingKitchen1, caption: { ru: 'Открытая гостиная зона с кухонным островом', en: 'Open-plan living area with integrated kitchen island' } },
-      { src: livingKitchen2, caption: { ru: 'Мягкие текстуры в сочетании со структурными формами', en: 'Soft textures balanced with structured forms' } },
-    ]
-  },
-  {
-    id: 'storage',
-    label: { ru: 'Хранение', en: 'Storage' },
-    images: [
-      { src: storage1, caption: { ru: 'Встроенный шкаф с минималистичной отделкой', en: 'Built-in wardrobe with minimalist detailing' } },
-    ]
-  },
-  {
-    id: 'entry',
-    label: { ru: 'Прихожая', en: 'Entry' },
-    images: [
-      { src: entry1, caption: { ru: 'Входная зона с текстурированными панелями', en: 'Entry area with textured wall panels' } },
-    ]
-  },
-  {
-    id: 'workspace',
-    label: { ru: 'Кабинет', en: 'Workspace' },
-    images: [
-      { src: workspace1, caption: { ru: 'Компактное рабочее пространство в интерьере', en: 'Compact workspace integrated into the interior' } },
-    ]
-  },
-  {
-    id: 'bathroom',
-    label: { ru: 'Ванная', en: 'Bathroom' },
-    images: [
-      { src: bathroom1, caption: { ru: 'Современная ванная с текстурами терраццо', en: 'Modern bathroom with terrazzo textures' } },
-      { src: bathroom2, caption: { ru: 'Функциональная планировка с акцентным освещением', en: 'Functional layout with refined lighting accents' } },
-      { src: bathroom3, caption: { ru: 'Чистая геометрия в сочетании с тёплыми деталями', en: 'Clean geometry combined with warm details' } },
-    ]
-  },
-  {
-    id: 'bedroom',
-    label: { ru: 'Спальня', en: 'Bedroom' },
-    images: [
-      { src: bedroom1, caption: { ru: 'Спальня для отдыха и баланса', en: 'Bedroom designed for rest and balance' } },
-      { src: bedroom2, caption: { ru: 'Мягкий текстиль и тёплые акценты освещения', en: 'Soft textiles and warm lighting accents' } },
-    ]
-  }
-];
+{
+  id: 'living',
+  label: { ru: 'Гостиная', en: 'Living' },
+  images: [
+  { src: livingKitchen1, caption: { ru: 'Открытая гостиная зона с кухонным островом', en: 'Open-plan living area with integrated kitchen island' } },
+  { src: livingKitchen2, caption: { ru: 'Мягкие текстуры в сочетании со структурными формами', en: 'Soft textures balanced with structured forms' } }]
+
+},
+{
+  id: 'storage',
+  label: { ru: 'Хранение', en: 'Storage' },
+  images: [
+  { src: storage1, caption: { ru: 'Встроенный шкаф с минималистичной отделкой', en: 'Built-in wardrobe with minimalist detailing' } }]
+
+},
+{
+  id: 'entry',
+  label: { ru: 'Прихожая', en: 'Entry' },
+  images: [
+  { src: entry1, caption: { ru: 'Входная зона с текстурированными панелями', en: 'Entry area with textured wall panels' } }]
+
+},
+{
+  id: 'workspace',
+  label: { ru: 'Кабинет', en: 'Workspace' },
+  images: [
+  { src: workspace1, caption: { ru: 'Компактное рабочее пространство в интерьере', en: 'Compact workspace integrated into the interior' } }]
+
+},
+{
+  id: 'bathroom',
+  label: { ru: 'Ванная', en: 'Bathroom' },
+  images: [
+  { src: bathroom1, caption: { ru: 'Современная ванная с текстурами терраццо', en: 'Modern bathroom with terrazzo textures' } },
+  { src: bathroom2, caption: { ru: 'Функциональная планировка с акцентным освещением', en: 'Functional layout with refined lighting accents' } },
+  { src: bathroom3, caption: { ru: 'Чистая геометрия в сочетании с тёплыми деталями', en: 'Clean geometry combined with warm details' } }]
+
+},
+{
+  id: 'bedroom',
+  label: { ru: 'Спальня', en: 'Bedroom' },
+  images: [
+  { src: bedroom1, caption: { ru: 'Спальня для отдыха и баланса', en: 'Bedroom designed for rest and balance' } },
+  { src: bedroom2, caption: { ru: 'Мягкий текстиль и тёплые акценты освещения', en: 'Soft textiles and warm lighting accents' } }]
+
+}];
+
 
 // Flatten all images for lightbox
-const allImages = sections.flatMap(section => section.images);
+const allImages = sections.flatMap((section) => section.images);
 
 const SoftModernApartmentV2 = () => {
   const { language } = useLanguage();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeSection, setActiveSection] = useState('living');
-  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const sectionRefs = useRef<{[key: string]: HTMLElement | null;}>({});
 
   const projectInfo = {
     title: {
@@ -103,7 +103,7 @@ const SoftModernApartmentV2 = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 3;
-      
+
       for (const section of sections) {
         const element = sectionRefs.current[section.id];
         if (element) {
@@ -153,8 +153,8 @@ const SoftModernApartmentV2 = () => {
       <SEO
         title={`${projectInfo.title[language]} | Gauhar Sultanova`}
         description={projectInfo.description[language]}
-        url="https://gauhar.lovable.app/residential/soft-modern-apartment-v2"
-      />
+        url="https://gauhar.lovable.app/residential/soft-modern-apartment-v2" />
+
       <Navigation />
 
       {/* Hero Section */}
@@ -164,8 +164,8 @@ const SoftModernApartmentV2 = () => {
             src={livingKitchen2}
             alt={projectInfo.title[language]}
             className="w-full h-full object-cover"
-            priority
-          />
+            priority />
+
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         </div>
 
@@ -173,12 +173,12 @@ const SoftModernApartmentV2 = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+            transition={{ duration: 0.8, delay: 0.2 }}>
+
             <Link
               to="/portfolio"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors text-sm tracking-wide"
-            >
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors text-sm tracking-wide">
+
               <ArrowLeft className="w-4 h-4" />
               {language === 'ru' ? 'Назад к портфолио' : 'Back to Portfolio'}
             </Link>
@@ -201,9 +201,9 @@ const SoftModernApartmentV2 = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl"
-        >
-          <p className="text-lg md:text-xl leading-relaxed text-foreground/80">
+          className="max-w-4xl">
+
+          <p className="text-lg md:text-xl leading-relaxed text-muted">
             {projectInfo.description[language]}
           </p>
         </motion.div>
@@ -211,63 +211,63 @@ const SoftModernApartmentV2 = () => {
 
       {/* Gallery Sections */}
       <div style={{ backgroundColor: '#F5F3F0' }} className="pb-32">
-        {sections.map((section, sectionIndex) => (
-          <section
-            key={section.id}
-            id={section.id}
-            ref={(el) => (sectionRefs.current[section.id] = el)}
-            className="px-4 md:px-8 lg:px-12 py-12 md:py-20"
-          >
+        {sections.map((section, sectionIndex) =>
+        <section
+          key={section.id}
+          id={section.id}
+          ref={(el) => sectionRefs.current[section.id] = el}
+          className="px-4 md:px-8 lg:px-12 py-12 md:py-20">
+
             {/* Section Title */}
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-sm tracking-[0.2em] uppercase text-foreground/50 mb-8 md:mb-12"
-            >
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-sm tracking-[0.2em] uppercase mb-8 md:mb-12 text-muted">
+
               {section.label[language]}
             </motion.h2>
 
             {/* Images Grid */}
             <div className={`grid gap-6 md:gap-8 ${
-              section.images.length === 1 
-                ? 'grid-cols-1' 
-                : section.images.length === 2 
-                  ? 'grid-cols-1 md:grid-cols-2'
-                  : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-            }`}>
+          section.images.length === 1 ?
+          'grid-cols-1' :
+          section.images.length === 2 ?
+          'grid-cols-1 md:grid-cols-2' :
+          'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`
+          }>
               {section.images.map((image, imageIndex) => {
-                const globalIndex = getGlobalIndex(sectionIndex, imageIndex);
-                const isFullWidth = section.images.length === 1 || (section.images.length === 3 && imageIndex === 0);
-                
-                return (
-                  <motion.div
-                    key={imageIndex}
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{ duration: 0.7, delay: imageIndex * 0.1 }}
-                    className={`group cursor-zoom-in ${isFullWidth && section.images.length === 3 ? 'md:col-span-2 lg:col-span-3' : ''}`}
-                    onClick={() => openLightbox(globalIndex)}
-                  >
+              const globalIndex = getGlobalIndex(sectionIndex, imageIndex);
+              const isFullWidth = section.images.length === 1 || section.images.length === 3 && imageIndex === 0;
+
+              return (
+                <motion.div
+                  key={imageIndex}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.7, delay: imageIndex * 0.1 }}
+                  className={`group cursor-zoom-in ${isFullWidth && section.images.length === 3 ? 'md:col-span-2 lg:col-span-3' : ''}`}
+                  onClick={() => openLightbox(globalIndex)}>
+
                     <div className="relative overflow-hidden bg-muted/10">
                       <BlurImage
-                        src={image.src}
-                        alt={image.caption[language]}
-                        className={`w-full ${isFullWidth ? 'aspect-[16/9]' : 'aspect-[4/5]'} object-cover transition-all duration-700 ease-out group-hover:scale-105`}
-                      />
+                      src={image.src}
+                      alt={image.caption[language]}
+                      className={`w-full ${isFullWidth ? 'aspect-[16/9]' : 'aspect-[4/5]'} object-cover transition-all duration-700 ease-out group-hover:scale-105`} />
+
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                     </div>
-                    <p className="mt-4 text-sm text-foreground/50 tracking-wide">
+                    <p className="mt-4 text-sm tracking-wide text-muted">
                       {image.caption[language]}
                     </p>
-                  </motion.div>
-                );
-              })}
+                  </motion.div>);
+
+            })}
             </div>
           </section>
-        ))}
+        )}
       </div>
 
       {/* Floating Section Navigation */}
@@ -275,39 +275,39 @@ const SoftModernApartmentV2 = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
-      >
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+
         <div className="flex items-center gap-1 px-2 py-2 bg-background/90 backdrop-blur-md border border-border/50 rounded-full shadow-lg">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className={`px-3 md:px-4 py-2 text-xs md:text-sm tracking-wide transition-all duration-300 rounded-full whitespace-nowrap ${
-                activeSection === section.id
-                  ? 'bg-foreground text-background'
-                  : 'text-foreground/60 hover:text-foreground hover:bg-muted/50'
-              }`}
-            >
+          {sections.map((section) =>
+          <button
+            key={section.id}
+            onClick={() => scrollToSection(section.id)}
+            className={`px-3 md:px-4 py-2 text-xs md:text-sm tracking-wide transition-all duration-300 rounded-full whitespace-nowrap ${
+            activeSection === section.id ?
+            'bg-foreground text-background' :
+            'text-foreground/60 hover:text-foreground hover:bg-muted/50'}`
+            }>
+
               {section.label[language]}
             </button>
-          ))}
+          )}
         </div>
       </motion.nav>
 
       {/* Image Lightbox */}
       <ImageLightbox
-        images={allImages.map(img => img.src)}
+        images={allImages.map((img) => img.src)}
         currentIndex={currentImageIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         onNext={() => setCurrentImageIndex((prev) => (prev + 1) % allImages.length)}
-        onPrev={() => setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)}
-      />
+        onPrev={() => setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)} />
+
 
       <Footer />
       <BackToTop />
-    </PageTransition>
-  );
+    </PageTransition>);
+
 };
 
 export default SoftModernApartmentV2;
