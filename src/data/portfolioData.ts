@@ -27,6 +27,7 @@ export interface PortfolioProject {
 // Commercial project images
 import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
+import officeReception from '@/assets/office/reception.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
@@ -127,6 +128,24 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: lobbyMainHall,
     images: [lobbyMainHall],
     externalLink: '/commercial/luxury-lobby',
+  },
+  {
+    id: 'corporate-office',
+    slug: 'corporate-office',
+    title: {
+      ru: 'Бутиковый корпоративный офис',
+      en: 'Boutique Corporate Office',
+    },
+    description: {
+      ru: 'Корпоративный интерьер, заменяющий холодную формальность подобранной теплотой. Ореховые панели, стеклянные перегородки и арт-детали формируют рабочее пространство с характером.',
+      en: 'A corporate interior that replaces cold formality with curated warmth. Walnut paneling, glass partitions, and art-led detailing shape a workspace with character.',
+    },
+    category: 'commercial',
+    area: 250,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: officeReception,
+    images: [officeReception],
+    externalLink: '/commercial/corporate-office',
   },
 ];
 
