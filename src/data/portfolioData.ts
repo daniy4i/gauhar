@@ -37,6 +37,7 @@ import softModernBedroom from '@/assets/soft-modern/bedroom-1.jpg';
 
 // Soft modern v2 apartment images
 import softModernV2Living from '@/assets/soft-modern-v2/living-kitchen-2.jpg';
+import classicWarmthLiving from '@/assets/classic-warmth/living-wide.jpg';
 
 export const portfolioProjects: PortfolioProject[] = [
   {
@@ -146,6 +147,24 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: officeReception,
     images: [officeReception],
     externalLink: '/commercial/corporate-office',
+  },
+  {
+    id: 'classic-warmth',
+    slug: 'classic-warmth',
+    title: {
+      ru: 'Квартира в тёплой классике',
+      en: 'Classic Warmth Apartment',
+    },
+    description: {
+      ru: 'Жилой концепт, соединяющий классическую теплоту с современной смелостью. Геометрические панели, LED-подсветка и палитра ореха, угля и коралла создают дом продуманного комфорта.',
+      en: 'A residential concept blending classical warmth with contemporary boldness. Geometric wood paneling, ambient LED accents, and a palette of walnut, charcoal, and coral shape a home of quiet drama.',
+    },
+    category: 'residential',
+    area: 110,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: classicWarmthLiving,
+    images: [classicWarmthLiving],
+    externalLink: '/residential/classic-warmth',
   },
 ];
 
