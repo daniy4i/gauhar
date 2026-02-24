@@ -16,6 +16,7 @@ import CommercialProject from "./pages/CommercialProject";
 import WarmApartment from "./pages/WarmApartment";
 import SoftModernApartment from "./pages/SoftModernApartment";
 import SoftModernApartmentV2 from "./pages/SoftModernApartmentV2";
+import LobbyProject from "./pages/LobbyProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const AnimatedRoutes = () => {
         <Route path="/residential/warm-apartment" element={<WarmApartment />} />
         <Route path="/residential/soft-modern-apartment" element={<SoftModernApartment />} />
         <Route path="/residential/soft-modern-apartment-v2" element={<SoftModernApartmentV2 />} />
+        <Route path="/commercial/luxury-lobby" element={<LobbyProject />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

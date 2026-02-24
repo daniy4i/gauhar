@@ -26,6 +26,7 @@ export interface PortfolioProject {
 
 // Commercial project images
 import cafeBar from '@/assets/commercial/cafe-bar.jpg';
+import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
@@ -108,6 +109,24 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: cafeBar,
     images: [cafeBar],
     externalLink: '/commercial/entertainment-center',
+  },
+  {
+    id: 'luxury-lobby',
+    slug: 'luxury-lobby',
+    title: {
+      ru: 'Премиальное лобби жилого комплекса',
+      en: 'Premium Residential Lobby',
+    },
+    description: {
+      ru: 'Интерьер лобби, возвышающий повседневный опыт возвращения домой. Тёмный орех, мрамор и бронза создают ощущение тихой роскоши с первого шага.',
+      en: 'A lobby interior that elevates the everyday experience of arriving home. Dark walnut, marble, and bronze establish a sense of quiet luxury from the first step inside.',
+    },
+    category: 'commercial',
+    area: 320,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: lobbyMainHall,
+    images: [lobbyMainHall],
+    externalLink: '/commercial/luxury-lobby',
   },
 ];
 
