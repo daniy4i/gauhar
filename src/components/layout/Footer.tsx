@@ -32,7 +32,7 @@ const Footer = () => {
     },
     en: {
       office: 'Almaty',
-      address: 'RK, Almaty, Khadzhimukan St, 49',
+      address: 'Kazakhstan',
       email: 'Email',
       phone: contactInfo.phone,
       writeToUs: 'Write to us:',
