@@ -13,13 +13,23 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import livingStairs from '@/assets/portfolio/loft-1.jpg';
 import entryBench from '@/assets/portfolio/loft-2.jpg';
 import livingOpen from '@/assets/portfolio/loft-3.jpg';
+import staircaseTv from '@/assets/portfolio/loft-staircase-tv.jpg';
+import readingNook from '@/assets/portfolio/loft-reading-nook.jpg';
 import kitchenWide from '@/assets/portfolio/restaurant-1.jpg';
 import kitchenDetail from '@/assets/portfolio/restaurant-2.jpg';
+import kitchenShelves from '@/assets/portfolio/loft-kitchen-shelves.jpg';
+import glassPartition from '@/assets/portfolio/loft-glass-partition.jpg';
+import ceramics from '@/assets/portfolio/loft-ceramics.jpg';
 import bathroomVanity from '@/assets/portfolio/restaurant-3.jpg';
 import guestWc from '@/assets/portfolio/laconic-living-1.jpg';
+import pinkBath from '@/assets/portfolio/loft-pink-bath.jpg';
+import guestWcPlaster from '@/assets/portfolio/loft-guest-wc.jpg';
 import girlBedroom from '@/assets/portfolio/laconic-living-2.jpg';
+import girlBedDetail from '@/assets/portfolio/loft-girl-bed.jpg';
 import boyBedroom from '@/assets/portfolio/minimalist-wood-1.jpg';
+import boysRoom from '@/assets/portfolio/loft-boys-room.jpg';
 import studyDesk from '@/assets/portfolio/minimalist-wood-2.jpg';
+import designer from '@/assets/portfolio/loft-designer.jpg';
 
 interface Section {
   id: string;
@@ -38,7 +48,7 @@ const sections: Section[] = [
       en: 'A double-height living room unfolds beneath a floating steel-and-oak staircase. A hammered black coffee table, linen sofas, and hand-sculpted bas-relief panels ground the space in tactile craft. The entry bench and plaster art set the tone from the first step.',
       ru: 'Двусветная гостиная разворачивается под парящей лестницей из стали и дуба. Кованый чёрный кофейный стол, льняные диваны и рукотворные барельефные панно наполняют пространство тактильным мастерством. Скамья в прихожей и гипсовый арт задают тон с первого шага.'
     },
-    images: [livingStairs, entryBench, livingOpen]
+    images: [livingStairs, entryBench, livingOpen, staircaseTv, readingNook]
   },
   {
     id: 'kitchen',
@@ -48,7 +58,7 @@ const sections: Section[] = [
       en: 'Seen through a black steel-framed glass partition, the kitchen pairs matte cream upper cabinets with warm oak lower panels. A woven rattan pendant hovers above a round dining table laid with ceramic plates and fresh flowers — organic yet refined.',
       ru: 'За чёрной стеклянной перегородкой в стальной раме кухня сочетает матовые кремовые верхние шкафы с тёплыми дубовыми нижними панелями. Плетёный ротанговый подвес парит над круглым обеденным столом с керамической посудой и свежими цветами — органично и утончённо.'
     },
-    images: [kitchenWide, kitchenDetail]
+    images: [glassPartition, kitchenWide, kitchenDetail, kitchenShelves, ceramics]
   },
   {
     id: 'bath',
@@ -58,7 +68,7 @@ const sections: Section[] = [
       en: 'The main bathroom features an asymmetric organic-shaped mirror above an oak vanity with woven storage baskets and travertine pendants. A minimal guest WC in warm plaster tones completes the wet zone with quiet elegance.',
       ru: 'Главная ванная украшена асимметричным зеркалом органической формы над дубовой тумбой с плетёными корзинами и травертиновыми подвесами. Минималистичный гостевой санузел в тёплых штукатурных тонах завершает мокрую зону тихой элегантностью.'
     },
-    images: [bathroomVanity, guestWc]
+    images: [bathroomVanity, guestWc, pinkBath, guestWcPlaster]
   },
   {
     id: 'kids',
@@ -68,7 +78,7 @@ const sections: Section[] = [
       en: "The daughter's room features a scalloped oak headboard with blush-pink arched wardrobes — playful yet timeless. The boys' room pairs twin oak-frame beds with an alabaster drum pendant and mountain-view study desk with cane-back chairs.",
       ru: 'Комната дочери украшена фигурным дубовым изголовьем и розовыми арочными шкафами — игриво, но вневременно. Комната мальчиков сочетает кровати в дубовых рамах с алебастровым подвесом и рабочим столом с видом на горы и стульями с ротанговой спинкой.'
     },
-    images: [girlBedroom, boyBedroom, studyDesk]
+    images: [girlBedroom, girlBedDetail, boyBedroom, boysRoom, studyDesk, designer]
   }
 ];
 
