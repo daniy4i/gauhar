@@ -38,6 +38,7 @@ import softModernBedroom from '@/assets/soft-modern/bedroom-1.jpg';
 // Soft modern v2 apartment images
 import softModernV2Living from '@/assets/soft-modern-v2/living-kitchen-2.jpg';
 import classicWarmthLiving from '@/assets/classic-warmth/living-wide.jpg';
+import goldenClassicLiving from '@/assets/portfolio/family-living-1.jpg';
 
 export const portfolioProjects: PortfolioProject[] = [
   {
@@ -165,6 +166,24 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: classicWarmthLiving,
     images: [classicWarmthLiving],
     externalLink: '/residential/classic-warmth',
+  },
+  {
+    id: 'golden-classic',
+    slug: 'golden-classic',
+    title: {
+      ru: 'Классический семейный дом в золотых тонах',
+      en: 'Golden Classic Family Home',
+    },
+    description: {
+      ru: 'Просторная семейная резиденция в неоклассическом стиле с дубовыми панелями, латунной фурнитурой и золотисто-кремовой палитрой. Парадные зоны, приватные пространства и творческие детские комнаты.',
+      en: 'A spacious neo-classical family residence with oak paneling, brass fixtures, and a golden cream palette. Formal spaces, private retreats, and imaginative children\'s rooms.',
+    },
+    category: 'residential',
+    area: 220,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: goldenClassicLiving,
+    images: [goldenClassicLiving],
+    externalLink: '/residential/golden-classic',
   },
 ];
 
