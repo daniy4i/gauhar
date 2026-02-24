@@ -21,6 +21,7 @@ import OfficeProject from "./pages/OfficeProject";
 import ClassicWarmthProject from "./pages/ClassicWarmthProject";
 import GoldenClassicProject from "./pages/GoldenClassicProject";
 import OrganicLoftProject from "./pages/OrganicLoftProject";
+import FloorPlansProject from "./pages/FloorPlansProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -47,6 +48,7 @@ const AnimatedRoutes = () => {
         <Route path="/residential/classic-warmth" element={<ClassicWarmthProject />} />
         <Route path="/residential/golden-classic" element={<GoldenClassicProject />} />
         <Route path="/residential/organic-loft" element={<OrganicLoftProject />} />
+        <Route path="/residential/floor-plans" element={<FloorPlansProject />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
