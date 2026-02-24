@@ -39,6 +39,7 @@ import softModernBedroom from '@/assets/soft-modern/bedroom-1.jpg';
 import softModernV2Living from '@/assets/soft-modern-v2/living-kitchen-2.jpg';
 import classicWarmthLiving from '@/assets/classic-warmth/living-wide.jpg';
 import goldenClassicLiving from '@/assets/portfolio/family-living-1.jpg';
+import organicLoftLiving from '@/assets/portfolio/loft-1.jpg';
 
 export const portfolioProjects: PortfolioProject[] = [
   {
@@ -184,6 +185,24 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: goldenClassicLiving,
     images: [goldenClassicLiving],
     externalLink: '/residential/golden-classic',
+  },
+  {
+    id: 'organic-loft',
+    slug: 'organic-loft',
+    title: {
+      ru: 'Органический лофт-таунхаус',
+      en: 'Organic Loft Townhouse',
+    },
+    description: {
+      ru: 'Двухуровневый таунхаус с парящей стальной лестницей, рукотворными гипсовыми панно и ротанговыми деталями. Ремесленное тепло встречает индустриальную структуру.',
+      en: 'A two-level townhouse with a floating steel staircase, hand-sculpted plaster panels, and woven rattan details. Artisan warmth meets industrial structure.',
+    },
+    category: 'residential',
+    area: 160,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: organicLoftLiving,
+    images: [organicLoftLiving],
+    externalLink: '/residential/organic-loft',
   },
 ];
 
