@@ -40,7 +40,7 @@ import softModernV2Living from '@/assets/soft-modern-v2/living-kitchen-2.jpg';
 import classicWarmthLiving from '@/assets/classic-warmth/living-wide.jpg';
 import goldenClassicLiving from '@/assets/portfolio/family-living-1.jpg';
 import organicLoftLiving from '@/assets/portfolio/loft-1.jpg';
-
+import floorPlanThumb from '@/assets/floorplans/plan-1.jpg';
 export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'soft-modern-v2',
@@ -203,6 +203,24 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: organicLoftLiving,
     images: [organicLoftLiving],
     externalLink: '/residential/organic-loft',
+  },
+  {
+    id: 'floor-plans',
+    slug: 'floor-plans',
+    title: {
+      ru: 'Архитектурные планировки',
+      en: 'Architectural Floor Plans',
+    },
+    description: {
+      ru: 'Коллекция рукописных планировок от компактных квартир до просторных резиденций. Каждая планировка балансирует циркуляцию, свет и функциональное зонирование.',
+      en: 'A collection of hand-illustrated floor plans from compact apartments to expansive residences. Each layout balances circulation, light, and functional zoning.',
+    },
+    category: 'residential',
+    area: 160,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: floorPlanThumb,
+    images: [floorPlanThumb],
+    externalLink: '/residential/floor-plans',
   },
 ];
 
