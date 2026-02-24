@@ -20,6 +20,10 @@ import diningWide from '@/assets/classic-warmth/dining-wide.jpg';
 import bedroom from '@/assets/classic-warmth/bedroom.jpg';
 import dressing1 from '@/assets/classic-warmth/dressing-1.jpg';
 import dressing2 from '@/assets/classic-warmth/dressing-2.jpg';
+import kitchenDining1 from '@/assets/classic-warmth/kitchen-dining-1.jpg';
+import kitchenDining2 from '@/assets/classic-warmth/kitchen-dining-2.jpg';
+import livingDark from '@/assets/classic-warmth/living-dark.jpg';
+import livingLight from '@/assets/classic-warmth/living-light.jpg';
 
 interface Section {
   id: string;
@@ -38,7 +42,7 @@ const sections: Section[] = [
       en: 'The living room is defined by a sculptural walnut feature wall with integrated LED lines that trace geometric patterns. Amber glass pendants and a low-profile media unit reinforce the warm, grounded atmosphere.',
       ru: 'Гостиная определяется скульптурной стеной из ореха со встроенными LED-линиями, образующими геометрические узоры. Янтарные стеклянные подвесы и низкая медиа-консоль усиливают тёплую, заземлённую атмосферу.'
     },
-    images: [livingWide, livingTv, livingGlow]
+    images: [livingWide, livingTv, livingGlow, livingDark, livingLight]
   },
   {
     id: 'kitchen',
@@ -48,7 +52,7 @@ const sections: Section[] = [
       en: 'Deep charcoal walls provide a dramatic backdrop for walnut cabinetry and white marble countertops. Coral upholstered dining chairs and gold-accented doors add personality without competing with the spatial logic.',
       ru: 'Глубокие угольные стены создают драматичный фон для ореховых шкафов и белых мраморных столешниц. Коралловые обеденные кресла и двери с золотыми акцентами добавляют характер, не нарушая пространственную логику.'
     },
-    images: [kitchenWide, kitchen, diningWide, diningDetail]
+    images: [kitchenWide, kitchen, kitchenDining1, kitchenDining2, diningWide, diningDetail]
   },
   {
     id: 'bedroom',
