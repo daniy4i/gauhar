@@ -386,7 +386,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-primary text-primary-foreground p-10 rounded-2xl relative"
+                className="bg-primary text-primary-foreground p-10 rounded-2xl relative transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_hsl(211,100%,50%/0.3)]"
               >
                 <div className="absolute top-6 right-6">
                   <span className="inline-flex items-center bg-white/20 px-3 py-1 rounded-full text-xs font-medium">
