@@ -16,6 +16,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent/10 hover:text-accent-foreground rounded-md",
         link: "text-primary underline-offset-4 hover:underline",
         whatsapp: "bg-[hsl(var(--whatsapp))] text-[hsl(var(--whatsapp-foreground))] rounded-full hover:bg-[hsl(142,70%,40%)] hover:shadow-[0_0_20px_hsl(var(--whatsapp)/0.4)]",
+        glass: "glass-button rounded-full text-white border border-white/20 backdrop-blur-xl bg-white/10 hover:bg-white/15 hover:border-white/30 hover:shadow-[0_0_30px_hsl(211,100%,50%/0.2)]",
+        glassGlow: "glass-glow-button rounded-full text-white backdrop-blur-xl bg-white/10 hover:bg-white/15",
       },
       size: {
         default: "h-11 px-6 py-2.5",
