@@ -114,14 +114,13 @@ const Index = () => {
               transition={{ delay: 0.9, duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
-              <Button asChild size="lg">
+              <Button asChild size="lg" variant="glassGlow">
                 <Link to="/contact">{t.hero.cta.request}</Link>
               </Button>
               <Button 
                 asChild 
-                variant="outline" 
-                size="lg" 
-                className="border-white/30 !text-white bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/50"
+                variant="glass" 
+                size="lg"
               >
                 <Link to="/portfolio">{t.hero.cta.portfolio}</Link>
               </Button>

@@ -274,4 +274,87 @@
     backface-visibility: hidden;
     transform: translateZ(0);
   }
+  
+  /* Apple-style Glass Button */
+  .glass-button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
+  }
+  
+  /* Glass Button with Animated Glow Border */
+  .glass-glow-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .glass-glow-button::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      transparent 0%,
+      hsl(211 100% 50% / 0.6) 10%,
+      transparent 20%,
+      transparent 50%,
+      hsl(211 100% 60% / 0.4) 60%,
+      transparent 70%
+    );
+    animation: glow-rotate 4s linear infinite;
+    z-index: -2;
+  }
+  
+  .glass-glow-button::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      hsl(240 6% 10% / 0.95) 0%,
+      hsl(240 6% 8% / 0.98) 100%
+    );
+    z-index: -1;
+  }
+  
+  .glass-glow-button:hover::before {
+    animation-duration: 2s;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      transparent 0%,
+      hsl(211 100% 55% / 0.8) 10%,
+      transparent 20%,
+      transparent 50%,
+      hsl(211 100% 65% / 0.6) 60%,
+      transparent 70%
+    );
+  }
+  
+  @keyframes glow-rotate {
+    from { --glow-angle: 0deg; }
+    to { --glow-angle: 360deg; }
+  }
+  
+  @property --glow-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
 }
+
