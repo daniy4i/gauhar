@@ -7,10 +7,10 @@ const Preloader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2400);
+    }, 1800);
 
     const handleLoad = () => {
-      setTimeout(() => setIsLoading(false), 2000);
+      setTimeout(() => setIsLoading(false), 1500);
     };
 
     if (document.readyState === 'complete') {

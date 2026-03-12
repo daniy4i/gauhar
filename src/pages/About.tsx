@@ -199,7 +199,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <Button asChild size="lg">
+              <Button asChild size="lg" variant="glassGlow">
                 <Link to="/contact">{t.common.getInTouch}</Link>
               </Button>
             </motion.div>

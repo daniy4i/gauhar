@@ -234,7 +234,7 @@ const Contact = () => {
                   rows={4}
                   className="bg-card border-border rounded-xl"
                 />
-                <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
+                <Button type="submit" size="lg" disabled={isSubmitting} variant="glassGlow" className="w-full sm:w-auto">
                   <Send className="w-4 h-4 mr-2" />
                   {isSubmitting ? t.contact.form.sending : t.contact.form.submit}
                 </Button>
