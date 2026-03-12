@@ -169,10 +169,10 @@ const Index = () => {
               </motion.span>
               
               <motion.h2 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 tracking-tight"
               >
                 {language === 'ru' ? 'Гаухар Сергазина' : 'Gauhar Sergazina'}
