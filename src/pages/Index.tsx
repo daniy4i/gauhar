@@ -159,10 +159,10 @@ const Index = () => {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <motion.span 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-6 block"
               >
                 {language === 'ru' ? 'О себе' : 'About Me'}
