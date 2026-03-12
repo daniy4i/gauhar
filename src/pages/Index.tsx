@@ -314,7 +314,7 @@ const Index = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-center mt-12 px-6"
             >
-              <Button asChild variant="outline" size="lg" className="border-white/20 !text-white hover:bg-white/5 hover:border-white/40 rounded-full px-8">
+              <Button asChild variant="glass" size="lg" className="px-8">
                 <Link to="/portfolio" className="group">
                   {language === 'ru' ? 'Все проекты' : 'All Projects'} 
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
