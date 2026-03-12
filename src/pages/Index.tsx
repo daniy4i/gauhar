@@ -416,7 +416,7 @@ const Index = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center mt-12"
             >
-              <Button asChild size="lg" className="bg-white text-background hover:bg-white/90">
+              <Button asChild size="lg" variant="glass" className="!text-white">
                 <Link to="/services" className="group">
                   {t.common.learnMore}
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />

@@ -181,7 +181,7 @@ const Portfolio = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <Button asChild size="lg">
+              <Button asChild size="lg" variant="glassGlow">
                 <Link to="/contact">{t.portfolio.projectCta}</Link>
               </Button>
             </motion.div>
