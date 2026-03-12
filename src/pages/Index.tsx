@@ -159,30 +159,30 @@ const Index = () => {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <motion.span 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-6 block"
               >
                 {language === 'ru' ? 'О себе' : 'About Me'}
               </motion.span>
               
               <motion.h2 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 tracking-tight"
               >
                 {language === 'ru' ? 'Гаухар Сергазина' : 'Gauhar Sergazina'}
               </motion.h2>
               
               <motion.p 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
               >
                 {language === 'ru' 
@@ -212,10 +212,10 @@ const Index = () => {
           <div className="container mx-auto px-0">
             {/* Section header */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-center mb-16 px-6"
             >
               <span className="text-[11px] tracking-[0.2em] text-white/40 uppercase mb-4 block">
@@ -342,10 +342,10 @@ const Index = () => {
           
           <div className="container mx-auto px-6 relative z-10">
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-center mb-16"
             >
               <span className="text-sm tracking-[0.2em] text-white/60 uppercase mb-4 block">
@@ -363,7 +363,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-colors duration-200"
+                className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_hsl(211,100%,50%/0.08)]"
               >
                 <h3 className="text-2xl font-medium mb-3">{t.services.packages.turnkey.title}</h3>
                 <div className="text-4xl font-normal mb-8">
@@ -386,7 +386,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-primary text-primary-foreground p-10 rounded-2xl relative"
+                className="bg-primary text-primary-foreground p-10 rounded-2xl relative transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_hsl(211,100%,50%/0.3)]"
               >
                 <div className="absolute top-6 right-6">
                   <span className="inline-flex items-center bg-white/20 px-3 py-1 rounded-full text-xs font-medium">

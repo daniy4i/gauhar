@@ -60,7 +60,7 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-colors duration-200"
+                  className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_hsl(211,100%,50%/0.08)]"
                 >
                   <div className="mb-8">
                     <h3 className="text-2xl font-medium mb-3">{t.services.packages.turnkey.title}</h3>
@@ -88,7 +88,7 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-primary text-primary-foreground p-10 rounded-2xl relative"
+                  className="bg-primary text-primary-foreground p-10 rounded-2xl relative transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_hsl(211,100%,50%/0.3)]"
                 >
                   <div className="absolute top-6 right-6">
                     <span className="inline-flex items-center bg-white/20 px-3 py-1 rounded-full text-xs font-medium">
