@@ -179,10 +179,10 @@ const Index = () => {
               </motion.h2>
               
               <motion.p 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
               >
                 {language === 'ru' 
