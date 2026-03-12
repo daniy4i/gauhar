@@ -196,7 +196,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="glass" size="lg">
                   <Link to="/about">
                     {language === 'ru' ? 'Узнать больше' : 'Learn More'} 
                     <ArrowRight className="w-4 h-4 ml-2" />
