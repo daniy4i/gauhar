@@ -363,7 +363,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-colors duration-200"
+                className="bg-card border border-border p-10 rounded-2xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_hsl(211,100%,50%/0.08)]"
               >
                 <h3 className="text-2xl font-medium mb-3">{t.services.packages.turnkey.title}</h3>
                 <div className="text-4xl font-normal mb-8">
