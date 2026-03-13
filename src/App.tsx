@@ -25,6 +25,7 @@ import FloorPlansProject from "./pages/FloorPlansProject";
 import PrestigeLobbyProject from "./pages/PrestigeLobbyProject";
 import EarthyCraftProject from "./pages/EarthyCraftProject";
 import SkylineOfficeProject from "./pages/SkylineOfficeProject";
+import JadeLobbyProject from "./pages/JadeLobbyProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
