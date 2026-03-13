@@ -30,6 +30,7 @@ import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
 import officeReception from '@/assets/office/reception.jpg';
 import prestigeLobbyReception from '@/assets/prestige-lobby/reception-area.jpg';
 import skylineExecutive from '@/assets/skyline-office/executive-lounge.jpg';
+import jadeLobbyEntry from '@/assets/jade-lobby/corridor-wide.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
