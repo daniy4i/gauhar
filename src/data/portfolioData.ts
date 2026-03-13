@@ -42,6 +42,7 @@ import classicWarmthLiving from '@/assets/classic-warmth/living-wide.jpg';
 import goldenClassicLiving from '@/assets/portfolio/family-living-1.jpg';
 import organicLoftLiving from '@/assets/portfolio/loft-1.jpg';
 import floorPlanThumb from '@/assets/floorplans/plan-1.jpg';
+import earthyCraftLiving from '@/assets/earthy-craft/glass-partition.jpg';
 export const portfolioProjects: PortfolioProject[] = [
   // === RESIDENTIAL ===
   {
