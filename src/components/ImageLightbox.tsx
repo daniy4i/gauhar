@@ -68,7 +68,7 @@ const ImageLightbox = ({
           {/* Close button */}
           <button 
             onClick={onClose}
-            className="absolute top-6 right-6 text-background/70 hover:text-background transition-colors z-10"
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
             aria-label="Close lightbox"
           >
             <X className="w-8 h-8" />
