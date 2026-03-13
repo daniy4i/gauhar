@@ -14,6 +14,7 @@ import { ArrowLeft, ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { portfolioProjects } from '@/data/portfolioData';
 import HeroVideo from '@/components/HeroVideo';
 import VideoBookingSection from '@/components/VideoBookingSection';
+import SectionDivider from '@/components/SectionDivider';
 import aboutBgImage from '@/assets/about/gauhar-bg.jpg';
 
 const Index = () => {
