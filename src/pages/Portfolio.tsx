@@ -156,19 +156,19 @@ const Portfolio = () => {
         <section className="py-32 bg-[hsl(240,6%,6%)]">
           <div className="container mx-auto px-6 text-center">
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 text-white tracking-tight"
             >
               {language === 'ru' ? 'Понравился проект?' : 'Like what you see?'}
             </motion.h2>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.5 }}
+              transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="text-white/60 mb-10 max-w-xl mx-auto text-lg"
             >
               {language === 'ru'
