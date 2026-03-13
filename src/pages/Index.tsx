@@ -145,14 +145,21 @@ const Index = () => {
           </motion.button>
         </section>
 
+        {/* Section Divider */}
+        <SectionDivider variant="line" />
+
         {/* About Section - With dimmed background portrait */}
         <section id="about" className="py-32 relative overflow-hidden">
           {/* Background Image with dimmed overlay */}
           <div className="absolute inset-0">
-            <img 
+            <motion.img 
               src={aboutBgImage} 
               alt="" 
               className="w-full h-full object-cover object-top opacity-15"
+              initial={{ scale: 1.1 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60" />
           </div>
@@ -207,6 +214,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Section Divider */}
+        <SectionDivider variant="gradient" />
 
         {/* Featured Projects - 2-column layout like hot-walls.ru */}
         <section id="portfolio" className="py-24 bg-[hsl(240,6%,6%)]">
