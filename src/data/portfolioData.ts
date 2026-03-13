@@ -29,6 +29,7 @@ import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
 import officeReception from '@/assets/office/reception.jpg';
 import prestigeLobbyReception from '@/assets/prestige-lobby/reception-area.jpg';
+import skylineExecutive from '@/assets/skyline-office/executive-lounge.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
