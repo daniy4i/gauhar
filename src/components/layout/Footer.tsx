@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useLanguage, contactInfo, getWhatsAppUrl } from '@/lib/i18n';
 import { Instagram, Youtube, Send, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
