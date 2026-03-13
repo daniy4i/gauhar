@@ -120,25 +120,25 @@ const Contact = () => {
         <section className="pt-32 pb-20">
           <div className="container mx-auto px-6 text-center">
             <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="text-sm tracking-[0.2em] text-muted-foreground uppercase mb-4 block"
             >
               {language === 'ru' ? 'Контакты' : 'Contact'}
             </motion.span>
             <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight"
             >
               {t.contact.title}
             </motion.h1>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="text-muted-foreground mt-4"
             >
               {t.contact.subtitle}
