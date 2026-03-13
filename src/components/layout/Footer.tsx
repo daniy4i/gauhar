@@ -21,7 +21,7 @@ const Footer = () => {
   const footerContent = {
     ru: {
       office: 'Алматы',
-      address: 'РК, г. Алматы, ул. Хаджимукана, 49',
+      address: 'РК, г. Алматы',
       email: 'Почта',
       phone: contactInfo.phone,
       writeToUs: 'Напишите нам:',
