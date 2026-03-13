@@ -92,10 +92,10 @@ const Navigation = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
         isScrolled
-          ? "bg-background/95 backdrop-blur-md py-3"
-          : "bg-transparent py-4"
+          ? "bg-background/90 backdrop-blur-xl py-3 shadow-[0_1px_0_hsl(var(--border)),0_4px_20px_-4px_hsl(0_0%_0%/0.1)]"
+          : "bg-transparent py-5"
       )}
     >
       <div className="container mx-auto px-6">
