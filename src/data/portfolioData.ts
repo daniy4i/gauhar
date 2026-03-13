@@ -29,6 +29,7 @@ import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
 import officeReception from '@/assets/office/reception.jpg';
 import prestigeLobbyReception from '@/assets/prestige-lobby/reception-area.jpg';
+import skylineExecutive from '@/assets/skyline-office/executive-lounge.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
@@ -225,6 +226,21 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: prestigeLobbyReception,
     images: [prestigeLobbyReception],
     externalLink: '/commercial/prestige-lobby',
+  },
+  {
+    id: 'skyline-office',
+    slug: 'skyline-office',
+    title: { ru: 'Корпоративный хаб «Скайлайн»', en: 'Skyline Corporate Hub' },
+    description: {
+      ru: 'Знаковый корпоративный интерьер в геодезической стеклянной башне с видом на Тянь-Шань. Скульптурные холлы, панорамный кабинет под куполом и терраса на крыше создают рабочее пространство-событие.',
+      en: 'A landmark corporate interior within a geodesic glass tower overlooking the Tien Shan mountains. Sculptural halls, a panoramic executive suite beneath a dome, and a rooftop terrace shape a workplace as event.',
+    },
+    category: 'commercial',
+    area: 850,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: skylineExecutive,
+    images: [skylineExecutive],
+    externalLink: '/commercial/skyline-office',
   },
 ];
 
