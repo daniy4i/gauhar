@@ -58,6 +58,7 @@ const AnimatedRoutes = () => {
         <Route path="/residential/earthy-craft" element={<EarthyCraftProject />} />
         <Route path="/commercial/skyline-office" element={<SkylineOfficeProject />} />
         <Route path="/commercial/jade-lobby" element={<JadeLobbyProject />} />
+        <Route path="/commercial/amber-lobby" element={<AmberLobbyProject />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

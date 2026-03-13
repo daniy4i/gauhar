@@ -259,6 +259,21 @@ export const portfolioProjects: PortfolioProject[] = [
     images: [jadeLobbyEntry],
     externalLink: '/commercial/jade-lobby',
   },
+  {
+    id: 'amber-lobby',
+    slug: 'amber-lobby',
+    title: { ru: 'Лобби ЖК «Янтарный камень»', en: 'Amber Stone Residential Lobby' },
+    description: {
+      ru: 'Лобби жилого комплекса, где мрамор эмперадор, ореховые панели и металл в тоне шампанского превращают ежедневное прибытие в момент тихой роскоши.',
+      en: 'A residential lobby where emperador marble, walnut paneling, and champagne metalwork transform the everyday act of arriving home into a moment of quiet luxury.',
+    },
+    category: 'commercial',
+    area: 240,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: amberLobbyReception,
+    images: [amberLobbyReception],
+    externalLink: '/commercial/amber-lobby',
+  },
 ];
 
 export const getProjectBySlug = (slug: string): PortfolioProject | undefined => {
