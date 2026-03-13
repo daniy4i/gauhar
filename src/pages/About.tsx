@@ -3,6 +3,7 @@ import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/layout/PageTransition';
 import SEO from '@/components/SEO';
+import SectionDivider from '@/components/SectionDivider';
 import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
