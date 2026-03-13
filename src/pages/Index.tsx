@@ -437,6 +437,9 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Section Divider */}
+        <SectionDivider variant="line" />
+
         {/* Video Booking Section */}
         <VideoBookingSection />
 
