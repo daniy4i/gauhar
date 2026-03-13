@@ -149,7 +149,7 @@ const ImageLightbox = ({
           )}
 
           {/* Keyboard hint */}
-          <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-4 text-background/40 text-xs">
+          <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-4 text-white/40 text-xs">
             <span>← → Navigate</span>
             <span>ESC Close</span>
           </div>
