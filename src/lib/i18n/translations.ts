@@ -498,7 +498,7 @@ export const contactInfo = {
   whatsappNumber: '77772112211',
   email: 'gauhars@mail.ru',
   address: {
-    ru: 'РК, г. Алматы, ул. Хаджимукана, 49',
+    ru: 'РК, г. Алматы',
     en: 'Khadzhimukan St. 49, Almaty, Kazakhstan',
   },
   instagram: 'gauhar_sergazina',
