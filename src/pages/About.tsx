@@ -164,11 +164,11 @@ const About = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }} 
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} 
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-card border border-border p-8 rounded-2xl hover:border-primary/30 transition-colors duration-200"
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-card border border-border p-8 rounded-2xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
               >
                 <GraduationCap className="w-8 h-8 text-primary mb-6" />
                 <h3 className="font-medium text-lg mb-4">{t.about.education.title}</h3>
