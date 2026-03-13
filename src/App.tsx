@@ -22,6 +22,7 @@ import ClassicWarmthProject from "./pages/ClassicWarmthProject";
 import GoldenClassicProject from "./pages/GoldenClassicProject";
 import OrganicLoftProject from "./pages/OrganicLoftProject";
 import FloorPlansProject from "./pages/FloorPlansProject";
+import PrestigeLobbyProject from "./pages/PrestigeLobbyProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const AnimatedRoutes = () => {
         <Route path="/residential/golden-classic" element={<GoldenClassicProject />} />
         <Route path="/residential/organic-loft" element={<OrganicLoftProject />} />
         <Route path="/residential/floor-plans" element={<FloorPlansProject />} />
+        <Route path="/commercial/prestige-lobby" element={<PrestigeLobbyProject />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

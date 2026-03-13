@@ -28,6 +28,7 @@ export interface PortfolioProject {
 import cafeBar from '@/assets/commercial/cafe-bar.jpg';
 import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
 import officeReception from '@/assets/office/reception.jpg';
+import prestigeLobbyReception from '@/assets/prestige-lobby/reception-area.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
@@ -193,6 +194,21 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: officeReception,
     images: [officeReception],
     externalLink: '/commercial/corporate-office',
+  },
+  {
+    id: 'prestige-lobby',
+    slug: 'prestige-lobby',
+    title: { ru: 'Лобби ЖК «Престиж»', en: 'Prestige Residential Lobby' },
+    description: {
+      ru: 'Парадное лобби жилого комплекса с мрамором неро маркина, зеркальными перегородками и реечными потолками с латунными деталями. Каждая поверхность продумана для создания атмосферы сдержанной роскоши.',
+      en: 'A grand residential lobby featuring nero marquina marble, mirrored partitions, and slatted timber ceilings with brass detailing. Every surface is considered to compose an atmosphere of understated opulence.',
+    },
+    category: 'commercial',
+    area: 280,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: prestigeLobbyReception,
+    images: [prestigeLobbyReception],
+    externalLink: '/commercial/prestige-lobby',
   },
 ];
 
