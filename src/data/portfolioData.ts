@@ -66,7 +66,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'earthy-craft',
     slug: 'earthy-craft',
-    title: { ru: 'Резиденция в ремесленном стиле', en: 'Earthy Craft Residence' },
+    title: { ru: 'Квартира в стиле «Japandi»', en: 'Earthy Craft Residence' },
     description: {
       ru: 'Дом, где каждый материал рассказывает историю. Дубовый паркет «ёлочкой», плетёные ротанговые светильники, авторские гипсовые панно и арочные стеклянные перегородки создают интерьер, одновременно укоренённый и утончённый.',
       en: 'A home where every material tells a story. Oak herringbone floors, woven rattan lighting, artisan plaster reliefs, and arched glass partitions compose an interior that feels both rooted and refined.',
