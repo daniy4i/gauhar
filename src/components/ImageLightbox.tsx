@@ -112,7 +112,7 @@ const ImageLightbox = ({
           
           {/* Image counter */}
           {images.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-background/70 text-sm font-light tracking-wider">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-sm font-light tracking-wider">
               {currentIndex + 1} / {images.length}
             </div>
           )}
