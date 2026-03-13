@@ -42,6 +42,7 @@ import classicWarmthLiving from '@/assets/classic-warmth/living-wide.jpg';
 import goldenClassicLiving from '@/assets/portfolio/family-living-1.jpg';
 import organicLoftLiving from '@/assets/portfolio/loft-1.jpg';
 import floorPlanThumb from '@/assets/floorplans/plan-1.jpg';
+import earthyCraftLiving from '@/assets/earthy-craft/glass-partition.jpg';
 export const portfolioProjects: PortfolioProject[] = [
   // === RESIDENTIAL ===
   {
@@ -58,6 +59,21 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: warmApartmentHero,
     images: [warmApartmentHero],
     externalLink: '/residential/warm-apartment',
+  },
+  {
+    id: 'earthy-craft',
+    slug: 'earthy-craft',
+    title: { ru: 'Резиденция в ремесленном стиле', en: 'Earthy Craft Residence' },
+    description: {
+      ru: 'Дом, где каждый материал рассказывает историю. Дубовый паркет «ёлочкой», плетёные ротанговые светильники, авторские гипсовые панно и арочные стеклянные перегородки создают интерьер, одновременно укоренённый и утончённый.',
+      en: 'A home where every material tells a story. Oak herringbone floors, woven rattan lighting, artisan plaster reliefs, and arched glass partitions compose an interior that feels both rooted and refined.',
+    },
+    category: 'residential',
+    area: 140,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: earthyCraftLiving,
+    images: [earthyCraftLiving],
+    externalLink: '/residential/earthy-craft',
   },
   {
     id: 'golden-classic',
