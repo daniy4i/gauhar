@@ -62,13 +62,13 @@ const ImageLightbox = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 bg-foreground/95 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
           onClick={onClose}
         >
           {/* Close button */}
           <button 
             onClick={onClose}
-            className="absolute top-6 right-6 text-background/70 hover:text-background transition-colors z-10"
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
             aria-label="Close lightbox"
           >
             <X className="w-8 h-8" />
@@ -78,7 +78,7 @@ const ImageLightbox = ({
           {images.length > 1 && (
             <button 
               onClick={(e) => { e.stopPropagation(); onPrev(); }}
-              className="absolute left-4 md:left-6 text-background/70 hover:text-background transition-colors z-10 p-2"
+              className="absolute left-4 md:left-6 text-white/70 hover:text-white transition-colors z-10 p-2"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-8 h-8 md:w-10 md:h-10" />
@@ -103,7 +103,7 @@ const ImageLightbox = ({
           {images.length > 1 && (
             <button 
               onClick={(e) => { e.stopPropagation(); onNext(); }}
-              className="absolute right-4 md:right-6 text-background/70 hover:text-background transition-colors z-10 p-2"
+              className="absolute right-4 md:right-6 text-white/70 hover:text-white transition-colors z-10 p-2"
               aria-label="Next image"
             >
               <ChevronRight className="w-8 h-8 md:w-10 md:h-10" />
@@ -112,7 +112,7 @@ const ImageLightbox = ({
           
           {/* Image counter */}
           {images.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-background/70 text-sm font-light tracking-wider">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-sm font-light tracking-wider">
               {currentIndex + 1} / {images.length}
             </div>
           )}
@@ -134,7 +134,7 @@ const ImageLightbox = ({
                   }}
                   className={`w-16 h-12 flex-shrink-0 overflow-hidden transition-all ${
                     idx === currentIndex 
-                      ? 'ring-2 ring-background opacity-100' 
+                      ? 'ring-2 ring-white opacity-100' 
                       : 'opacity-50 hover:opacity-75'
                   }`}
                 >
@@ -149,7 +149,7 @@ const ImageLightbox = ({
           )}
 
           {/* Keyboard hint */}
-          <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-4 text-background/40 text-xs">
+          <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-4 text-white/40 text-xs">
             <span>← → Navigate</span>
             <span>ESC Close</span>
           </div>
