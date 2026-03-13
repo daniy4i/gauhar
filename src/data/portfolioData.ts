@@ -30,6 +30,7 @@ import lobbyMainHall from '@/assets/lobby/main-hall.jpg';
 import officeReception from '@/assets/office/reception.jpg';
 import prestigeLobbyReception from '@/assets/prestige-lobby/reception-area.jpg';
 import skylineExecutive from '@/assets/skyline-office/executive-lounge.jpg';
+import jadeLobbyEntry from '@/assets/jade-lobby/corridor-wide.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
@@ -241,6 +242,21 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: skylineExecutive,
     images: [skylineExecutive],
     externalLink: '/commercial/skyline-office',
+  },
+  {
+    id: 'jade-lobby',
+    slug: 'jade-lobby',
+    title: { ru: 'Лобби в стиле арт-деко «Нефрит»', en: 'Jade Art Deco Lobby' },
+    description: {
+      ru: 'Лобби жилого комплекса в духе арт-деко: нефритовая венецианская штукатурка, янтарный оникс, золотые молдинги и бархатная мебель ледяного голубого оттенка. Каждое прибытие — событие.',
+      en: 'A residential lobby channeling art deco glamour: jade venetian plaster, amber onyx, gold-leaf moldings, and ice-blue velvet furnishings. Every arrival feels like an occasion.',
+    },
+    category: 'commercial',
+    area: 180,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: jadeLobbyEntry,
+    images: [jadeLobbyEntry],
+    externalLink: '/commercial/jade-lobby',
   },
 ];
 

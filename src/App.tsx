@@ -25,6 +25,7 @@ import FloorPlansProject from "./pages/FloorPlansProject";
 import PrestigeLobbyProject from "./pages/PrestigeLobbyProject";
 import EarthyCraftProject from "./pages/EarthyCraftProject";
 import SkylineOfficeProject from "./pages/SkylineOfficeProject";
+import JadeLobbyProject from "./pages/JadeLobbyProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const AnimatedRoutes = () => {
         <Route path="/commercial/prestige-lobby" element={<PrestigeLobbyProject />} />
         <Route path="/residential/earthy-craft" element={<EarthyCraftProject />} />
         <Route path="/commercial/skyline-office" element={<SkylineOfficeProject />} />
+        <Route path="/commercial/jade-lobby" element={<JadeLobbyProject />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
