@@ -78,7 +78,7 @@ const ImageLightbox = ({
           {images.length > 1 && (
             <button 
               onClick={(e) => { e.stopPropagation(); onPrev(); }}
-              className="absolute left-4 md:left-6 text-background/70 hover:text-background transition-colors z-10 p-2"
+              className="absolute left-4 md:left-6 text-white/70 hover:text-white transition-colors z-10 p-2"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-8 h-8 md:w-10 md:h-10" />
