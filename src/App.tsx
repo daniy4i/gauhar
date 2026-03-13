@@ -23,6 +23,7 @@ import GoldenClassicProject from "./pages/GoldenClassicProject";
 import OrganicLoftProject from "./pages/OrganicLoftProject";
 import FloorPlansProject from "./pages/FloorPlansProject";
 import PrestigeLobbyProject from "./pages/PrestigeLobbyProject";
+import EarthyCraftProject from "./pages/EarthyCraftProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
