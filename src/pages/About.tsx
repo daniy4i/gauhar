@@ -157,6 +157,8 @@ const About = () => {
           </div>
         </section>
 
+        <SectionDivider variant="gradient" />
+
         {/* Info Cards */}
         <section className="py-24">
           <div className="container mx-auto px-6">
