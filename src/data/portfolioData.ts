@@ -31,6 +31,7 @@ import officeReception from '@/assets/office/reception.jpg';
 import prestigeLobbyReception from '@/assets/prestige-lobby/reception-area.jpg';
 import skylineExecutive from '@/assets/skyline-office/executive-lounge.jpg';
 import jadeLobbyEntry from '@/assets/jade-lobby/corridor-wide.jpg';
+import amberLobbyReception from '@/assets/amber-lobby/panoramic-view.jpg';
 
 // Warm apartment images
 import warmApartmentHero from '@/assets/warm-apartment/hero.jpg';
@@ -257,6 +258,21 @@ export const portfolioProjects: PortfolioProject[] = [
     thumbnail: jadeLobbyEntry,
     images: [jadeLobbyEntry],
     externalLink: '/commercial/jade-lobby',
+  },
+  {
+    id: 'amber-lobby',
+    slug: 'amber-lobby',
+    title: { ru: 'Лобби ЖК «Янтарный камень»', en: 'Amber Stone Residential Lobby' },
+    description: {
+      ru: 'Лобби жилого комплекса, где мрамор эмперадор, ореховые панели и металл в тоне шампанского превращают ежедневное прибытие в момент тихой роскоши.',
+      en: 'A residential lobby where emperador marble, walnut paneling, and champagne metalwork transform the everyday act of arriving home into a moment of quiet luxury.',
+    },
+    category: 'commercial',
+    area: 240,
+    location: { ru: 'Алматы', en: 'Almaty' },
+    thumbnail: amberLobbyReception,
+    images: [amberLobbyReception],
+    externalLink: '/commercial/amber-lobby',
   },
 ];
 
