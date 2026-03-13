@@ -134,7 +134,7 @@ const ImageLightbox = ({
                   }}
                   className={`w-16 h-12 flex-shrink-0 overflow-hidden transition-all ${
                     idx === currentIndex 
-                      ? 'ring-2 ring-background opacity-100' 
+                      ? 'ring-2 ring-white opacity-100' 
                       : 'opacity-50 hover:opacity-75'
                   }`}
                 >
